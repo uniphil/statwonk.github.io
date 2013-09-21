@@ -34,8 +34,7 @@ end
 {% endcodeblock %}
 
 In the end, I had to choose a different method because of [this
-reason](http://stackoverflow.com/questions/13074582/problems-implementing-activemodel-dirty-rails-3-2-8).
-Stashing this here for later because ActiveModel::Dirty methods look cool!
+reason](http://stackoverflow.com/questions/13074582/problems-implementing-activemodel-dirty-rails-3-2-8). Stashing this here for later because ActiveModel::Dirty methods look cool!
 
 The _was method particularly looks cool.  Great for keeping track of
 changes to models.
