@@ -63,7 +63,7 @@ default_asides: [asides/stackoverflow.html, asides/twitter.html, asides/linkedin
 # ----------------------- #
 
 # Github repositories
-github_user: cpeter9
+github_user: statwonk
 github_repo_count: 8
 github_show_profile_link: true
 github_skip_forks: true
