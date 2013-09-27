@@ -9,16 +9,15 @@ categories: R, data, import
 There are a variety of ways to import data into R.
 
 I most often work with CSV files.  In my experience, getting the file path
-correct is the trickiest part of brining data into R.  I'm going to show you how
-this works by first writing a piece of data to CSV and then we'll bring it back
+correct is the trickiest part of bringing data into R.  I'm going to show you how
+this works by first writing a piece of data to a CSV file and then we'll bring it back
 in.
 
 The `data()` function in R allows access to tons of toy datasets.  R programmers
 typically use these to [create reproducible examples](http://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example) on sites like StackOverflow.
 
 {% codeblock lang:r %}
-data(mtcars) # first I get some toy data, so now we have access to the mtcars
-data.frame
+data(mtcars) # first I get some toy data, so now we have access to the mtcars data.frame
 
 head(mtcars) # Let's take a look
 
@@ -30,8 +29,7 @@ Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0 3    1
 Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0 3    2
 Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0 3    1
 
-str(mtcars) # we can see how each variable is coded here: num, chr, list, int,
-etc.
+str(mtcars) # we can see how each variable is coded here: num, chr, list, int, etc.
 
 'data.frame':32 obs. of  11 variables:
   $ mpg : num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...
@@ -48,14 +46,15 @@ etc.
 {% endcodeblock %}
 
 So we have a `data.frame` with 32 observations and 11 variables.  Now let's
-use `write.csv()`. First we'll take a look at the inputs for the function.
+use `write.csv()`. First we'll take a look at the inputs for the function. We
+can do this by putting a `?` in front of our empty function and running it with
+`R`.
 
 {% codeblock lang:r %}
 ?write.csv # put a ? in front of any function to see its help page.
 {% endcodeblock %}
 
-We're brought to [this page](http://stat.ethz.ch/R-manual/R-devel/library/utils/html/write.table.html) which shows all the options we can use.  For now,
-we're only going to use the first two: `x`, some object and `file= ""`.
+We're brought to [this page](http://stat.ethz.ch/R-manual/R-devel/library/utils/html/write.table.html) which shows all the options we can use.  For now, we're only going to use the first two arguments (or parameters, which ever you prefer): `x`, some object and `file= ""`.
 
 If you use Linux, Mac, or Unix:
 {% codeblock lang:r %}
