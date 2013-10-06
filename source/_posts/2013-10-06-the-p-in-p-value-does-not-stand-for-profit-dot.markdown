@@ -22,7 +22,7 @@ new_red_button <- rbinom(n = 100000, 1, p = 0.05)
 prop.test(table(old_green_button, new_red_button))
 {% endcodeblock %}
 
-In the code above, I first randomnly generate `100k` binomial outcomes for each button. Remember, the conversion rates are 3% and 5%, respectively.  Next, I apply the Chi-square test for equality of proportions.  This is the standard statistical test for testing if two proportions (conv. rates) come from the same population.  That is, should I expect these two buttons to yield a different conversion rate (and profit) going forward?
+In the code above, I first randomly generate `100k` binomial outcomes (really bernoulli r.v.) for each button. Remember, the conversion rates are 3% and 5%, respectively.  Next, I apply the Chi-square test for equality of proportions.  This is the standard statistical test for testing if two proportions (conv. rates) come from the same population.  That is, should I expect these two buttons to yield a different conversion rate (and profit) going forward?
 
 Below are the results from one run, and despite the new red button being 66%
 better than the green button, our p-value sits at 90%, well above the
