@@ -13,8 +13,7 @@ econometrician that specializes in survival analysis, experimental design and Ba
 
 Some of my interests include data mining, statistics, [snowboarding](http://i.imgur.com/rMdk65b.jpg) (hoping to do VT this season!), baysian analysis for ab testing, business  intelltigence.
 
-I have a Master's degree in Applied Statistics from [Louisiana State
-University](http://stats.lsu.edu). My committee members include: Louis A. Escobar (survival analyis), R. Carter Hill (econometrics), Brian Marx (p-splines, he invented them!).  
+I have a Master's degree in Applied Statistics from [Louisiana State University](http://stats.lsu.edu). My committee members include: Louis A. Escobar (survival analyis), R. Carter Hill (econometrics), Brian Marx (p-splines, he invented them!).  
 
 Here's some of my work:
 
