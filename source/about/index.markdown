@@ -8,7 +8,8 @@ footer: true
 ---
 
 I'm Christopher Peters and I'm a data scientist and developer at
-[Treehouse](http://teamtreehouse.com/about).
+[Treehouse](http://teamtreehouse.com/about). I think even my dog knows that my the job title data scientist is bullshit.  The truth is that I'm an
+econometrician that specializes in survival analysis, experimental design and Bayesian methods. But how do you tell someone that at a dinner party? Perhaps statistician is a more proper title, that's what my degree states.
 
 Some of my interests include data mining, statistics, [snowboarding](http://i.imgur.com/rMdk65b.jpg) (hoping to do VT this season!), baysian analysis for ab testing, business  intelltigence.
 
