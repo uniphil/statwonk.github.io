@@ -24,6 +24,5 @@ Take a look at some of my work:
 height="600" style="border:1px solid #ddd;"></iframe>
 
 <br>
-Please feel free to drop me a line at:
-[@statwonk](http://twitter.com/statwonk), or cpeter9 at Google's mail
-service.
+
+Please feel free to drop me a line at: [@statwonk](http://twitter.com/statwonk), or cpeter9 at Google's mail service.  Damn, you spammers!
