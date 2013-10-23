@@ -18,7 +18,7 @@ some great resources, I've taught myself R, SAS, Stata, Ruby on Rails, JavaScrip
 
 I have a Master's degree in Applied Statistics from [Louisiana State University](http://stats.lsu.edu). My committee members include: Louis A. Escobar (survival analyis), R. Carter Hill (econometrics), Brian Marx (p-splines, he invented them!).  
 
-Here's some of my work:
+Take a look at some of my work:
 
 <iframe src="http://personal.crocodoc.com/vupdpCp?embedded=true" width="100%"
 height="600" style="border:1px solid #ddd;"></iframe>
