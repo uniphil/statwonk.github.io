@@ -22,7 +22,7 @@ href="https://twitter.com/statwonk/statuses/393945145030094848">October 26,
 2013</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-So I took a look at the drug reaction info and the top twenty reactions seemed relatively benign, so I feel a bit better.  It's a pretty simple way to go about things, but I'd encourage you to take a look at some [FDA studies of drugs you take](http://www.accessdata.fda.gov/scripts/cder/drugsatfda/index.cfm).  The few I've looked at are appallingly deficient.  Where are the power studies, yo?  If a study has a 5% likelihood of detecting a 20% increase in heart attack, you'd never know -- that's why you should NOT blindly trust p-values > 0.05.  It doesn't mean that there isn't an effect and the study may not have had a good chance of detecting the increased risk from the get-go.
+So I took a look at the drug reaction info and the top twenty reactions seemed relatively benign, so I feel a bit better.  It's a pretty simple way to go about things, but I'd encourage you to take a look at some [FDA studies of drugs you take](http://www.accessdata.fda.gov/scripts/cder/drugsatfda/index.cfm).  The few I've looked at are appallingly deficient.  Where are the power studies, yo?  If a study has a 5% likelihood of detecting a 20% increase in heart attacks, you'd never know -- that's why you should NOT blindly trust p-values > 0.05.  It doesn't mean that there isn't an effect and the study may not have had a good chance of detecting the increased risk from the get-go.
 
 You can find my little script on [Github here](https://github.com/statwonk/FDA-adverse-drug-reactions). 
 
