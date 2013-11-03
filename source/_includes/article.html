@@ -2,7 +2,7 @@
   <header>
     {% if index %}
       {% if post.external-url %}
-        <a href="{{ post.external-url }}"><h3 class="entry-title">{{ post.title }}</h3></a>
+        <a href="{{ post.external-url }}"><h1 class="entry-title">{{ post.title }}</h1></a>
       {% else %}
           <h1 class="entry-title"><a href="{{ root_url }}{{ post.url }}">{% if site.titlecase %}{{ post.title | titlecase }}{% else %}{{ post.title }}{% endif %}</a></h1>
       {% endif %}
