@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "'P-value does not stand for profit.'"
+title: "P-value does not stand for profit."
 date: 2013-10-06 16:26
 comments: true
 categories: statistics, business, data science 

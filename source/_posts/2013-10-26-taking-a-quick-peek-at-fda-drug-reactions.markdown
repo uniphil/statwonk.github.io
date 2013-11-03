@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "'Taking a quick peek at FDA adverse drug reactions"
+title: "Taking a quick peek at FDA adverse drug reactions"
 date: 2013-10-26 00:07
 comments: true
 categories: medicine, statistics, R, FDA

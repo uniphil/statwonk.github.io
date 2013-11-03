@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "'How statisticians lost their business mojo"
+title: "How statisticians lost their business mojo"
 date: 2013-10-11 09:45
 comments: true
 categories: 
