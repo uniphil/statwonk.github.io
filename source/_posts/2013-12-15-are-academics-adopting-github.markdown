@@ -6,7 +6,7 @@ comments: true
 categories: academia, git, github, version control, R, Python
 ---
 
-As the partner of the "Piled Higher, and Deeper" (a Ph.D student) crowd and also a data
+As the partner of one of the "Piled Higher, and Deeper" (a Ph.D student) crowd and also a data
 scientist, I couldn't help but introduce the 'git-way' to Gentry.
 
 She's a geographer at Queen's university.  **Like me, she's tech savvy, but coding
