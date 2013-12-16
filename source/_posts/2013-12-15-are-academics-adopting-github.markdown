@@ -51,9 +51,9 @@ teaches an [excellent lesson on Git at Treehouse](http://teamtreehouse.com/libra
 Today, you get the benefit of that curiousity. **Are academics adopting
 Github?**
 
-Assuming that LaTeX is a good proxy for academic use of Github, yes, academics
+Assuming that LaTeX is a good proxy for academic use of Github, **yes, academics
 have been creating Github repositories at basically an exponential rate since
-the beginning of 2011 and the pace has really picked up the past two months
+the beginning of 2011** and the pace has really picked up since August 2013.
 (makes sense given that it's the school year).
 
 {% img center http://i.imgur.com/bVA4Pa9.png %}
