@@ -17,19 +17,13 @@ categories:
 
 <div id="charts">
   <div id="hour-chart" class="chart">
-    <div class="title">Time of Day</div>
+    <div class="title">Readings by time of day</div>
   </div>
   <div id="delay-chart" class="chart">
-    <div class="title">Arrival Delay (min.)</div>
-  </div>
-  <div id="distance-chart" class="chart">
-    <div class="title">Distance (mi.)</div>
-  </div>
-  <div id="date-chart" class="chart">
-    <div class="title">Date</div>
+    <div class="title">Glucose</div>
   </div>
 </div>
-<aside id="totals"><span id="active">-</span> of <span id="total">-</span> flights selected.</aside>
+<aside id="totals"><span id="active">-</span> of <span id="total">-</span> readings selected.</aside>
 
 <div id="lists">
   <div id="flight-list" class="list"></div>
@@ -38,7 +32,7 @@ categories:
 
 <script>
 // (It's CSV, but GitHub Pages only gzip's JSON at the moment.)
-d3.csv("/assets/flights-3m.json", function(error, flights) {
+d3.csv("/assets/diabetes.json", function(error, flights) {
 
   // Various formatters.
   var formatNumber = d3.format(",d"),
@@ -48,26 +42,25 @@ d3.csv("/assets/flights-3m.json", function(error, flights) {
 
   // A nest operator, for grouping the flight list.
   var nestByDate = d3.nest()
-      .key(function(d) { return d3.time.day(d.date); });
+      .key(function(d) { return d3.time.day(d.time); });
 
   // A little coercion, since the CSV is untyped.
   flights.forEach(function(d, i) {
     d.index = i;
-    d.date = parseDate(d.date);
-    d.delay = +d.delay;
-    d.distance = +d.distance;
+    d.time = parseDate(d.time);
+    d.bg = +d.bg;
   });
 
   // Create the crossfilter for the relevant dimensions and groups.
   var flight = crossfilter(flights),
       all = flight.groupAll(),
-      date = flight.dimension(function(d) { return d.date; }),
+      date = flight.dimension(function(d) { return d.time; }),
       dates = date.group(d3.time.day),
-      hour = flight.dimension(function(d) { return d.date.getHours() + d.date.getMinutes() / 60; }),
+      hour = flight.dimension(function(d) { return d.time.getHours() + d.time.getMinutes() / 60; }),
       hours = hour.group(Math.floor),
-      delay = flight.dimension(function(d) { return Math.max(-60, Math.min(149, d.delay)); }),
+      delay = flight.dimension(function(d) { return d.bg; }),
       delays = delay.group(function(d) { return Math.floor(d / 10) * 10; }),
-      distance = flight.dimension(function(d) { return Math.min(1999, d.distance); }),
+      distance = flight.dimension(function(d) { return Math.min(1999, d.temp_basal); }),
       distances = distance.group(function(d) { return Math.floor(d / 50) * 50; });
 
   var charts = [
@@ -83,25 +76,8 @@ d3.csv("/assets/flights-3m.json", function(error, flights) {
         .dimension(delay)
         .group(delays)
       .x(d3.scale.linear()
-        .domain([-60, 150])
+        .domain([0, 400])
         .rangeRound([0, 10 * 21])),
-
-    barChart()
-        .dimension(distance)
-        .group(distances)
-      .x(d3.scale.linear()
-        .domain([0, 2000])
-        .rangeRound([0, 10 * 40])),
-
-    barChart()
-        .dimension(date)
-        .group(dates)
-        .round(d3.time.day.round)
-      .x(d3.time.scale()
-        .domain([new Date(2001, 0, 1), new Date(2001, 3, 1)])
-        .rangeRound([0, 10 * 90]))
-        .filter([new Date(2001, 1, 1), new Date(2001, 2, 1)])
-
   ];
 
   // Given our array of charts, which we assume are in the same order as the
@@ -175,24 +151,16 @@ d3.csv("/assets/flights-3m.json", function(error, flights) {
 
       flightEnter.append("div")
           .attr("class", "time")
-          .text(function(d) { return formatTime(d.date); });
-
-      flightEnter.append("div")
-          .attr("class", "origin")
-          .text(function(d) { return d.origin; });
-
-      flightEnter.append("div")
-          .attr("class", "destination")
-          .text(function(d) { return d.destination; });
+          .text(function(d) { return formatTime(d.time); });
 
       flightEnter.append("div")
           .attr("class", "distance")
-          .text(function(d) { return formatNumber(d.distance) + " mi."; });
+          .text(function(d) { return formatNumber(d.temp_basal) + " mi."; });
 
       flightEnter.append("div")
           .attr("class", "delay")
-          .classed("early", function(d) { return d.delay < 0; })
-          .text(function(d) { return formatChange(d.delay) + " min."; });
+          .classed("early", function(d) { return d.bg < 0; })
+          .text(function(d) { return formatChange(d.bg) + " min."; });
 
       flight.exit().remove();
 
