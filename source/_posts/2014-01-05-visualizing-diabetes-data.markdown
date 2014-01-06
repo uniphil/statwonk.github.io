@@ -11,9 +11,6 @@ categories:
 <script src="http://d3js.org/d3.v3.min.js"></script>
 
 <div id="body">
-<h1>Crossfilter</h1>
-
-<h2>Fast Multidimensional Filtering for Coordinated Views</h2>
 
 <div id="charts">
   <div id="hour-chart" class="chart">
@@ -27,7 +24,6 @@ categories:
 
 <div id="lists">
   <div id="flight-list" class="list"></div>
-</div>
 </div>
 
 <script>
@@ -49,6 +45,7 @@ d3.csv("/assets/diabetes.json", function(error, flights) {
     d.index = i;
     d.time = parseDate(d.time);
     d.bg = +d.bg;
+    d.hour = d.time.getHours();
   });
 
   // Create the crossfilter for the relevant dimensions and groups.
@@ -111,7 +108,7 @@ d3.csv("/assets/diabetes.json", function(error, flights) {
 
   // Like d3.time.format, but faster.
   function parseDate(d) {
-    return new Date(2001,
+    return new Date(2013,
         d.substring(0, 2) - 1,
         d.substring(2, 4),
         d.substring(4, 6),
@@ -129,7 +126,7 @@ d3.csv("/assets/diabetes.json", function(error, flights) {
   };
 
   function flightList(div) {
-    var flightsByDate = nestByDate.entries(date.top(40));
+    var flightsByDate = nestByDate.entries(date.top(1200));
 
     div.each(function() {
       var date = d3.select(this).selectAll(".date")
@@ -139,7 +136,7 @@ d3.csv("/assets/diabetes.json", function(error, flights) {
           .attr("class", "date")
         .append("div")
           .attr("class", "day")
-          .text(function(d) { return formatDate(d.values[0].date); });
+          .text(function(d) { return formatDate(d.values[0].time); });
 
       date.exit().remove();
 
@@ -148,23 +145,21 @@ d3.csv("/assets/diabetes.json", function(error, flights) {
 
       var flightEnter = flight.enter().append("div")
           .attr("class", "flight");
-
+      
       flightEnter.append("div")
           .attr("class", "time")
           .text(function(d) { return formatTime(d.time); });
 
       flightEnter.append("div")
-          .attr("class", "distance")
-          .text(function(d) { return formatNumber(d.temp_basal) + " mi."; });
-
-      flightEnter.append("div")
           .attr("class", "delay")
-          .classed("early", function(d) { return d.bg < 0; })
-          .text(function(d) { return formatChange(d.bg) + " min."; });
+          .classed("inrange", function(d) { return d.bg > 69 && d.bg < 181})
+          .classed("highoutofrange", function(d) { return d.bg >= 181 })
+          .classed("lowoutofrange", function(d) { return d.bg < 69 })
+          .text(function(d) { return d.bg + " mg/dl"; });
 
       flight.exit().remove();
 
-      flight.order();
+      flight.sort(function(a, b) { return b - a; });
     });
   }
 
@@ -362,3 +357,4 @@ d3.csv("/assets/diabetes.json", function(error, flights) {
 });
 
 </script>
+</div>

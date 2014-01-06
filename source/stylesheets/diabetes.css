@@ -50,34 +50,25 @@ footer {
 }
 
 #hour-chart {
-  width: 260px;
+  width: 250px;
 }
 
 #delay-chart {
-  width: 230px;
+  width: 250px;
 }
 
 #distance-chart {
   width: 420px;
 }
 
-#date-chart {
-  width: 640px;
-}
-
 #flight-list {
   min-height: 1024px;
 }
 
-#flight-list .date,
-#flight-list .day {
-  margin-bottom: .4em;
-}
-
-#flight-list .flight {
+#flight-list .date {
   line-height: 1.5em;
   background: #eee;
-  width: 640px;
+  width: 225px;
   margin-bottom: 1px;
 }
 
@@ -90,20 +81,20 @@ footer {
   width: 100px;
 }
 
-#flight-list div.distance,
 #flight-list div.delay {
-  width: 160px;
+  width: 100px;
   padding-right: 10px;
   text-align: right;
 }
 
-#flight-list .early {
+#flight-list .inrange {
   color: green;
 }
 
-aside {
-  position: absolute;
-  left: 740px;
-  font-size: smaller;
-  width: 220px;
+#flight-list .highoutofrange {
+  color: black;
+}
+
+#flight-list .lowoutofrange {
+  color: red;
 }
