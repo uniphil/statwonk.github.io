@@ -6,9 +6,9 @@ comments: true
 categories: diabetes, d3, javascript, visualization
 ---
 
-<link rel="stylesheet" type="text/css" href="/stylesheets/diabetes.css">
-<link rel="stylesheet" type="text/css" href="/stylesheets/braces.css">
-<script type="text/javascript" src="/javascripts/crossfilter.v1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="stylesheets/diabetes.css">
+<link rel="stylesheet" type="text/css" href="stylesheets/braces.css">
+<script type="text/javascript" src="javascripts/crossfilter.v1.min.js"></script>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 
 My partner is a loving and willing lab-rat. She's bionic and carries an insulin
