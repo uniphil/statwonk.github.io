@@ -10,14 +10,59 @@ categories:
 <link rel="stylesheet" type="text/css" href="/stylesheets/braces.css">
 <script type="text/javascript" src="/javascripts/crossfilter.v1.min.js"></script>
 <script src="http://d3js.org/d3.v3.min.js"></script>
+
+My partner is a loving and willing lab-rat. She's bionic and carries an insulin
+pump that automatically doses insulin for her diabetes. The pump has a few
+"levers" one can pull and "knobs" that can be set.
+
+This is her exact model:
+
+{%img center http://www.medtronicdiabetes.com/res/img/misc/revel-pump-introducing.png 400 400 %}
+
+The beauty for a data scientist, like me, is that the pump records every blood
+glucose measurement.  Blood glucose is basically what keeps your body fueled
+with energy. The non-diabetic's pancreas regulates these levels, like an
+automatic transmission in a car. The diabetic's pancreas is like a manual
+transmission.  My partner takes a blood glucose reading (tachometer RPM level)
+and decides to "shift" or not by giving herself insulin.
+
+Ideally, a diabetic would like to stay in a range of 70 - 180 mg/dL of blood
+glucose.  If you're not diabetic, you probably never stray from 70 - 140 mg/dL.
+
+The interesting thing is that patterns become apparent in the diabetic.
+
+For example, select levels greater than 250 in the Glucose graph below.  You can
+see that many happen after 4pm, likely after lunch and/or dinner.  It makes
+sense, right?
+
+{% img center http://i.imgur.com/S7HOtYb.png %}
+
+If you select values less than 70, you'll see three spikes.
+
+{%img center http://i.imgur.com/4mUfiCg.png %}
+
+These are likely do to insulin mis-calculations before eating breakfast, lunch
+and a late snack. At these times, the diabetic gives themself a large quantity
+of insulin to counter-act the rise in blood glucose that the food will provide.
+Again, it's like shifting a manual transmission in traffic on hills, sometimes
+you grind the gears.
+
+Play with the data yourself.  It's a kindly donated year's worth of a real
+diabetic's readings.
+
 <div id="charts">
   <div id="hour-chart" class="chart">
-    <div class="title">Readings by time of day</div>
+    <div class="title">Readings by time of day (hour, 0 = midnight)</div>
   </div>
   <br>
   <div id="delay-chart" class="chart">
-    <div class="title">Glucose</div>
+    <div class="title">Glucose (mg / dL)</div>
   </div>
+<div id="curly-brace">
+  <div id="left" class="brace"></div>
+  <div id="right" class="brace"></div>
+  <span style="margin-left:30px;">Ideal range</span>
+</div>
 </div>
 <aside id="totals"><span id="active">-</span> of <span id="total">-</span> readings selected.</aside>
 
@@ -354,8 +399,3 @@ d3.csv("/assets/diabetes.json", function(error, flights) {
   }
 });
 </script>
-<div id="curly-brace">
-  <div id="left" class="brace"></div>
-  <div id="right" class="brace"></div>
-  <span style="margin-left:30px;">Ideal range</span>
-</div>
