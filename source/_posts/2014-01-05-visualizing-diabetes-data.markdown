@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Visualizing diabetes data"
+title: "Visualizing my bionic partner's data"
 date: 2014-01-05 16:44
 comments: true
-categories: 
+categories: diabetes, d3, javascript, visualization
 ---
 
 <link rel="stylesheet" type="text/css" href="/stylesheets/diabetes.css">
