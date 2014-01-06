@@ -7,6 +7,7 @@ categories:
 ---
 
 <link rel="stylesheet" type="text/css" href="/stylesheets/diabetes.css">
+<link rel="stylesheet" type="text/css" href="/stylesheets/braces.css">
 <script type="text/javascript" src="/javascripts/crossfilter.v1.min.js"></script>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <div id="charts">
@@ -353,3 +354,8 @@ d3.csv("/assets/diabetes.json", function(error, flights) {
   }
 });
 </script>
+<div id="curly-brace">
+  <div id="left" class="brace"></div>
+  <div id="right" class="brace"></div>
+  <span style="margin-left:30px;">Ideal range</span>
+</div>
