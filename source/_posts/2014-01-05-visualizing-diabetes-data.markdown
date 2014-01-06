@@ -9,13 +9,11 @@ categories:
 <link rel="stylesheet" type="text/css" href="/stylesheets/diabetes.css">
 <script type="text/javascript" src="/javascripts/crossfilter.v1.min.js"></script>
 <script src="http://d3js.org/d3.v3.min.js"></script>
-
-<div id="body">
-
 <div id="charts">
   <div id="hour-chart" class="chart">
     <div class="title">Readings by time of day</div>
   </div>
+  <br>
   <div id="delay-chart" class="chart">
     <div class="title">Glucose</div>
   </div>
@@ -56,9 +54,7 @@ d3.csv("/assets/diabetes.json", function(error, flights) {
       hour = flight.dimension(function(d) { return d.time.getHours() + d.time.getMinutes() / 60; }),
       hours = hour.group(Math.floor),
       delay = flight.dimension(function(d) { return d.bg; }),
-      delays = delay.group(function(d) { return Math.floor(d / 10) * 10; }),
-      distance = flight.dimension(function(d) { return Math.min(1999, d.temp_basal); }),
-      distances = distance.group(function(d) { return Math.floor(d / 50) * 50; });
+      delays = delay.group(function(d) { return Math.floor(d / 10) * 10; })
 
   var charts = [
 
@@ -67,14 +63,14 @@ d3.csv("/assets/diabetes.json", function(error, flights) {
         .group(hours)
       .x(d3.scale.linear()
         .domain([0, 24])
-        .rangeRound([0, 10 * 24])),
+        .rangeRound([0, 500])),
 
     barChart()
         .dimension(delay)
         .group(delays)
       .x(d3.scale.linear()
-        .domain([0, 400])
-        .rangeRound([0, 10 * 21])),
+        .domain([0, 600])
+        .rangeRound([0, 800]))
   ];
 
   // Given our array of charts, which we assume are in the same order as the
@@ -167,7 +163,8 @@ d3.csv("/assets/diabetes.json", function(error, flights) {
     if (!barChart.id) barChart.id = 0;
 
     var margin = {top: 10, right: 10, bottom: 20, left: 10},
-        x,
+        width = 600 - margin.left - margin.right,
+        x = d3.scale.linear().range([0, width]),
         y = d3.scale.linear().range([100, 0]),
         id = barChart.id++,
         axis = d3.svg.axis().orient("bottom"),
@@ -178,8 +175,7 @@ d3.csv("/assets/diabetes.json", function(error, flights) {
         round;
 
     function chart(div) {
-      var width = x.range()[1],
-          height = y.range()[0];
+      var height = y.range()[0];
 
       y.domain([0, group.top(1)[0].value]);
 
@@ -189,6 +185,7 @@ d3.csv("/assets/diabetes.json", function(error, flights) {
 
         // Create the skeletal chart.
         if (g.empty()) {
+
           div.select(".title").append("a")
               .attr("href", "javascript:reset(" + id + ")")
               .attr("class", "reset")
@@ -355,6 +352,4 @@ d3.csv("/assets/diabetes.json", function(error, flights) {
     return d3.rebind(chart, brush, "on");
   }
 });
-
 </script>
-</div>

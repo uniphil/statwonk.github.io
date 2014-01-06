@@ -10,8 +10,8 @@ footer {
 }
 
 .chart {
-  display: inline-block;
   height: 151px;
+  width: 900px;
   margin-bottom: 20px;
 }
 
@@ -50,22 +50,31 @@ footer {
 }
 
 #hour-chart {
-  width: 250px;
+  width: 7000px;
 }
 
 #delay-chart {
-  width: 250px;
+  width: 700px;
 }
 
 #distance-chart {
-  width: 420px;
+  width: 500px;
+}
+
+#date-chart {
+  width: 500px;
 }
 
 #flight-list {
   min-height: 1024px;
 }
 
-#flight-list .date {
+#flight-list .date,
+#flight-list .day {
+  margin-bottom: .4em;
+}
+
+#flight-list .flight {
   line-height: 1.5em;
   background: #eee;
   width: 225px;
