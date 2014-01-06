@@ -47,7 +47,7 @@ of insulin to counter-act the rise in blood glucose that the food will provide.
 Again, it's like shifting a manual transmission in traffic on hills, sometimes
 you grind the gears.
 
-Play with the data yourself.  It's a kindly donated year's worth of a real
+**Play with the data yourself.**  It's a kindly donated year's worth of a real
 diabetic's readings.
 
 <div id="charts">
