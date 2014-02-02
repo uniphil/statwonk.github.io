@@ -4,7 +4,7 @@
   <title><![CDATA[@statwonk]]></title>
   <link href="http://statwonk.github.io/atom.xml" rel="self"/>
   <link href="http://statwonk.github.io/"/>
-  <updated>2014-02-02T17:59:46-05:00</updated>
+  <updated>2014-02-02T18:13:59-05:00</updated>
   <id>http://statwonk.github.io/</id>
   <author>
     <name><![CDATA[Christopher P. Peters]]></name>
@@ -18,11 +18,11 @@
     <link href="http://statwonk.github.io/blog/2014/02/02/dipping-my-toe-in-the-node-dot-js-waters/"/>
     <updated>2014-02-02T11:03:00-05:00</updated>
     <id>http://statwonk.github.io/blog/2014/02/02/dipping-my-toe-in-the-node-dot-js-waters</id>
-    <content type="html"><![CDATA[<p>I&rsquo;ve recently been attracted to learning JavaScript by way of D3.js.  We all know from the Hacker News posts that &lsquo;ole JS has seen a huge revitalization and if you want to push data around with D3, you might as well take advantage of the powerful language its build on. So I started with <a href="http://crockford.com">Crockford&rsquo;s</a> <em>JavaScript: The Good Parts.</em></p>
+    <content type="html"><![CDATA[<p>I&rsquo;ve recently been attracted to learning JavaScript by way of D3.js.  We all know from the Hacker News posts that ole JS has seen a huge revitalization and if you want to push data around with D3, you might as well take advantage of the powerful language its build on. So I started with <a href="http://crockford.com">Crockford&rsquo;s</a> <em>JavaScript: The Good Parts.</em></p>
 
 <p>Before reading the book, JavaScript was a means to take care of incidental calculations that may need to be done when creating graphs.  Dates are always a pain in the ass, so hey, &ldquo;I might want some JS ability to work with them.&rdquo;</p>
 
-<p>Instead, I&rsquo;m now looking at JavaScript as a potential alternative to R in certain spaces. Having the ability to jump from language to language (maybe even tie them together with a shell script) is a huge boon for data science work.  Each language has it&rsquo;s pros and cons and usually some mix of them is the best most efficient path from raw data to inights.</p>
+<p>Instead, I&rsquo;m now looking at JavaScript as a potential alternative to R in certain spaces. Having the ability to jump from language to language (maybe even tie them together with a shell script) is a huge boon for data science work.  Each language has its pros and cons and usually some mix of them is the best most efficient path from raw data to inights.</p>
 
 <p>Only recently did I even realize that the browser is a compiler while reading up on Google&rsquo;s <a href="https://code.google.com/p/v8/">V8 engine</a> and Mozilla&rsquo;s <a href="http://en.wikipedia.org/wiki/Gecko_(layout_engine)">Gecko engine</a>. An aquantance at a recent party put it, &ldquo; &hellip; Google put tons of work into V8, it&rsquo;s a very efficient and speedy.&rdquo; This is pretty exciting in that it turns the browser from a space simply to display data to a computing engine.</p>
 

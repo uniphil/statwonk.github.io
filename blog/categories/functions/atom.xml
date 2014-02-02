@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: R | @statwonk]]></title>
-  <link href="http://statwonk.github.io/blog/categories/r/atom.xml" rel="self"/>
+  <title><![CDATA[Category: functions | @statwonk]]></title>
+  <link href="http://statwonk.github.io/blog/categories/functions/atom.xml" rel="self"/>
   <link href="http://statwonk.github.io/"/>
   <updated>2014-02-02T18:13:59-05:00</updated>
   <id>http://statwonk.github.io/</id>
