@@ -131,7 +131,7 @@ console.log(bootmeans())
 
 It's much longer and really dirty, but hey, it's in JavaScript! I also have a nice interpreter / host with Node.js. [It's not an exact copy, **JS doesn't have nice statistical functions like R, such as mean!!!!**]
 
-I'm also interested in how I can leverage learning JavaScript [**given how similar it is to R**](http://www.yaksis.com/posts/coffeescript-for-r.html). As that author shows, the following code block is 100% valide JavaScript and R:
+I'm also interested in how I can leverage learning JavaScript [**given how similar it is to R**](http://www.yaksis.com/posts/coffeescript-for-r.html). As that author shows, the following code block is 100% valid JavaScript and R:
 
 {% codeblock lang:javascript %}
 fib = function(n) {
