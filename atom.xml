@@ -1,0 +1,1347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[@statwonk]]></title>
+  <link href="http://statwonk.github.io/atom.xml" rel="self"/>
+  <link href="http://statwonk.github.io/"/>
+  <updated>2014-02-02T10:04:33-05:00</updated>
+  <id>http://statwonk.github.io/</id>
+  <author>
+    <name><![CDATA[Christopher P. Peters]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Resizing tmux panes with the bind-key]]></title>
+    <link href="http://statwonk.github.io/blog/2014/01/18/resizing-tmux-panes-with-the-bind-key/"/>
+    <updated>2014-01-18T14:06:00-05:00</updated>
+    <id>http://statwonk.github.io/blog/2014/01/18/resizing-tmux-panes-with-the-bind-key</id>
+    <content type="html"><![CDATA[<iframe align="center" width="600" height="450" src="http://statwonk.github.io//www.youtube.com/embed/oGs7h9ECL0Y" frameborder="0" allowfullscreen></iframe>
+
+
+<p>With small screens, resizing tmux panes efficiently is important.  Using the <code>resize-pane -U [number]</code> command each time you want to resize a pane, isn&rsquo;t going to cut it.</p>
+
+<p>Add the following lines to your <code>~/.tmux.conf</code> file:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>bind-key -r j resize-pane -D 5
+</span><span class='line'>bind-key -r k resize-pane -U 5
+</span><span class='line'>bind-key -r h resize-pane -L 5
+</span><span class='line'>bind-key -r l resize-pane -R 5</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Instead of typing <code>resize-pane -U 10</code> into <code>tmux</code>, just hit <code>bind-key</code> and tap <code>k</code> a few times. If working with vertically split panes, type <code>bind-key</code> and <code>h</code> or <code>l</code> a few times.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Visualizing my bionic partner's data]]></title>
+    <link href="http://statwonk.github.io/blog/2014/01/05/visualizing-diabetes-data/"/>
+    <updated>2014-01-05T16:44:00-05:00</updated>
+    <id>http://statwonk.github.io/blog/2014/01/05/visualizing-diabetes-data</id>
+    <content type="html"><![CDATA[<p><link rel="stylesheet" type="text/css" href="../../../../../stylesheets/diabetes.css">
+<link rel="stylesheet" type="text/css" href="../../../../../stylesheets/braces.css"></p>
+
+<script type="text/javascript" src="../../../../../javascripts/crossfilter.v1.min.js"></script>
+
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+
+<p>My partner is a loving and willing lab-rat. She&rsquo;s bionic and carries an insulin
+pump that automatically doses insulin for her diabetes. The pump has a few
+&ldquo;levers&rdquo; one can pull and &ldquo;knobs&rdquo; that can be set.</p>
+
+<p>This is her exact model:</p>
+
+<p><img class="center" src="http://www.medtronicdiabetes.com/res/img/misc/revel-pump-introducing.png" width="400" height="400"></p>
+
+<p>The beauty for a data scientist, like me, is that the pump records every blood
+glucose measurement.  Blood glucose is basically what keeps your body fueled
+with energy. The non-diabetic&rsquo;s pancreas regulates these levels, like an
+automatic transmission in a car. The diabetic&rsquo;s pancreas is like a manual
+transmission.  My partner takes a blood glucose reading (tachometer RPM level)
+and decides to &ldquo;shift&rdquo; or not by giving herself insulin.</p>
+
+<p>Ideally, a diabetic would like to stay in a range of 70 &ndash; 180 mg/dL of blood
+glucose.  If you&rsquo;re not diabetic, you probably never stray from 70 &ndash; 140 mg/dL.</p>
+
+<p>The interesting thing is that patterns become apparent in the diabetic.</p>
+
+<p>For example, select levels greater than 250 in the Glucose graph below.  You can
+see that many happen after 4pm, likely after lunch and/or dinner.  It makes
+sense, right?</p>
+
+<p><img class="center" src="http://i.imgur.com/S7HOtYb.png"></p>
+
+<p>If you select values less than 70, you&rsquo;ll see three spikes.</p>
+
+<p><img class="center" src="http://i.imgur.com/4mUfiCg.png"></p>
+
+<p>These are likely do to insulin mis-calculations before eating breakfast, lunch
+and a late snack. At these times, the diabetic gives themself a large quantity
+of insulin to counter-act the rise in blood glucose that the food will provide.
+Again, it&rsquo;s like shifting a manual transmission in traffic on hills, sometimes
+you grind the gears.</p>
+
+<p><strong>Play with the data yourself.</strong>  It&rsquo;s a kindly donated year&rsquo;s worth of a real
+diabetic&rsquo;s readings.</p>
+
+<div id="charts">
+  <div id="hour-chart" class="chart">
+    <div class="title">Readings by time of day (hour, 0 = midnight)</div>
+  </div>
+  <br>
+  <div id="delay-chart" class="chart">
+    <div class="title">Glucose (mg / dL)</div>
+  </div>
+<div id="curly-brace">
+  <div id="left" class="brace"></div>
+  <div id="right" class="brace"></div>
+  <span style="margin-left:30px;">Ideal range</span>
+</div>
+</div>
+
+
+<p><aside id="totals"><span id="active">&ndash;</span> of <span id="total">&ndash;</span> readings selected.</aside></p>
+
+<div id="lists">
+  <div id="flight-list" class="list"></div>
+</div>
+
+
+
+
+<script>
+// (It's CSV, but GitHub Pages only gzip's JSON at the moment.)
+d3.csv("/assets/diabetes.json", function(error, flights) {
+
+  // Various formatters.
+  var formatNumber = d3.format(",d"),
+      formatChange = d3.format("+,d"),
+      formatDate = d3.time.format("%B %d, %Y"),
+      formatTime = d3.time.format("%I:%M %p");
+
+  // A nest operator, for grouping the flight list.
+  var nestByDate = d3.nest()
+      .key(function(d) { return d3.time.day(d.time); });
+
+  // A little coercion, since the CSV is untyped.
+  flights.forEach(function(d, i) {
+    d.index = i;
+    d.time = parseDate(d.time);
+    d.bg = +d.bg;
+    d.hour = d.time.getHours();
+  });
+
+  // Create the crossfilter for the relevant dimensions and groups.
+  var flight = crossfilter(flights),
+      all = flight.groupAll(),
+      date = flight.dimension(function(d) { return d.time; }),
+      dates = date.group(d3.time.day),
+      hour = flight.dimension(function(d) { return d.time.getHours() + d.time.getMinutes() / 60; }),
+      hours = hour.group(Math.floor),
+      delay = flight.dimension(function(d) { return d.bg; }),
+      delays = delay.group(function(d) { return Math.floor(d / 10) * 10; })
+
+  var charts = [
+
+    barChart()
+        .dimension(hour)
+        .group(hours)
+      .x(d3.scale.linear()
+        .domain([0, 24])
+        .rangeRound([0, 500])),
+
+    barChart()
+        .dimension(delay)
+        .group(delays)
+      .x(d3.scale.linear()
+        .domain([0, 600])
+        .rangeRound([0, 800]))
+  ];
+
+  // Given our array of charts, which we assume are in the same order as the
+  // .chart elements in the DOM, bind the charts to the DOM and render them.
+  // We also listen to the chart's brush events to update the display.
+  var chart = d3.selectAll(".chart")
+      .data(charts)
+      .each(function(chart) { chart.on("brush", renderAll).on("brushend", renderAll); });
+
+  // Render the initial lists.
+  var list = d3.selectAll(".list")
+      .data([flightList]);
+
+  // Render the total.
+  d3.selectAll("#total")
+      .text(formatNumber(flight.size()));
+
+  renderAll();
+
+  // Renders the specified chart or list.
+  function render(method) {
+    d3.select(this).call(method);
+  }
+
+  // Whenever the brush moves, re-rendering everything.
+  function renderAll() {
+    chart.each(render);
+    list.each(render);
+    d3.select("#active").text(formatNumber(all.value()));
+  }
+
+  // Like d3.time.format, but faster.
+  function parseDate(d) {
+    return new Date(2013,
+        d.substring(0, 2) - 1,
+        d.substring(2, 4),
+        d.substring(4, 6),
+        d.substring(6, 8));
+  }
+
+  window.filter = function(filters) {
+    filters.forEach(function(d, i) { charts[i].filter(d); });
+    renderAll();
+  };
+
+  window.reset = function(i) {
+    charts[i].filter(null);
+    renderAll();
+  };
+
+  function flightList(div) {
+    var flightsByDate = nestByDate.entries(date.top(1200));
+
+    div.each(function() {
+      var date = d3.select(this).selectAll(".date")
+          .data(flightsByDate, function(d) { return d.key; });
+
+      date.enter().append("div")
+          .attr("class", "date")
+        .append("div")
+          .attr("class", "day")
+          .text(function(d) { return formatDate(d.values[0].time); });
+
+      date.exit().remove();
+
+      var flight = date.order().selectAll(".flight")
+          .data(function(d) { return d.values; }, function(d) { return d.index; });
+
+      var flightEnter = flight.enter().append("div")
+          .attr("class", "flight");
+      
+      flightEnter.append("div")
+          .attr("class", "time")
+          .text(function(d) { return formatTime(d.time); });
+
+      flightEnter.append("div")
+          .attr("class", "delay")
+          .classed("inrange", function(d) { return d.bg > 69 && d.bg < 181})
+          .classed("highoutofrange", function(d) { return d.bg >= 181 })
+          .classed("lowoutofrange", function(d) { return d.bg < 69 })
+          .text(function(d) { return d.bg + " mg/dl"; });
+
+      flight.exit().remove();
+
+      flight.sort(function(a, b) { return b - a; });
+    });
+  }
+
+  function barChart() {
+    if (!barChart.id) barChart.id = 0;
+
+    var margin = {top: 10, right: 10, bottom: 20, left: 10},
+        width = 600 - margin.left - margin.right,
+        x = d3.scale.linear().range([0, width]),
+        y = d3.scale.linear().range([100, 0]),
+        id = barChart.id++,
+        axis = d3.svg.axis().orient("bottom"),
+        brush = d3.svg.brush(),
+        brushDirty,
+        dimension,
+        group,
+        round;
+
+    function chart(div) {
+      var height = y.range()[0];
+
+      y.domain([0, group.top(1)[0].value]);
+
+      div.each(function() {
+        var div = d3.select(this),
+            g = div.select("g");
+
+        // Create the skeletal chart.
+        if (g.empty()) {
+
+          div.select(".title").append("a")
+              .attr("href", "javascript:reset(" + id + ")")
+              .attr("class", "reset")
+              .text("reset")
+              .style("display", "none");
+
+          g = div.append("svg")
+              .attr("width", width + margin.left + margin.right)
+              .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+              .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+          g.append("clipPath")
+              .attr("id", "clip-" + id)
+            .append("rect")
+              .attr("width", width)
+              .attr("height", height);
+
+          g.selectAll(".bar")
+              .data(["background", "foreground"])
+            .enter().append("path")
+              .attr("class", function(d) { return d + " bar"; })
+              .datum(group.all());
+
+          g.selectAll(".foreground.bar")
+              .attr("clip-path", "url(#clip-" + id + ")");
+
+          g.append("g")
+              .attr("class", "axis")
+              .attr("transform", "translate(0," + height + ")")
+              .call(axis);
+
+          // Initialize the brush component with pretty resize handles.
+          var gBrush = g.append("g").attr("class", "brush").call(brush);
+          gBrush.selectAll("rect").attr("height", height);
+          gBrush.selectAll(".resize").append("path").attr("d", resizePath);
+        }
+
+        // Only redraw the brush if set externally.
+        if (brushDirty) {
+          brushDirty = false;
+          g.selectAll(".brush").call(brush);
+          div.select(".title a").style("display", brush.empty() ? "none" : null);
+          if (brush.empty()) {
+            g.selectAll("#clip-" + id + " rect")
+                .attr("x", 0)
+                .attr("width", width);
+          } else {
+            var extent = brush.extent();
+            g.selectAll("#clip-" + id + " rect")
+                .attr("x", x(extent[0]))
+                .attr("width", x(extent[1]) - x(extent[0]));
+          }
+        }
+
+        g.selectAll(".bar").attr("d", barPath);
+      });
+
+      function barPath(groups) {
+        var path = [],
+            i = -1,
+            n = groups.length,
+            d;
+        while (++i < n) {
+          d = groups[i];
+          path.push("M", x(d.key), ",", height, "V", y(d.value), "h9V", height);
+        }
+        return path.join("");
+      }
+
+      function resizePath(d) {
+        var e = +(d == "e"),
+            x = e ? 1 : -1,
+            y = height / 3;
+        return "M" + (.5 * x) + "," + y
+            + "A6,6 0 0 " + e + " " + (6.5 * x) + "," + (y + 6)
+            + "V" + (2 * y - 6)
+            + "A6,6 0 0 " + e + " " + (.5 * x) + "," + (2 * y)
+            + "Z"
+            + "M" + (2.5 * x) + "," + (y + 8)
+            + "V" + (2 * y - 8)
+            + "M" + (4.5 * x) + "," + (y + 8)
+            + "V" + (2 * y - 8);
+      }
+    }
+
+    brush.on("brushstart.chart", function() {
+      var div = d3.select(this.parentNode.parentNode.parentNode);
+      div.select(".title a").style("display", null);
+    });
+
+    brush.on("brush.chart", function() {
+      var g = d3.select(this.parentNode),
+          extent = brush.extent();
+      if (round) g.select(".brush")
+          .call(brush.extent(extent = extent.map(round)))
+        .selectAll(".resize")
+          .style("display", null);
+      g.select("#clip-" + id + " rect")
+          .attr("x", x(extent[0]))
+          .attr("width", x(extent[1]) - x(extent[0]));
+      dimension.filterRange(extent);
+    });
+
+    brush.on("brushend.chart", function() {
+      if (brush.empty()) {
+        var div = d3.select(this.parentNode.parentNode.parentNode);
+        div.select(".title a").style("display", "none");
+        div.select("#clip-" + id + " rect").attr("x", null).attr("width", "100%");
+        dimension.filterAll();
+      }
+    });
+
+    chart.margin = function(_) {
+      if (!arguments.length) return margin;
+      margin = _;
+      return chart;
+    };
+
+    chart.x = function(_) {
+      if (!arguments.length) return x;
+      x = _;
+      axis.scale(x);
+      brush.x(x);
+      return chart;
+    };
+
+    chart.y = function(_) {
+      if (!arguments.length) return y;
+      y = _;
+      return chart;
+    };
+
+    chart.dimension = function(_) {
+      if (!arguments.length) return dimension;
+      dimension = _;
+      return chart;
+    };
+
+    chart.filter = function(_) {
+      if (_) {
+        brush.extent(_);
+        dimension.filterRange(_);
+      } else {
+        brush.clear();
+        dimension.filterAll();
+      }
+      brushDirty = true;
+      return chart;
+    };
+
+    chart.group = function(_) {
+      if (!arguments.length) return group;
+      group = _;
+      return chart;
+    };
+
+    chart.round = function(_) {
+      if (!arguments.length) return round;
+      round = _;
+      return chart;
+    };
+
+    return d3.rebind(chart, brush, "on");
+  }
+});
+</script>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Are academics adopting Github?]]></title>
+    <link href="http://statwonk.github.io/blog/2013/12/15/are-academics-adopting-github/"/>
+    <updated>2013-12-15T20:27:00-05:00</updated>
+    <id>http://statwonk.github.io/blog/2013/12/15/are-academics-adopting-github</id>
+    <content type="html"><![CDATA[<p>As the partner of one of the &ldquo;Piled Higher, and Deeper&rdquo; (a Ph.D student) crowd and also a data
+scientist, I couldn&rsquo;t help but introduce the &lsquo;git-way&rsquo; to Gentry.</p>
+
+<p>She&rsquo;s a geographer at Queen&rsquo;s university.  <strong>Like me, she&rsquo;s tech savvy, but coding
+is new to her.  Human geography, her field, is largely qualitative like the rest
+of the humanities.</strong></p>
+
+<p><a href="http://i.imgur.com/PDQx8tf.jpg"><span class='caption-wrapper right'><img class='caption' src='http://i.imgur.com/PDQx8tf.jpg' width='350' height='550' title='"An academic's console command cheat sheet"'><span class='caption-text'>&ldquo;An academic&rsquo;s console command cheat sheet&rdquo;</span></span></a></p>
+
+<p>At the end of her previous degree, I helped her cope with MS Word as it struggled under the weight of a 100+ page thesis.  We expanded the memory on her laptop.  She had &ldquo;sub-docs&rdquo; everywhere.  Bits and pieces of thoughts  put to the side, worked on independently, temporarily stricken.  But how to keep track of it all?</p>
+
+<p>I was learning Git at the same time on my path from statistician to data scientist.</p>
+
+<p>A year later, I&rsquo;ve come to use git and Github on a daily-basis.  I&rsquo;ve moved
+from an academic statistician to a commercial data scientist.  I work with a
+team of developers, and the Git-way has become really the only way for keeping track
+of my projects.</p>
+
+<p>Now, Gentry is working on her dissertation.  As a first step into coding, she&rsquo;s been learning LaTeX.  She&rsquo;s sold because she can annotate her own dissertation with comments.</p>
+
+<p>For those unfamiliar, LaTeX is a typsetting language. It creates beautiful documents with high-level style control. I recommend it to anyone that&rsquo;s ever tried to do formatting in
+MS Word. :&ndash;)</p>
+
+<p>LaTeX is also largely confined to academia.  I&rsquo;m not saying they don&rsquo;t exist,
+but I haven&rsquo;t met anyone that uses LaTeX who is not also an academic.</p>
+
+<p><strong>Now that Gentry was coding her dissertation, using Git and Github were open to
+her as tools.</strong></p>
+
+<p>I commonly relate Github to my non-programming friends by telling them it&rsquo;s the
+Facebook of code and programmers.  People instantly get this analogy.  &ldquo;Oh, so
+it lets you be social and interact?&rdquo;</p>
+
+<p>&ldquo;Precisely, but with code.&rdquo;</p>
+
+<p>Github is perfect for academics.  If they can use it by coding with LaTeX, even
+non-quantitative academics can work socially and openly (which is possibly more
+important).</p>
+
+<p>Gentry&rsquo;s sold and she&rsquo;s been been learning Git with my co-worker Tommy Morgan.  Tommy
+teaches an <a href="http://teamtreehouse.com/library/git-basics">excellent lesson on Git at Treehouse</a>.  As I was speaking with the Co-Founder Ryan Carson last week, I wondered out loud, &ldquo;how many academics out there are using Git (and Github)?&rdquo;</p>
+
+<p>Today, you get the benefit of that curiousity. <strong>Are academics adopting
+Github?</strong></p>
+
+<p>Assuming that LaTeX is a good proxy for academic use of Github, <strong>yes, academics
+have been creating Github repositories at basically an exponential rate since
+the beginning of 2011</strong> and the pace has really picked up since August 2013.
+(makes sense given that it&rsquo;s the school year).</p>
+
+<p><img class="center" src="http://i.imgur.com/bVA4Pa9.png"></p>
+
+<p>&hellip;and on a log-scale (notice that the growth is linear on this scale), that means
+it&rsquo;s exponential growth since the beginning of 2011.</p>
+
+<p><img class="center" src="http://i.imgur.com/hmI9mpb.png"></p>
+
+<p>This is just a raw look at the number of LaTeX repositories on Github by month.
+But I don&rsquo;t think the data needs to be spoiled by over-analysis.  As a next
+step, I&rsquo;d like to try forecasting the growth rate of these repositories by using
+the growth rates of other repositories.</p>
+
+<p>The idea of git and Github is so powerful, that I bet the academic community
+falls in love as much as the programming world has.  I also predict that those
+academics who adopt first will have a sigificant competitive advantage over
+their peers.  This is in an increasingly competitive job market where
+Ph.D-candidate after candidate hit a brick wall when searching for a
+tenure-track position.</p>
+
+<p>This data scientist is very proud of his human geographer for using version
+control in the place of snippets of MS Word documents.</p>
+
+<p>For those interested, the code I used to do this analysis was a mix of Python
+and R.  Here&rsquo;s the <a href="https://github.com/statwonk/academic-github-adoption">Github repo</a>, and relevant code snippets:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">requests</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">json</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">csv</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">time</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">times</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;2010&quot;</span><span class="p">,</span> <span class="s">&quot;2011&quot;</span><span class="p">,</span> <span class="s">&quot;2012&quot;</span><span class="p">]</span>
+</span><span class='line'><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">12</span><span class="p">):</span>
+</span><span class='line'>  <span class="n">times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="mi">2013</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;-&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)))</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">df</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span class='line'><span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">times</span><span class="p">:</span>
+</span><span class='line'>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+</span><span class='line'>        <span class="c"># print &quot;Sleeping 15 seconds ... &quot;</span>
+</span><span class='line'>        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">60</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;https://api.github.com/search/repositories?q=language:latex&amp;&#39;</span> <span class="o">+</span> \
+</span><span class='line'>                         <span class="s">&#39;page=&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39;&amp;per_page=100&#39;</span> <span class="o">+</span> \
+</span><span class='line'>                         <span class="s">&#39;&amp;created=&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">))</span>
+</span><span class='line'>        <span class="k">if</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">ok</span><span class="p">):</span>
+</span><span class='line'>            <span class="n">repoItem</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</span><span class='line'>            <span class="k">print</span> <span class="s">&quot;page &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;, year &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+</span><span class='line'>            <span class="k">for</span> <span class="n">repo</span> <span class="ow">in</span> <span class="n">repoItem</span><span class="p">[</span><span class="s">&#39;items&#39;</span><span class="p">]:</span>
+</span><span class='line'>                <span class="n">df</span><span class="p">[</span><span class="n">repo</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">repo</span><span class="p">[</span><span class="s">&#39;created_at&#39;</span><span class="p">]</span>
+</span><span class='line'>        <span class="k">else</span><span class="p">:</span> <span class="k">print</span> <span class="s">&quot;oh nos! Page &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot; has a problem&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;data.csv&#39;</span><span class="p">,</span> <span class="s">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">csvfile</span><span class="p">:</span>
+</span><span class='line'>    <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">csvfile</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span> <span class="s">&#39;,&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+</span><span class='line'>        <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>&hellip; admittedly pretty basic.  Just learning Python! Plotting was done in R&rsquo;s
+<code>ggplot2</code> library.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'>library<span class="p">(</span>ggplot2<span class="p">)</span>
+</span><span class='line'>library<span class="p">(</span>lubridate<span class="p">)</span>
+</span><span class='line'>library<span class="p">(</span>ggthemes<span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>df <span class="o">&lt;-</span> read.csv<span class="p">(</span><span class="s">&quot;data.csv&quot;</span><span class="p">,</span> header <span class="o">=</span> <span class="k-Variable">F</span><span class="p">)</span>
+</span><span class='line'>names<span class="p">(</span>df<span class="p">)</span> <span class="o">&lt;-</span> c<span class="p">(</span><span class="s">&quot;repo&quot;</span><span class="p">,</span> <span class="s">&quot;created_at&quot;</span><span class="p">)</span>
+</span><span class='line'>df<span class="o">$</span>created_at <span class="o">&lt;-</span> as.POSIXct<span class="p">(</span>df<span class="o">$</span>created_at<span class="p">)</span>
+</span><span class='line'>df <span class="o">&lt;-</span> df<span class="p">[</span>df<span class="o">$</span>created_at <span class="o">&lt;</span> max<span class="p">(</span>df<span class="o">$</span>created_at<span class="p">)</span> <span class="o">-</span> days<span class="p">(</span><span class="m">14</span><span class="p">),</span> <span class="p">]</span>
+</span><span class='line'>
+</span><span class='line'>ggplot<span class="p">(</span>df<span class="p">,</span> aes<span class="p">(</span>x <span class="o">=</span> created_at<span class="p">))</span> <span class="o">+</span>
+</span><span class='line'>  scale_y_continuous<span class="p">(</span>breaks <span class="o">=</span> seq<span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">150</span><span class="p">,</span> <span class="m">25</span><span class="p">))</span> <span class="o">+</span>
+</span><span class='line'>  geom_hline<span class="p">(</span>yintercept <span class="o">=</span> <span class="m">25</span><span class="p">,</span> colour <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> linetype<span class="o">=</span><span class="s">&quot;dotted&quot;</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>  geom_hline<span class="p">(</span>yintercept <span class="o">=</span> <span class="m">50</span><span class="p">,</span> colour <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> linetype<span class="o">=</span><span class="s">&quot;dotted&quot;</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>  geom_hline<span class="p">(</span>yintercept <span class="o">=</span> <span class="m">75</span><span class="p">,</span> colour <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> linetype<span class="o">=</span><span class="s">&quot;dotted&quot;</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>  geom_hline<span class="p">(</span>yintercept <span class="o">=</span> <span class="m">100</span><span class="p">,</span> colour <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> linetype<span class="o">=</span><span class="s">&quot;dotted&quot;</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>  geom_hline<span class="p">(</span>yintercept <span class="o">=</span> <span class="m">125</span><span class="p">,</span> colour <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> linetype<span class="o">=</span><span class="s">&quot;dotted&quot;</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>  geom_histogram<span class="p">(</span>colour <span class="o">=</span> <span class="s">&quot;black&quot;</span><span class="p">,</span> fill <span class="o">=</span> <span class="s">&quot;tan&quot;</span><span class="p">,</span> binwidth <span class="o">=</span> <span class="m">60</span><span class="o">*</span><span class="m">60</span><span class="o">*</span><span class="m">24</span><span class="o">*</span><span class="m">30.5</span><span class="p">,</span> stat <span class="o">=</span> <span class="s">&quot;bin&quot;</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>  xlab<span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>  ylab<span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>  ggtitle<span class="p">(</span><span class="s">&quot;Public Github Repositories\nwritten in LaTeX per Month&quot;</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>  theme_solarized<span class="p">(</span>light <span class="o">=</span> <span class="k-Variable">F</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>  theme<span class="p">(</span>axis.text.x <span class="o">=</span> element_text<span class="p">(</span>size <span class="o">=</span> <span class="m">32</span><span class="p">),</span>
+</span><span class='line'>        axis.text.y <span class="o">=</span> element_text<span class="p">(</span>size <span class="o">=</span> <span class="m">28</span><span class="p">),</span>
+</span><span class='line'>        plot.title <span class="o">=</span> element_text<span class="p">(</span>size <span class="o">=</span> <span class="m">30</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'>ggplot<span class="p">(</span>df<span class="p">,</span> aes<span class="p">(</span>x <span class="o">=</span> created_at<span class="p">))</span> <span class="o">+</span>
+</span><span class='line'>  scale_y_log10<span class="p">()</span> <span class="o">+</span>
+</span><span class='line'>  geom_hline<span class="p">(</span>yintercept <span class="o">=</span> <span class="m">10</span><span class="p">,</span> colour <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> linetype<span class="o">=</span><span class="s">&quot;dotted&quot;</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>  geom_hline<span class="p">(</span>yintercept <span class="o">=</span> <span class="m">100</span><span class="p">,</span> colour <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> linetype<span class="o">=</span><span class="s">&quot;dotted&quot;</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>  geom_histogram<span class="p">(</span>colour <span class="o">=</span> <span class="s">&quot;black&quot;</span><span class="p">,</span> fill <span class="o">=</span> <span class="s">&quot;tan&quot;</span><span class="p">,</span> binwidth <span class="o">=</span> <span class="m">60</span><span class="o">*</span><span class="m">60</span><span class="o">*</span><span class="m">24</span><span class="o">*</span><span class="m">30.5</span><span class="p">,</span> stat <span class="o">=</span> <span class="s">&quot;bin&quot;</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>  xlab<span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>  ylab<span class="p">(</span><span class="s">&quot;(Log scale)&quot;</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>  ggtitle<span class="p">(</span><span class="s">&quot;Public Github Repositories\nwritten in LaTeX per Month&quot;</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>  theme_solarized<span class="p">(</span>light <span class="o">=</span> <span class="k-Variable">F</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>  theme<span class="p">(</span>axis.title.y <span class="o">=</span> element_text<span class="p">(</span>size <span class="o">=</span> <span class="m">25</span><span class="p">),</span>
+</span><span class='line'>        axis.text.x <span class="o">=</span> element_text<span class="p">(</span>size <span class="o">=</span> <span class="m">32</span><span class="p">),</span>
+</span><span class='line'>        axis.text.y <span class="o">=</span> element_text<span class="p">(</span>size <span class="o">=</span> <span class="m">28</span><span class="p">),</span>
+</span><span class='line'>        plot.title <span class="o">=</span> element_text<span class="p">(</span>size <span class="o">=</span> <span class="m">30</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Washing dishes with Bayes]]></title>
+    <link href="http://statwonk.github.io/blog/2013/11/24/washing-dishes-with-bayes/"/>
+    <updated>2013-11-24T16:08:00-05:00</updated>
+    <id>http://statwonk.github.io/blog/2013/11/24/washing-dishes-with-bayes</id>
+    <content type="html"><![CDATA[<p>Cutting board to wash.</p>
+
+<p>Where do I focus my effort?</p>
+
+<p>The dirtiest part.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Goodbye scripts, hello R packages!]]></title>
+    <link href="http://statwonk.github.io/blog/2013/11/03/goodbye-scripts/"/>
+    <updated>2013-11-03T20:21:00-05:00</updated>
+    <id>http://statwonk.github.io/blog/2013/11/03/goodbye-scripts</id>
+    <content type="html"><![CDATA[<p>This weekend I reached the breaking point with my R codebase.  I&rsquo;ve heard it said before that the best thing about R is that it was created by statisticians and the worst thing about R is that was created by statisticians.</p>
+
+<p>R is a domain-specific language.  My perspective as a student of R, is that the culture is heavily oriented towards writing scripts.  Academic statisticians as a culture have, in my opinion, very poor programming skills.  There are exceptions like Hadley Wickham, but it appears even he has been forced to leave academia.  Probably because his game changing R packages weren&rsquo;t recognized in proportion to the mindless publication of p-values or yet another Fisherian SAS implementation.  I could be wrong, is it a sabbatical? are his R packages recognized as world-class by his collegues?</p>
+
+<p>My own academic experience was a mixed bag.  I had an absolutely wonderful advisor that programmed in R (and a couple of other professors, too).  The rest of the department were using SAS.  If you use R (and have used SAS), I don&rsquo;t have to tell you what that meant for me in terms of programming education in school.</p>
+
+<p>I&rsquo;ve been on my own when it comes to learning the fundamentals of modern programming.  Having only used procedural languages (R [mostly], SAS, and Stata), the transition to object-orientation was both difficult and a breath of fresh air.</p>
+
+<p>I understood that having hundreds and hundreds of scripts meant that I was effectively re-writting the wheel on a daily basis.  I want to escape from that. Luckily, I work for an <a href="http://teamtreehouse.com">amazing company</a> that happens to be in the tech. education business.</p>
+
+<p>It wasn&rsquo;t until a couple of coworkers suggested I learn Ruby (Treehouse rocks for learning this language by the way!), that I really began to engage object-orientation and modularization on a daily-basis.  &ldquo;Wait, you mean if I define this in a class with a given namespace, I can call the method from anywhere?&rdquo;</p>
+
+<p>R is also an object-oriented language, but it&rsquo;s application seems fairly limited and you&rsquo;re usually crossing your fingers in hopes that a package maintainer has thought to overload the <code>plot()</code> or <code>summary()</code> functions.</p>
+
+<p>Modularization appears to come largely through <code>source()</code> and R packages.</p>
+
+<p>To me, package development has always seemed intimidating.  I&rsquo;ve had several false starts.  That was made more likely by my past use of Windows as a development OS.  Bad bad bad choice.  For the past six months, I&rsquo;ve moved to Ubuntu (vim and tmux, and I have to give huge credit to <a href="http://www.rstudio.com/">RStudio</a> even though I&rsquo;m moving away from it) and not looked back.</p>
+
+<p>Today, in my frustration I decided to give package creation another shot.  And it worked!  To my delight, I was able to create the package, add some functions, compile it, load it, and start using my code in a clean re-usable and modular way.  Success!</p>
+
+<p>I have to give almost exclusive credit to Hadley Wickham and his super clear explaination of <a href="http://adv-r.had.co.nz/Package-basics.html">package authoring basics.</a></p>
+
+<p>Hadley has built some amazing package development tools, like <a href="https://github.com/hadley/devtools">devtools</a> which proports to make the package structure easier to use than not (and I believe it).  He actually says in the documentation that he&rsquo;ll send you a handwritten apology if you piss off the R-core team due to a <code>devtools</code> bug.  Sounds like a goal. :&ndash;)  He also has created a package for <a href="https://github.com/hadley/testthat">test-driven development</a> in R.  Another aspect of Ruby that I&rsquo;ve loved, but never used in R.  And I&rsquo;m not alone, I know that I&rsquo;m not.  I&rsquo;ve never met another R programmer face-to-face that uses unit tests.  Looking forward to it!  Finally, Hadley completes the grand slam (with Peter Danenberg and Manuel Eugster) with the <code>roxygen2</code> <a href="https://github.com/klutometis/roxygen">package</a>, which allows package developers to write self-documenting code.</p>
+
+<p>So today I&rsquo;m feeling great about getting my first package off the ground. I&rsquo;ve already spent a couple of hours breaking my old scripts into modules.  I&rsquo;m calling the package <code>treehouser</code> since it&rsquo;s for work, and follow&rsquo;s Hadley&rsquo;s naming convention.  I&rsquo;m hugely greatful to Hadley (I&rsquo;ve already gotten an amazing amount of milliage out of <code>ggplot2</code>).  Thank you!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[5 Cool Unix Hacks for Fun and Productivity]]></title>
+    <link href="http://statwonk.github.io/blog/2013/11/03/5-cool-unix-hacks-for-fun-and-productivity/"/>
+    <updated>2013-11-03T11:40:00-05:00</updated>
+    <id>http://statwonk.github.io/blog/2013/11/03/5-cool-unix-hacks-for-fun-and-productivity</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Taking a quick peek at FDA adverse drug reactions]]></title>
+    <link href="http://statwonk.github.io/blog/2013/10/26/taking-a-quick-peek-at-fda-drug-reactions/"/>
+    <updated>2013-10-26T00:07:00-04:00</updated>
+    <id>http://statwonk.github.io/blog/2013/10/26/taking-a-quick-peek-at-fda-drug-reactions</id>
+    <content type="html"><![CDATA[<p>About a week ago my doctor put me on a new medication.  The drug is one that is known to have some unpleasant effects as you get used to it.  I was curious to see what the reported adverse reactions (to the U.S. FDA) were, so I decided to take a look at the data.</p>
+
+<p>The data actually wasn&rsquo;t very easy to find, but here&rsquo;s the current location: <a href="http://www.fda.gov/Drugs/GuidanceComplianceRegulatoryInformation/Surveillance/AdverseDrugEffects/ucm082193.htm">http://www.fda.gov/Drugs/GuidanceComplianceRegulatoryInformation/Surveillance/AdverseDrugEffects/ucm082193.htm</a>.</p>
+
+<p>Wow, look at the SEO value of that URL!</p>
+
+<p>It&rsquo;s pretty unbelievable to me that the latest data is now more than 10 months old. We&rsquo;ll have to see what the FDA says,</p>
+
+<blockquote class="twitter-tweet tw-center-align"><p><a
+href="https://twitter.com/FDA_Drug_Info">@FDA_Drug_Info</a> This info seems
+stale, what&#39;s going on? <a
+href="http://t.co/fVAkiJzS9i">http://t.co/fVAkiJzS9i</a></p>&mdash; Christopher
+Peters (@statwonk) <a
+href="https://twitter.com/statwonk/statuses/393945145030094848">October 26,
+2013</a></blockquote>
+
+
+<script async src="http://statwonk.github.io//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p>So I took a look at the drug reaction info and the top twenty reactions seemed relatively benign, so I feel a bit better.  It&rsquo;s a pretty simple way to go about things, but I&rsquo;d encourage you to take a look at some <a href="http://www.accessdata.fda.gov/scripts/cder/drugsatfda/index.cfm">FDA studies of drugs you take</a>.  The few I&rsquo;ve looked at are appallingly deficient.  Where are the power studies, yo?  If a study has a 5% likelihood of detecting a 20% increase in heart attacks, you&rsquo;d never know &mdash; that&rsquo;s why you should NOT blindly trust p-values > 0.05.  It doesn&rsquo;t mean that there isn&rsquo;t an effect and the study may not have had a good chance of detecting the increased risk from the get-go.</p>
+
+<p>You can find my little script on <a href="https://github.com/statwonk/FDA-adverse-drug-reactions">Github here</a>.</p>
+
+<p>I would love to collaborate with someone on this, let&rsquo;s dig into this data!</p>
+
+<p>Perhaps data mine to find not well known drug interactions?</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'><span class="c1"># Author: Christopher Peters</span>
+</span><span class='line'><span class="c1"># Twitter: @statwonk</span>
+</span><span class='line'><span class="c1"># Analysis of adverse reported drug events from FDA database</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># Data found here: http://www.fda.gov/Drugs/GuidanceComplianceRegulatoryInformation/Surveillance/AdverseDrugEffects/ucm082193.htm</span>
+</span><span class='line'>
+</span><span class='line'>patient <span class="o">&lt;-</span> read.table<span class="p">(</span><span class="s">&quot;~/Downloads/faers_ascii_2012q4/ascii/demo12q4.txt&quot;</span><span class="p">,</span> sep <span class="o">=</span> <span class="s">&quot;$&quot;</span><span class="p">,</span> header <span class="o">=</span> <span class="k-Variable">T</span><span class="p">,</span> fill <span class="o">=</span> <span class="k-Variable">T</span><span class="p">,</span> quote <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
+</span><span class='line'>drug <span class="o">&lt;-</span> read.table<span class="p">(</span><span class="s">&quot;~/Downloads/faers_ascii_2012q4/ascii/drug12q4.txt&quot;</span><span class="p">,</span> sep <span class="o">=</span> <span class="s">&quot;$&quot;</span><span class="p">,</span> header <span class="o">=</span> <span class="k-Variable">T</span><span class="p">,</span> fill <span class="o">=</span> <span class="k-Variable">T</span><span class="p">,</span> quote <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
+</span><span class='line'>reaction <span class="o">&lt;-</span> read.table<span class="p">(</span><span class="s">&quot;~/Downloads/faers_ascii_2012q4/ascii/reac12q4.txt&quot;</span><span class="p">,</span> sep <span class="o">=</span> <span class="s">&quot;$&quot;</span><span class="p">,</span> header <span class="o">=</span> <span class="k-Variable">T</span><span class="p">,</span> fill <span class="o">=</span> <span class="k-Variable">T</span><span class="p">,</span> quote <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
+</span><span class='line'>outcomes <span class="o">&lt;-</span> read.table<span class="p">(</span><span class="s">&quot;~/Downloads/faers_ascii_2012q4/ascii/outc12q4.txt&quot;</span><span class="p">,</span> sep <span class="o">=</span> <span class="s">&quot;$&quot;</span><span class="p">,</span> header <span class="o">=</span> <span class="k-Variable">T</span><span class="p">,</span> fill <span class="o">=</span> <span class="k-Variable">T</span><span class="p">,</span> quote <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># You can find individual drugs and their reported adverse by specifying there names below</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># There are commonly many names for a drug, see below where I put three grepl statements</span>
+</span><span class='line'><span class="c1"># with text like, &quot;put drug brand name here&quot;, you can replace this with drug brand names</span>
+</span><span class='line'><span class="c1"># you can add or remote grepl statements depending on the number of brand names you want to look over.</span>
+</span><span class='line'>df <span class="o">&lt;-</span> drug<span class="p">[(</span>grepl<span class="p">(</span><span class="s">&quot;put drug brand name 1 here&quot;</span><span class="p">,</span> drug<span class="o">$</span>drugname<span class="p">,</span> ignore.case <span class="o">=</span> <span class="k-Variable">T</span><span class="p">)</span> <span class="o">|</span> <span class="c1"># drug is likely to be entered as many different brand names, use this to capture them individually</span>
+</span><span class='line'>              grepl<span class="p">(</span><span class="s">&quot;put drug brand name 2 here&quot;</span><span class="p">,</span> drug<span class="o">$</span>drugname<span class="p">,</span> ignore.case <span class="o">=</span> <span class="k-Variable">T</span><span class="p">)</span> <span class="o">|</span> <span class="c1"># enter drug names here, add or remove grepl() as needed with &quot;or&quot; statements \</span>
+</span><span class='line'>              grepl<span class="p">(</span><span class="s">&quot;put drug brand name 3 here ... add more grepl statements as necessary&quot;</span><span class="p">,</span> drug<span class="o">$</span>drugname<span class="p">,</span> ignore.case <span class="o">=</span> <span class="k-Variable">T</span><span class="p">))</span> <span class="o">&amp;</span> drug<span class="o">$</span>drug_seq <span class="o">==</span> <span class="m">1</span><span class="p">,</span> <span class="p">]</span> <span class="c1"># drug seq 1 == suspect drug of many possible that patient is taking</span>
+</span><span class='line'>
+</span><span class='line'>df <span class="o">&lt;-</span> merge<span class="p">(</span>df<span class="p">,</span> reaction<span class="p">,</span> by <span class="o">=</span> <span class="s">&quot;primaryid&quot;</span><span class="p">)</span> <span class="c1"># let&#39;s merge the drug file with reactions</span>
+</span><span class='line'>df <span class="o">&lt;-</span> merge<span class="p">(</span>df<span class="p">,</span> outcomes<span class="p">,</span> by <span class="o">=</span> <span class="s">&quot;primaryid&quot;</span><span class="p">)</span> <span class="c1"># we&#39;ll bring in outcomes, too</span>
+</span><span class='line'>df2 <span class="o">&lt;-</span> as.data.frame<span class="p">(</span>table<span class="p">(</span>df<span class="o">$</span>pt<span class="p">,</span> df<span class="o">$</span>outc_code<span class="p">))</span> <span class="c1"># count the instances of reactions and their outcomes</span>
+</span><span class='line'>names<span class="p">(</span>df2<span class="p">)</span> <span class="o">&lt;-</span> c<span class="p">(</span><span class="s">&quot;reaction&quot;</span><span class="p">,</span> <span class="s">&quot;outcome&quot;</span><span class="p">,</span> <span class="s">&quot;count&quot;</span><span class="p">)</span>
+</span><span class='line'>df2 <span class="o">&lt;-</span> df2<span class="p">[</span>order<span class="p">(</span>df2<span class="o">$</span>count<span class="p">,</span> decreasing <span class="o">=</span> <span class="k-Variable">T</span><span class="p">),</span> <span class="p">]</span>
+</span><span class='line'>head<span class="p">(</span>df2<span class="p">,</span> <span class="m">20</span><span class="p">)</span> <span class="c1"># top 20 reactions</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How statisticians lost their business mojo]]></title>
+    <link href="http://statwonk.github.io/blog/2013/10/11/how-statisticians-lost-their-business-mojo/"/>
+    <updated>2013-10-11T09:45:00-04:00</updated>
+    <id>http://statwonk.github.io/blog/2013/10/11/how-statisticians-lost-their-business-mojo</id>
+    <content type="html"><![CDATA[<p>The manufacturers of Japan will tell you of W. Edwards Deming.  His famous 1950s lectures in Japan popularized quality control and continuous improvement. Six sigma strategy is born out of Deming&rsquo;s vision.</p>
+
+<p><img class="left" src="http://statwonk.github.io/images/deming.gif" width="200" height="250" title="Deming" ></p>
+
+<p>Consider when you drink your Guiness beer, world reknown, that it&rsquo;s recipe was
+perfected by a statistician, W. S. Gosset.  (He created the t-distribution in
+1909 to do this).</p>
+
+<p><span style="font-weight:bold">These statisticians had an amazing sense of business mojo.</span></p>
+
+<p>Since the 1960s, we [statisticians] have lost this mojo.  And the reason is that
+they&rsquo;ve followed R.A. Fisher&rsquo;s significance testing orthodoxy without question.  Fisher created the p-value we know today and many
+think of as synonymous with statistics.  P-value measures precision, not effect size.  That&rsquo;s it, that&rsquo;s why our business mojo is gone. P-values are the gate keeper to academic publication, NOT effect sizes.</p>
+
+<p>Effect size is &ldquo;oomph&rdquo;, &ldquo;mojo&rdquo;, &ldquo;level of profit&rdquo;, &ldquo;return on investment.&rdquo;  Yet
+statistician&rsquo;s obsession with the p-value and precision alone leads to
+hilariously inept results.</p>
+
+<p>Take this extract from a leading journal of management science,</p>
+
+<blockquote><p>Our first hypothesis suggested that visionary leadership was related to higher<br/>levels of internal and external cooperation.  We used two measures to represent<br/>internal and external cooperation, quality philosophy and supplier cooperation.<br/>Top management team involvement, our measure of visionary leadership, was<br/>significantly related to both quality philosophy (t = 10.80, p < .001) and<br/>suplier involvement (t = 7.59, p < .001). <span style="background-color: #ffe026">Therefore, Hypothesis I is supported.</span></p><footer><strong>Thomas J. Douglas and Lawrence D. Fredendall</strong> <cite>Decision Sciences 35 (3 Summer 2004)</cite></footer></blockquote>
+
+
+<p>Notice that there&rsquo;s zero mention of effect size?  Just that the p-values are
+less than 0.05.  Ironically this article is titled, &ldquo;Evaluating the Deming
+Management Model of Total Quality in Services.&rdquo;  So how much did Deming&rsquo;s model
+contribute to internal and external cooperation?  The authors never say.  They
+technically report it in one table, but never mention it as a conclusion of
+worth.</p>
+
+<p>This is what Deming says about significance testing,</p>
+
+<blockquote><p>Ther are many other books on so-called quality control [Deming wrote].  Each<br/>book has something good in it, and nearly every author is a friend and colleague<br/>of mine.  Most of the books nevertheless contain bear traps, such as reject<br/>limits, &#8230; areas under the normal curve, acceptangce sampling &#8230; The student<br/> should also <span style="background-color: #ffe026">avoid passages in books that treat confidence intervals and tests of<br/>significance, as such calculations have no appliction in analytic problems in science and industry.</span></p><footer><strong>Deming</strong> <cite><a href='http://books.google.com/books?id=JWLIRr_ROgAC&pg=PA116&lpg=PA116&dq=avoid+passages+in+books+that+treat+confidence+intervals+and+tests+ofsignificance,+as+such+calculations+have+no+appliction+in+analytic+problems+in+science+and+industry&source=bl&ots=GvsUzNkqEf&sig=B0otz7pBntQaNhEocw4hFaWBl_U&hl=en&sa=X&ei=KjJYUtjIEMTgyQGthICADw&redir_esc=y#v=onepage&q=avoid%20passages%20in%20books%20that%20treat%20confidence%20intervals%20and%20tests%20ofsignificance%2C%20as%20such%20calculations%20have%20no%20appliction%20in%20analytic%20problems%20in%20science%20and%20industry&f=false'>1982</a></cite></footer></blockquote>
+
+
+<p><span style="background-color:#ffe026">So how can statisticians get their business mojo back?</span></p>
+
+<p>As <a href="http://www.deirdremccloskey.com/docs/jsm.pdf">Stephen T. Ziliak and Deirdre McCloskey</a> note, &ldquo;Deming himself asked of any service or product how in the eyes of the user it could be improved. No matter.&rdquo;</p>
+
+<p>Fisher (p-value inventor) was very much against using measures of
+productivity, profit, reliability, etc. in science. He states the difference,</p>
+
+<blockquote><p>I am casting no contempt on acceptance procedures [read effect size, read profit, revenue, cost reduction], and I am thankful, whenever I travel by air, that the high level of precision and reliability required can really be achieved by such means.  But the logical differences between such an operation and the work of scientific discovery by physical or biological experimentation seem to me so wide that the analogy between them is not helpful, and the identification of the two sorts of operation is decidedly misleading.</p><footer><strong>Fisher</strong> <cite><a href='http://www.phil.vt.edu/dmayo/personal_website/Fisher-1955.pdf'>1955</a></cite></footer></blockquote>
+
+
+<p><span style="background-color: #ffe026">So Fisher is very quietly telling us, yes, my methods are not for
+business.  They&rsquo;re for science.</span>  The massive implications of that for past research aside, what can we replace Fisher&rsquo;s methods with?</p>
+
+<p>We want to apply newer more sophisticated methods that respect effect sizes, and will lead us to large gains for the company.  If we have to go back over the mechanism with Fisherian testing to enhance precision, fine.  Search for large effects first as Deming&rsquo;s philosophy suggests.</p>
+
+<p>We should also listen to Leo Brieman when he suggests, &ldquo;we can move away from exclusive dependence on data models and adopt a more diverse set of tools.&rdquo;  In his seminal,&ldquo;<a href="http://projecteuclid.org/DPubS?service=UI&amp;version=1.0&amp;verb=Display&amp;handle=euclid.ss/1009213726">Statistical Modeling: The Two Cultures</a>,&rdquo; he proposes statisticians be humble in the face of problems.  Refrain from imposing linearity and variable selection by tests of significance (p-values).  Instead minimize rates of error in held out test set data using a training set.  This opens up a HUGE new space to do analysis, all without p-values! Non-parametric methods like <a href="http://stackoverflow.com/questions/tagged/random-forest"><code>random-forest</code></a>, SVM, boosting, bagging, sophisticated loss functions (read maximizing revenue with respect to minimizing cost, profit!).</p>
+
+<p>There are other methods, too, such as Bayesian inference.  These methods are really great for giving you degrees of a belief in a hypothesis.  If you&rsquo;re working on marketing problems, like I am, then you know pretty well ahead of time what to expect in terms of a conversion rate.  And if you use Chi-square or t-tests to choose winners, you know that your experiments commonly require 200k plus participants to achieve statistical significance (p-value &lt; .05) even for a 20% increase in conversion rate.  Fishers methods are much much too coarse for web app startup companies.  Instead, we&rsquo;re more accepting of Type 1 error, which for us is that a marketing campaign under performs.  We are also looking for ostensibly the best user experience possible, or increase in profit, something meaninful in effect size: a game changer.  Amazingly, Fisher will miss these game changers.  Bayes methods allow us to use our prior knowledge that conversion rates range between 1 &ndash; 5% (and follow a beta distribution) to get much more sensitive tools.</p>
+
+<p><span style="font-weight:bold">Summary:</span></p>
+
+<ol>
+<li><span style="background-color:#ffe026">Don&rsquo;t use p-values and significance testing in business.</span></li>
+<li>Use algoritmic methods that minimize or maximize something that matters to you.</li>
+<li>Focus on the effect size (Deming).  Let&rsquo;s be certain of having a meaningful effect on our customer&rsquo;s experience, not just certainty about some effect regardless of of the size (Fisher).</li>
+</ol>
+
+
+<p>Who am I to critize 70+ years of statistical application?  I&rsquo;m a data
+scientist, a business statistician who tried to use Fisherian methods in
+business.  I have quickly learned that they&rsquo;re nearly useless here.
+Instead, there&rsquo;s a whole new set of useful tools that open up to the
+business analyst that realizes significance testing is nearly worthless.
+We&rsquo;ll no longer be plagued with a lack of observations.  W.S. Gosset was able to
+improve Guinness beer sometimes 3 obsevations at a time.  No longer will the
+practicioners (marketers, management, stakeholders) scratch their head when you
+come back with a 30% a/b test lift and a p-value of 0.60.  Neither will they be
+fluxomed when you say, &ldquo;look, the p-value is less than .05, we have a
+relationship here!&rdquo;  So, what?  If you are very certain that you convert 2 more
+users out of 1 billion clicks, who cares?  What Deming, Gossett, and now myself
+are looking for are large effect sizes, even if they vary!</p>
+
+<p>I have to give huge thanks to Stephen T. Ziliak and Deirdre N. McCloskey for
+nurturing my thoughts in this area, who&rsquo;s book, &ldquo;<a href="http://projecteuclid.org/DPubS?service=UI&amp;version=1.0&amp;verb=Display&amp;handle=euclid.ss/1009213726">The Cult of Statistical Significance</a>&rdquo; should revolutionize scientific statistical application, even if it fails to do so like those before those authors.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[P-value does not stand for profit.]]></title>
+    <link href="http://statwonk.github.io/blog/2013/10/06/the-p-in-p-value-does-not-stand-for-profit-dot/"/>
+    <updated>2013-10-06T16:26:00-04:00</updated>
+    <id>http://statwonk.github.io/blog/2013/10/06/the-p-in-p-value-does-not-stand-for-profit-dot</id>
+    <content type="html"><![CDATA[<p>With the data science revolution, a whole new round of statisticans will be thrust into dealing with business problems.  What they&rsquo;re bound to find is that their beloved p-value is not going to stand up to the market as it does in academic journals.  For the past thirty years, the computational cost of the simple t-test has fallen dramatically, while the academic reward of publication has stayed the same.  The result is that more newly minted analysts than ever are confused by the blank stare they receive from their manager when they tell the manager, &ldquo;these two samples are statistically significantly different at the 5% level.&rdquo;  The manager asks, &ldquo;<span style="background-color:#ffe026">so what? How much profit will we make?</span>&rdquo; To which the statistician replies, &ldquo;<span style="background-color:#ffe026">the p-value is less than 5%.</span>&rdquo;</p>
+
+<p><span style="background-color:#ffe026"></span>
+Here&rsquo;s one simple example. Suppose I have two site variations I want to test.  I&rsquo;d like to test a new red button against our old green button.  I&rsquo;m interested to know if the red button outperforms green with respect to clicks.</p>
+
+<p>We&rsquo;ll simulate this with the <code>R</code> language.  We can draw a <code>0</code> or <code>1</code> with known probabilities to model our buttons.  I&rsquo;ll set the conversion rate for the green button at 3% and 5% for our new red button, a 66% percent improvement.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'>old_green_button <span class="o">&lt;-</span> rbinom<span class="p">(</span>n <span class="o">=</span> <span class="m">100000</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> p <span class="o">=</span> <span class="m">0.03</span><span class="p">)</span>
+</span><span class='line'>new_red_button <span class="o">&lt;-</span> rbinom<span class="p">(</span>n <span class="o">=</span> <span class="m">100000</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> p <span class="o">=</span> <span class="m">0.05</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>prop.test<span class="p">(</span>table<span class="p">(</span>old_green_button<span class="p">,</span> new_red_button<span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In the code above, I first randomly generate <code>100k</code> binomial outcomes (really bernoulli r.v.) for each button. Remember, the conversion rates are 3% and 5%, respectively.  Next, I apply the Chi-square test for equality of proportions.  This is the standard statistical test for testing if two proportions (conv. rates) come from the same population.  That is, should I expect these two buttons to yield a different conversion rate (and profit) going forward?</p>
+
+<p>Below are the results from one run, and despite the new red button being 66%
+better than the green button, our p-value sits at 90%, well above the
+traditional statistician&rsquo;s 5% p-value cutoff.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'><span class="m">2</span><span class="o">-</span>sample test <span class="kr">for</span> equality of proportions with continuity correction
+</span><span class='line'>
+</span><span class='line'>data<span class="o">:</span>  table<span class="p">(</span>old_green_button<span class="p">,</span> new_red_button<span class="p">)</span>
+</span><span class='line'>X<span class="o">-</span>squared <span class="o">=</span> <span class="m">0.0185</span><span class="p">,</span> df <span class="o">=</span> <span class="m">1</span><span class="p">,</span> p<span class="o">-</span>value <span class="o">=</span> <span class="m">0.8919</span>
+</span><span class='line'>alternative hypothesis<span class="o">:</span> two.sided
+</span><span class='line'><span class="m">95</span> percent confidence interval<span class="o">:</span>
+</span><span class='line'> <span class="m">-0.008662492</span>  <span class="m">0.007240556</span>
+</span><span class='line'> sample estimates<span class="o">:</span>
+</span><span class='line'>    prop <span class="m">1</span>    prop <span class="m">2</span>
+</span><span class='line'>    <span class="m">0.9498581</span> <span class="m">0.9505691</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now, I&rsquo;ll repeat this experiment 1000 times and show you how the p-value
+shakes out.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'>library<span class="p">(</span>ggplot2<span class="p">)</span>
+</span><span class='line'>library<span class="p">(</span>ggthemes<span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>times <span class="o">&lt;-</span> <span class="m">1000</span>
+</span><span class='line'>p_values <span class="o">&lt;-</span> rep<span class="p">(</span><span class="kc">NA</span><span class="p">,</span> times<span class="p">)</span>
+</span><span class='line'><span class="kr">for</span><span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span>times<span class="p">){</span>
+</span><span class='line'>  set.seed<span class="p">(</span>i<span class="p">)</span>
+</span><span class='line'>  old_green_button <span class="o">&lt;-</span> rbinom<span class="p">(</span>n <span class="o">=</span> <span class="m">100000</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> p <span class="o">=</span> <span class="m">0.03</span><span class="p">)</span>
+</span><span class='line'>  new_red_button <span class="o">&lt;-</span> rbinom<span class="p">(</span><span class="m">100000</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> p <span class="o">=</span> <span class="m">0.05</span><span class="p">)</span>
+</span><span class='line'>  p_values<span class="p">[</span>i<span class="p">]</span> <span class="o">&lt;-</span> prop.test<span class="p">(</span>table<span class="p">(</span>old_green_button<span class="p">,</span>
+</span><span class='line'>                                 new_red_button<span class="p">))</span><span class="o">$</span>p.value
+</span><span class='line'>
+</span><span class='line'>  print<span class="p">(</span>i<span class="p">)</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>df <span class="o">&lt;-</span> as.data.frame<span class="p">(</span>p_values<span class="p">)</span>
+</span><span class='line'>ggplot<span class="p">(</span>df<span class="p">,</span> aes<span class="p">(</span>x <span class="o">=</span> p_values<span class="p">))</span> <span class="o">+</span>
+</span><span class='line'>  geom_density<span class="p">(</span>fill <span class="o">=</span> <span class="s">&quot;grey50&quot;</span><span class="p">,</span> alpha <span class="o">=</span> <span class="m">0.5</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>  geom_vline<span class="p">(</span>xintercept <span class="o">=</span> <span class="m">0.05</span><span class="p">,</span> colour <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> size <span class="o">=</span> <span class="m">2</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>  ggtitle<span class="p">(</span><span class="s">&quot;Only 6% of p-values are less than 0.05&quot;</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>    ylab<span class="p">(</span><span class="s">&quot;Density&quot;</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>    xlab<span class="p">(</span><span class="s">&quot;P-values&quot;</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>  theme_few<span class="p">()</span> <span class="o">+</span>
+</span><span class='line'>  theme<span class="p">(</span>axis.text <span class="o">=</span> element_text<span class="p">(</span>size <span class="o">=</span> <span class="m">15</span><span class="p">),</span>
+</span><span class='line'>        plot.title <span class="o">=</span> element_text<span class="p">(</span>size <span class="o">=</span> <span class="m">20</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The result shows that only 6% of p-values will be less than 0.05%!  The
+sacred statistical decision rule would have you leave a 66% percent
+conversion rate increase on the table and this is why p-value does not stand for profit.</p>
+
+<p><img src="http://i.imgur.com/9vl6z1x.png"></img></p>
+
+<p>In my next post, I&rsquo;ll analyze exactly why using p-values above other
+methods leads the data scientist astray.  I&rsquo;ll introduce how I use Bayesian
+analysis to avoid the p-value pitfall.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA['Reading CSV data into R']]></title>
+    <link href="http://statwonk.github.io/blog/2013/09/27/reading-csv-data-into-r/"/>
+    <updated>2013-09-27T12:27:00-04:00</updated>
+    <id>http://statwonk.github.io/blog/2013/09/27/reading-csv-data-into-r</id>
+    <content type="html"><![CDATA[<p>There are a variety of ways to import data into R.</p>
+
+<p>I most often work with CSV files.  In my experience, getting the file path
+correct is the trickiest part of bringing data into R.  I&rsquo;m going to show you how
+this works by first writing a piece of data to a CSV file and then we&rsquo;ll bring it back
+in.</p>
+
+<p>The <code>data()</code> function in R allows access to tons of toy datasets.  R programmers
+typically use these to <a href="http://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example">create reproducible examples</a> on sites like StackOverflow.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'>data<span class="p">(</span>mtcars<span class="p">)</span> <span class="c1"># first I get some toy data, so now we have access to the mtcars data.frame</span>
+</span><span class='line'>
+</span><span class='line'>head<span class="p">(</span>mtcars<span class="p">)</span> <span class="c1"># Let&#39;s take a look</span>
+</span><span class='line'>
+</span><span class='line'>                  mpg cyl disp  hp drat    wt  qsec vs am gear carb
+</span><span class='line'>Mazda RX4         <span class="m">21.0</span>   <span class="m">6</span>  <span class="m">160</span> <span class="m">110</span> <span class="m">3.90</span> <span class="m">2.620</span> <span class="m">16.46</span>  <span class="m">0</span>  <span class="m">1</span> <span class="m">4</span>    <span class="m">4</span>
+</span><span class='line'>Mazda RX4 Wag     <span class="m">21.0</span>   <span class="m">6</span>  <span class="m">160</span> <span class="m">110</span> <span class="m">3.90</span> <span class="m">2.875</span> <span class="m">17.02</span>  <span class="m">0</span>  <span class="m">1</span> <span class="m">4</span>    <span class="m">4</span>
+</span><span class='line'>Datsun <span class="m">710</span>        <span class="m">22.8</span>   <span class="m">4</span>  <span class="m">108</span>  <span class="m">93</span> <span class="m">3.85</span> <span class="m">2.320</span> <span class="m">18.61</span>  <span class="m">1</span>  <span class="m">1</span> <span class="m">4</span>    <span class="m">1</span>
+</span><span class='line'>Hornet <span class="m">4</span> Drive    <span class="m">21.4</span>   <span class="m">6</span>  <span class="m">258</span> <span class="m">110</span> <span class="m">3.08</span> <span class="m">3.215</span> <span class="m">19.44</span>  <span class="m">1</span>  <span class="m">0</span> <span class="m">3</span>    <span class="m">1</span>
+</span><span class='line'>Hornet Sportabout <span class="m">18.7</span>   <span class="m">8</span>  <span class="m">360</span> <span class="m">175</span> <span class="m">3.15</span> <span class="m">3.440</span> <span class="m">17.02</span>  <span class="m">0</span>  <span class="m">0</span> <span class="m">3</span>    <span class="m">2</span>
+</span><span class='line'>Valiant           <span class="m">18.1</span>   <span class="m">6</span>  <span class="m">225</span> <span class="m">105</span> <span class="m">2.76</span> <span class="m">3.460</span> <span class="m">20.22</span>  <span class="m">1</span>  <span class="m">0</span> <span class="m">3</span>    <span class="m">1</span>
+</span><span class='line'>
+</span><span class='line'>str<span class="p">(</span>mtcars<span class="p">)</span> <span class="c1"># we can see how each variable is coded here: num, chr, list, int, etc.</span>
+</span><span class='line'>
+</span><span class='line'><span class="s">&#39;data.frame&#39;</span><span class="o">:</span><span class="m">32</span> obs. of  <span class="m">11</span> variables<span class="o">:</span>
+</span><span class='line'>  <span class="o">$</span> mpg <span class="o">:</span> num  <span class="m">21</span> <span class="m">21</span> <span class="m">22.8</span> <span class="m">21.4</span> <span class="m">18.7</span> <span class="m">18.1</span> <span class="m">14.3</span> <span class="m">24.4</span> <span class="m">22.8</span> <span class="m">19.2</span> <span class="kc">...</span>
+</span><span class='line'>  <span class="o">$</span> cyl <span class="o">:</span> num  <span class="m">6</span> <span class="m">6</span> <span class="m">4</span> <span class="m">6</span> <span class="m">8</span> <span class="m">6</span> <span class="m">8</span> <span class="m">4</span> <span class="m">4</span> <span class="m">6</span> <span class="kc">...</span>
+</span><span class='line'>  <span class="o">$</span> disp<span class="o">:</span> num  <span class="m">160</span> <span class="m">160</span> <span class="m">108</span> <span class="m">258</span> <span class="m">360</span> <span class="kc">...</span>
+</span><span class='line'>  <span class="o">$</span> hp  <span class="o">:</span> num  <span class="m">110</span> <span class="m">110</span> <span class="m">93</span> <span class="m">110</span> <span class="m">175</span> <span class="m">105</span> <span class="m">245</span> <span class="m">62</span> <span class="m">95</span> <span class="m">123</span> <span class="kc">...</span>
+</span><span class='line'>  <span class="o">$</span> drat<span class="o">:</span> num  <span class="m">3.9</span> <span class="m">3.9</span> <span class="m">3.85</span> <span class="m">3.08</span> <span class="m">3.15</span> <span class="m">2.76</span> <span class="m">3.21</span> <span class="m">3.69</span> <span class="m">3.92</span> <span class="m">3.92</span> <span class="kc">...</span>
+</span><span class='line'>  <span class="o">$</span> wt  <span class="o">:</span> num  <span class="m">2.62</span> <span class="m">2.88</span> <span class="m">2.32</span> <span class="m">3.21</span> <span class="m">3.44</span> <span class="kc">...</span>
+</span><span class='line'>  <span class="o">$</span> qsec<span class="o">:</span> num  <span class="m">16.5</span> <span class="m">17</span> <span class="m">18.6</span> <span class="m">19.4</span> <span class="m">17</span> <span class="kc">...</span>
+</span><span class='line'>  <span class="o">$</span> vs  <span class="o">:</span> num  <span class="m">0</span> <span class="m">0</span> <span class="m">1</span> <span class="m">1</span> <span class="m">0</span> <span class="m">1</span> <span class="m">0</span> <span class="m">1</span> <span class="m">1</span> <span class="m">1</span> <span class="kc">...</span>
+</span><span class='line'>  <span class="o">$</span> am  <span class="o">:</span> num  <span class="m">1</span> <span class="m">1</span> <span class="m">1</span> <span class="m">0</span> <span class="m">0</span> <span class="m">0</span> <span class="m">0</span> <span class="m">0</span> <span class="m">0</span> <span class="m">0</span> <span class="kc">...</span>
+</span><span class='line'>  <span class="o">$</span> gear<span class="o">:</span> num  <span class="m">4</span> <span class="m">4</span> <span class="m">4</span> <span class="m">3</span> <span class="m">3</span> <span class="m">3</span> <span class="m">3</span> <span class="m">4</span> <span class="m">4</span> <span class="m">4</span> <span class="kc">...</span>
+</span><span class='line'>  <span class="o">$</span> carb<span class="o">:</span> num  <span class="m">4</span> <span class="m">4</span> <span class="m">1</span> <span class="m">1</span> <span class="m">2</span> <span class="m">1</span> <span class="m">4</span> <span class="m">2</span> <span class="m">2</span> <span class="m">4</span> <span class="kc">...</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So we have a <code>data.frame</code> with 32 observations and 11 variables.  Now let&rsquo;s
+use <code>write.csv()</code>. First we&rsquo;ll take a look at the inputs for the function. We
+can do this by putting a <code>?</code> in front of our empty function and running it with
+<code>R</code>.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'><span class="o">?</span>write.csv <span class="c1"># put a ? in front of any function to see its help page.</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We&rsquo;re brought to <a href="http://stat.ethz.ch/R-manual/R-devel/library/utils/html/write.table.html">this page</a> which shows all the options we can use.  For now, we&rsquo;re only going to use the first two arguments (or parameters, which ever you prefer): <code>x</code>, some object and <code>file= ""</code>.</p>
+
+<p>If you use Linux, Mac, or Unix:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'>write.csv<span class="p">(</span>mtcars<span class="p">,</span> file <span class="o">=</span> <span class="s">&quot;~/mtcars.csv&quot;</span><span class="p">)</span> <span class="c1"># &lt;-- that file path would tell a Unix</span>
+</span><span class='line'>system to save the CSV <span class="kr">in</span> the home directory.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you use Windows (Windows is not the OS you want to be programming R in, but
+it&rsquo;s okay to start on):</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'>write.csv<span class="p">(</span>mtcars<span class="p">,</span> file <span class="o">=</span> <span class="s">&quot;C:/Users/Chris/Documents/mtcars.csv&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Notice the direction of the backslashes in the Windows path?  It&rsquo;s the opposite
+of how Windows does it.  The <code>\</code> character is considered special in R.  You can
+simply convert all the <code>\</code> backslashes that Windows shows you in a filepath to
+<code>/</code> forward slashes.  If you wanted to get fancy, you could actually put two
+backslashes, like this instead of single forward slashes <code>C:\\temp\\some-file.csv</code>.</p>
+
+<p>Both of these would work, <code>C:\\temp\\some-file.csv</code> and <code>C:/temp/some-file.csv</code>,
+while <code>C:\temp\some-file.csv</code> will not.</p>
+
+<p>Now that we know the exact path of the file, let&rsquo;s read it back in to R.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'>my_data_frame <span class="o">&lt;-</span> read.csv<span class="p">(</span><span class="s">&quot;~/mtcars.csv&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>or for Windows:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'>my_data_frame <span class="o">&lt;-</span> read.csv<span class="p">(</span><span class="s">&quot;C:/Users/Chris/Documents/mtcars.csv&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I&rsquo;d encourage you to read <a href="http://stat.ethz.ch/R-manual/R-devel/library/utils/html/read.table.html">the documentation</a> on the <code>read.csv()</code>.</p>
+
+<p>You&rsquo;ll notice that when we take a look at the imported data the variables are
+coded differently.  This is because <code>read.csv()</code> looks at your data and makes a
+guess about which type they should be: <code>character</code>, <code>numeric</code>, <code>int</code>, <code>factor</code>,
+etc.  Commonly you&rsquo;ll want to control this with options like <code>stringsAsFactors =
+FALSE</code>.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'><span class="s">&#39;data.frame&#39;</span><span class="o">:</span><span class="m">32</span> obs. of  <span class="m">12</span> variables<span class="o">:</span>
+</span><span class='line'>   <span class="o">$</span> X   <span class="o">:</span> Factor w<span class="o">/</span> <span class="m">32</span> levels <span class="s">&quot;AMC Javelin&quot;</span><span class="p">,</span>..<span class="o">:</span> <span class="m">18</span> <span class="m">19</span> <span class="m">5</span> <span class="m">13</span> <span class="m">14</span> <span class="m">31</span> <span class="m">7</span> <span class="m">21</span> <span class="m">20</span> <span class="m">22</span> <span class="kc">...</span>
+</span><span class='line'>   <span class="o">$</span> mpg <span class="o">:</span> num  <span class="m">21</span> <span class="m">21</span> <span class="m">22.8</span> <span class="m">21.4</span> <span class="m">18.7</span> <span class="m">18.1</span> <span class="m">14.3</span> <span class="m">24.4</span> <span class="m">22.8</span> <span class="m">19.2</span> <span class="kc">...</span>
+</span><span class='line'>   <span class="o">$</span> cyl <span class="o">:</span> int  <span class="m">6</span> <span class="m">6</span> <span class="m">4</span> <span class="m">6</span> <span class="m">8</span> <span class="m">6</span> <span class="m">8</span> <span class="m">4</span> <span class="m">4</span> <span class="m">6</span> <span class="kc">...</span>
+</span><span class='line'>   <span class="o">$</span> disp<span class="o">:</span> num  <span class="m">160</span> <span class="m">160</span> <span class="m">108</span> <span class="m">258</span> <span class="m">360</span> <span class="kc">...</span>
+</span><span class='line'>   <span class="o">$</span> hp  <span class="o">:</span> int  <span class="m">110</span> <span class="m">110</span> <span class="m">93</span> <span class="m">110</span> <span class="m">175</span> <span class="m">105</span> <span class="m">245</span> <span class="m">62</span> <span class="m">95</span> <span class="m">123</span> <span class="kc">...</span>
+</span><span class='line'>   <span class="o">$</span> drat<span class="o">:</span> num  <span class="m">3.9</span> <span class="m">3.9</span> <span class="m">3.85</span> <span class="m">3.08</span> <span class="m">3.15</span> <span class="m">2.76</span> <span class="m">3.21</span> <span class="m">3.69</span> <span class="m">3.92</span> <span class="m">3.92</span> <span class="kc">...</span>
+</span><span class='line'>   <span class="o">$</span> wt  <span class="o">:</span> num  <span class="m">2.62</span> <span class="m">2.88</span> <span class="m">2.32</span> <span class="m">3.21</span> <span class="m">3.44</span> <span class="kc">...</span>
+</span><span class='line'>   <span class="o">$</span> qsec<span class="o">:</span> num  <span class="m">16.5</span> <span class="m">17</span> <span class="m">18.6</span> <span class="m">19.4</span> <span class="m">17</span> <span class="kc">...</span>
+</span><span class='line'>   <span class="o">$</span> vs  <span class="o">:</span> int  <span class="m">0</span> <span class="m">0</span> <span class="m">1</span> <span class="m">1</span> <span class="m">0</span> <span class="m">1</span> <span class="m">0</span> <span class="m">1</span> <span class="m">1</span> <span class="m">1</span> <span class="kc">...</span>
+</span><span class='line'>   <span class="o">$</span> am  <span class="o">:</span> int  <span class="m">1</span> <span class="m">1</span> <span class="m">1</span> <span class="m">0</span> <span class="m">0</span> <span class="m">0</span> <span class="m">0</span> <span class="m">0</span> <span class="m">0</span> <span class="m">0</span> <span class="kc">...</span>
+</span><span class='line'>   <span class="o">$</span> gear<span class="o">:</span> int  <span class="m">4</span> <span class="m">4</span> <span class="m">4</span> <span class="m">3</span> <span class="m">3</span> <span class="m">3</span> <span class="m">3</span> <span class="m">4</span> <span class="m">4</span> <span class="m">4</span> <span class="kc">...</span>
+</span><span class='line'>   <span class="o">$</span> carb<span class="o">:</span> int  <span class="m">4</span> <span class="m">4</span> <span class="m">1</span> <span class="m">1</span> <span class="m">2</span> <span class="m">1</span> <span class="m">4</span> <span class="m">2</span> <span class="m">2</span> <span class="m">4</span> <span class="kc">...</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That&rsquo;s all for now.  Next time we&rsquo;ll do some basic visualization of this
+dataset.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA['Placing knitr chunks in a table']]></title>
+    <link href="http://statwonk.github.io/blog/2013/09/22/placing-knitr-chunks-in-a-table/"/>
+    <updated>2013-09-22T10:42:00-04:00</updated>
+    <id>http://statwonk.github.io/blog/2013/09/22/placing-knitr-chunks-in-a-table</id>
+    <content type="html"><![CDATA[<p><a href="yihui.name/knitr/">knitr</a> is as the tagline says, &lsquo;elegant, flexible and fast dynamic report generation with R&rsquo;.</p>
+
+<p>Basically, knitr allows you to embed R in LaTeX documents (and HTML documents, too!).  It gives you a large amount of control over how the R output appears in the document.</p>
+
+<p>The following is a <a href="http://stackoveflow.com">Stackoverflow</a> question
+that I answered: <a href="http://stackoverflow.com/questions/18936330/placing-knitr-chunks-including-plots-inside-a-latex-layout-table/18937206#18937206">placing knitr chunks including plots inside a LaTeX layout (table)</a>.</p>
+
+<p>The author was having difficulties with this code snippet:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='latex'><span class='line'><span class="k">\documentclass</span><span class="nb">{</span>article<span class="nb">}</span>
+</span><span class='line'><span class="k">\usepackage</span><span class="nb">{</span>float<span class="nb">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">\begin</span><span class="nb">{</span>document<span class="nb">}</span>
+</span><span class='line'>  <span class="k">\begin</span><span class="nb">{</span>table<span class="nb">}</span>
+</span><span class='line'>    <span class="k">\begin</span><span class="nb">{</span>tabular<span class="nb">}{</span>ll<span class="nb">}</span>
+</span><span class='line'>    A <span class="nb">&amp;</span>
+</span><span class='line'>    &lt;&lt;results1&gt;&gt;=
+</span><span class='line'>    plot(1,1)
+</span><span class='line'>    @ <span class="k">\\</span>
+</span><span class='line'>    B <span class="nb">&amp;</span>
+</span><span class='line'>    &lt;&lt;results2&gt;&gt;=
+</span><span class='line'>    table(rnorm(10))
+</span><span class='line'>    @
+</span><span class='line'>    <span class="k">\end</span><span class="nb">{</span>tabular<span class="nb">}</span>
+</span><span class='line'>  <span class="k">\end</span><span class="nb">{</span>table<span class="nb">}</span>
+</span><span class='line'><span class="k">\end</span><span class="nb">{</span>document<span class="nb">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>My solution was to move <code>\\</code> from line 10 to its own line, change the first chunk&rsquo;s option <code>echo=FALSE</code> to false. I also put the second bit of R code in an inline block using the <code>\Sexpr{}</code> command and appended a new line break <code>\\</code>.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='latex'><span class='line'><span class="k">\documentclass</span><span class="nb">{</span>article<span class="nb">}</span>
+</span><span class='line'><span class="k">\usepackage</span><span class="nb">{</span>float<span class="nb">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">\begin</span><span class="nb">{</span>document<span class="nb">}</span>
+</span><span class='line'>  <span class="k">\begin</span><span class="nb">{</span>table<span class="nb">}</span>
+</span><span class='line'>    <span class="k">\begin</span><span class="nb">{</span>tabular<span class="nb">}{</span>ll<span class="nb">}</span>
+</span><span class='line'>    A <span class="nb">&amp;</span>
+</span><span class='line'>    &lt;&lt;results1, echo=FALSE&gt;&gt;=
+</span><span class='line'>    plot(1,1)
+</span><span class='line'>    @
+</span><span class='line'>    <span class="k">\\</span>
+</span><span class='line'>    B <span class="nb">&amp;</span> <span class="k">\Sexpr</span><span class="nb">{</span>table(rnorm(10))<span class="nb">}</span>
+</span><span class='line'>    <span class="k">\\</span>
+</span><span class='line'>    <span class="k">\end</span><span class="nb">{</span>tabular<span class="nb">}</span>
+</span><span class='line'>  <span class="k">\end</span><span class="nb">{</span>table<span class="nb">}</span>
+</span><span class='line'><span class="k">\end</span><span class="nb">{</span>document<span class="nb">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Enjoyed playing with this little chunk of knitr!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA['ActiveModel::Dirty']]></title>
+    <link href="http://statwonk.github.io/blog/2013/09/17/activemodel-dirty/"/>
+    <updated>2013-09-17T18:13:00-04:00</updated>
+    <id>http://statwonk.github.io/blog/2013/09/17/activemodel-dirty</id>
+    <content type="html"><![CDATA[<p>Today, I was briefly introduced to ActiveModel::Dirty.  The source
+documentation
+<a href="http://api.rubyonrails.org/classes/ActiveModel/Dirty.html">here</a> shows a
+minimal example:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Person</span>
+</span><span class='line'>  <span class="kp">include</span> <span class="ss">ActiveModel</span><span class="p">:</span><span class="ss">:Dirty</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">define_attribute_methods</span> <span class="ss">:name</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">name</span>
+</span><span class='line'>    <span class="vi">@name</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">name</span><span class="o">=</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">name_will_change!</span> <span class="k">unless</span> <span class="n">val</span> <span class="o">==</span> <span class="vi">@name</span>
+</span><span class='line'>    <span class="vi">@name</span> <span class="o">=</span> <span class="n">val</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">save</span>
+</span><span class='line'>    <span class="vi">@previously_changed</span> <span class="o">=</span> <span class="n">changes</span>
+</span><span class='line'>    <span class="vi">@changed_attributes</span><span class="o">.</span><span class="n">clear</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In the end, I had to choose a different method because of <a href="http://stackoverflow.com/questions/13074582/problems-implementing-activemodel-dirty-rails-3-2-8">this
+reason</a>. Stashing this here for later because ActiveModel::Dirty methods look cool!</p>
+
+<p>The _was method particularly looks cool.  Great for keeping track of
+changes to models.</p>
+]]></content>
+  </entry>
+  
+</feed>

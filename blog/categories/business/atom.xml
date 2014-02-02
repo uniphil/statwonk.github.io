@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: business, | @statwonk]]></title>
+  <link href="http://statwonk.github.io/blog/categories/business/atom.xml" rel="self"/>
+  <link href="http://statwonk.github.io/"/>
+  <updated>2014-02-02T10:04:33-05:00</updated>
+  <id>http://statwonk.github.io/</id>
+  <author>
+    <name><![CDATA[Christopher P. Peters]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[P-value does not stand for profit.]]></title>
+    <link href="http://statwonk.github.io/blog/2013/10/06/the-p-in-p-value-does-not-stand-for-profit-dot/"/>
+    <updated>2013-10-06T16:26:00-04:00</updated>
+    <id>http://statwonk.github.io/blog/2013/10/06/the-p-in-p-value-does-not-stand-for-profit-dot</id>
+    <content type="html"><![CDATA[<p>With the data science revolution, a whole new round of statisticans will be thrust into dealing with business problems.  What they&rsquo;re bound to find is that their beloved p-value is not going to stand up to the market as it does in academic journals.  For the past thirty years, the computational cost of the simple t-test has fallen dramatically, while the academic reward of publication has stayed the same.  The result is that more newly minted analysts than ever are confused by the blank stare they receive from their manager when they tell the manager, &ldquo;these two samples are statistically significantly different at the 5% level.&rdquo;  The manager asks, &ldquo;<span style="background-color:#ffe026">so what? How much profit will we make?</span>&rdquo; To which the statistician replies, &ldquo;<span style="background-color:#ffe026">the p-value is less than 5%.</span>&rdquo;</p>
+
+<p><span style="background-color:#ffe026"></span>
+Here&rsquo;s one simple example. Suppose I have two site variations I want to test.  I&rsquo;d like to test a new red button against our old green button.  I&rsquo;m interested to know if the red button outperforms green with respect to clicks.</p>
+
+<p>We&rsquo;ll simulate this with the <code>R</code> language.  We can draw a <code>0</code> or <code>1</code> with known probabilities to model our buttons.  I&rsquo;ll set the conversion rate for the green button at 3% and 5% for our new red button, a 66% percent improvement.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>old_green_button <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> rbinom<span class="p">(</span>n <span class="o">=</span> <span class="m">100000</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> p <span class="o">=</span> <span class="m">0.03</span><span class="p">)</span>
+</span><span class='line'>new_red_button <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> rbinom<span class="p">(</span>n <span class="o">=</span> <span class="m">100000</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> p <span class="o">=</span> <span class="m">0.05</span><span class="p">)</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>prop.test<span class="p">(</span>table<span class="p">(</span>old_green_button<span class="p">,</span> new_red_button<span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>In the code above, I first randomly generate <code>100k</code> binomial outcomes (really bernoulli r.v.) for each button. Remember, the conversion rates are 3% and 5%, respectively.  Next, I apply the Chi-square test for equality of proportions.  This is the standard statistical test for testing if two proportions (conv. rates) come from the same population.  That is, should I expect these two buttons to yield a different conversion rate (and profit) going forward?</p>
+
+<p>Below are the results from one run, and despite the new red button being 66%
+better than the green button, our p-value sits at 90%, well above the
+traditional statistician&rsquo;s 5% p-value cutoff.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span><span class="m">2</span><span class="o">-</span>sample test <span class="kr">for</span> equality of proportions with continuity correction<span class="o">&lt;/</span>p<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>data<span class="o">:</span>  table<span class="p">(</span>old_green_button<span class="p">,</span> new_red_button<span class="p">)</span>
+</span><span class='line'>X<span class="o">-</span>squared <span class="o">=</span> <span class="m">0.0185</span><span class="p">,</span> df <span class="o">=</span> <span class="m">1</span><span class="p">,</span> p<span class="o">-</span>value <span class="o">=</span> <span class="m">0.8919</span>
+</span><span class='line'>alternative hypothesis<span class="o">:</span> two.sided
+</span><span class='line'><span class="m">95</span> percent confidence interval<span class="o">:</span>
+</span><span class='line'> <span class="m">-0.008662492</span>  <span class="m">0.007240556</span>
+</span><span class='line'> sample estimates<span class="o">:&lt;/</span>p<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>pre<span class="o">&gt;&lt;</span>code<span class="o">&gt;</span>prop <span class="m">1</span>    prop <span class="m">2</span>
+</span><span class='line'><span class="m">0.9498581</span> <span class="m">0.9505691</span>
+</span><span class='line'><span class="o">&lt;/</span>code<span class="o">&gt;&lt;/</span>pre<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Now, I&rsquo;ll repeat this experiment 1000 times and show you how the p-value
+shakes out.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'>library<span class="p">(</span>ggplot2<span class="p">)</span>
+</span><span class='line'>library<span class="p">(</span>ggthemes<span class="p">)</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>times <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> <span class="m">1000</span>
+</span><span class='line'>p_values <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> rep<span class="p">(</span><span class="kc">NA</span><span class="p">,</span> times<span class="p">)</span>
+</span><span class='line'><span class="kr">for</span><span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span>times<span class="p">){</span>
+</span><span class='line'>  set.seed<span class="p">(</span>i<span class="p">)</span>
+</span><span class='line'>  old_green_button <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> rbinom<span class="p">(</span>n <span class="o">=</span> <span class="m">100000</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> p <span class="o">=</span> <span class="m">0.03</span><span class="p">)</span>
+</span><span class='line'>  new_red_button <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> rbinom<span class="p">(</span><span class="m">100000</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> p <span class="o">=</span> <span class="m">0.05</span><span class="p">)</span>
+</span><span class='line'>  p_values<span class="p">[</span>i<span class="p">]</span> <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> prop.test<span class="p">(</span>table<span class="p">(</span>old_green_button<span class="p">,</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>pre<span class="o">&gt;&lt;</span>code<span class="o">&gt;</span>                             new_red_button<span class="p">))</span><span class="o">$</span>p.value
+</span><span class='line'><span class="o">&lt;/</span>code<span class="o">&gt;&lt;/</span>pre<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>  print<span class="p">(</span>i<span class="p">)</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>df <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> as.data.frame<span class="p">(</span>p_values<span class="p">)</span>
+</span><span class='line'>ggplot<span class="p">(</span>df<span class="p">,</span> aes<span class="p">(</span>x <span class="o">=</span> p_values<span class="p">))</span> <span class="o">+</span>
+</span><span class='line'>  geom_density<span class="p">(</span>fill <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>grey50<span class="o">&amp;</span>rdquo<span class="p">;,</span> alpha <span class="o">=</span> <span class="m">0.5</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>  geom_vline<span class="p">(</span>xintercept <span class="o">=</span> <span class="m">0.05</span><span class="p">,</span> colour <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>red<span class="o">&amp;</span>rdquo<span class="p">;,</span> size <span class="o">=</span> <span class="m">2</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>  ggtitle<span class="p">(</span><span class="o">&amp;</span>ldquo<span class="p">;</span>Only <span class="m">6</span>% of p<span class="o">-</span>values are less than <span class="m">0.05</span><span class="o">&amp;</span>rdquo<span class="p">;)</span> <span class="o">+&lt;/</span>p<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>pre<span class="o">&gt;&lt;</span>code<span class="o">&gt;</span>ylab<span class="p">(</span><span class="s">&quot;Density&quot;</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>xlab<span class="p">(</span><span class="s">&quot;P-values&quot;</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'><span class="o">&lt;/</span>code<span class="o">&gt;&lt;/</span>pre<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>  theme_few<span class="p">()</span> <span class="o">+</span>
+</span><span class='line'>  theme<span class="p">(</span>axis.text <span class="o">=</span> element_text<span class="p">(</span>size <span class="o">=</span> <span class="m">15</span><span class="p">),</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>pre<span class="o">&gt;&lt;</span>code<span class="o">&gt;</span>    plot.title <span class="o">=</span> element_text<span class="p">(</span>size <span class="o">=</span> <span class="m">20</span><span class="p">))</span>
+</span><span class='line'><span class="o">&lt;/</span>code<span class="o">&gt;&lt;/</span>pre<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>The result shows that only 6% of p-values will be less than 0.05%!  The
+sacred statistical decision rule would have you leave a 66% percent
+conversion rate increase on the table and this is why p-value does not stand for profit.</p>
+
+<p><img src="http://i.imgur.com/9vl6z1x.png"></img></p>
+
+<p>In my next post, I&rsquo;ll analyze exactly why using p-values above other
+methods leads the data scientist astray.  I&rsquo;ll introduce how I use Bayesian
+analysis to avoid the p-value pitfall.</p>
+]]></content>
+  </entry>
+  
+</feed>

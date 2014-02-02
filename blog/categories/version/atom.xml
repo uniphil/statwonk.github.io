@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: version | @statwonk]]></title>
+  <link href="http://statwonk.github.io/blog/categories/version/atom.xml" rel="self"/>
+  <link href="http://statwonk.github.io/"/>
+  <updated>2014-02-02T10:04:33-05:00</updated>
+  <id>http://statwonk.github.io/</id>
+  <author>
+    <name><![CDATA[Christopher P. Peters]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Are academics adopting Github?]]></title>
+    <link href="http://statwonk.github.io/blog/2013/12/15/are-academics-adopting-github/"/>
+    <updated>2013-12-15T20:27:00-05:00</updated>
+    <id>http://statwonk.github.io/blog/2013/12/15/are-academics-adopting-github</id>
+    <content type="html"><![CDATA[<p>As the partner of one of the &ldquo;Piled Higher, and Deeper&rdquo; (a Ph.D student) crowd and also a data
+scientist, I couldn&rsquo;t help but introduce the &lsquo;git-way&rsquo; to Gentry.</p>
+
+<p>She&rsquo;s a geographer at Queen&rsquo;s university.  <strong>Like me, she&rsquo;s tech savvy, but coding
+is new to her.  Human geography, her field, is largely qualitative like the rest
+of the humanities.</strong></p>
+
+<p><a href="http://i.imgur.com/PDQx8tf.jpg"><span class='caption-wrapper right'><img class='caption' src='http://i.imgur.com/PDQx8tf.jpg' width='350' height='550' title='&ldquo;An academic&rsquo;s console command cheat sheet&rdquo;'><span class='caption-text'>&ldquo;An academic&rsquo;s console command cheat sheet&rdquo;</span></span></a></p>
+
+<p>At the end of her previous degree, I helped her cope with MS Word as it struggled under the weight of a 100+ page thesis.  We expanded the memory on her laptop.  She had &ldquo;sub-docs&rdquo; everywhere.  Bits and pieces of thoughts  put to the side, worked on independently, temporarily stricken.  But how to keep track of it all?</p>
+
+<p>I was learning Git at the same time on my path from statistician to data scientist.</p>
+
+<p>A year later, I&rsquo;ve come to use git and Github on a daily-basis.  I&rsquo;ve moved
+from an academic statistician to a commercial data scientist.  I work with a
+team of developers, and the Git-way has become really the only way for keeping track
+of my projects.</p>
+
+<p>Now, Gentry is working on her dissertation.  As a first step into coding, she&rsquo;s been learning LaTeX.  She&rsquo;s sold because she can annotate her own dissertation with comments.</p>
+
+<p>For those unfamiliar, LaTeX is a typsetting language. It creates beautiful documents with high-level style control. I recommend it to anyone that&rsquo;s ever tried to do formatting in
+MS Word. :&ndash;)</p>
+
+<p>LaTeX is also largely confined to academia.  I&rsquo;m not saying they don&rsquo;t exist,
+but I haven&rsquo;t met anyone that uses LaTeX who is not also an academic.</p>
+
+<p><strong>Now that Gentry was coding her dissertation, using Git and Github were open to
+her as tools.</strong></p>
+
+<p>I commonly relate Github to my non-programming friends by telling them it&rsquo;s the
+Facebook of code and programmers.  People instantly get this analogy.  &ldquo;Oh, so
+it lets you be social and interact?&rdquo;</p>
+
+<p>&ldquo;Precisely, but with code.&rdquo;</p>
+
+<p>Github is perfect for academics.  If they can use it by coding with LaTeX, even
+non-quantitative academics can work socially and openly (which is possibly more
+important).</p>
+
+<p>Gentry&rsquo;s sold and she&rsquo;s been been learning Git with my co-worker Tommy Morgan.  Tommy
+teaches an <a href="http://teamtreehouse.com/library/git-basics">excellent lesson on Git at Treehouse</a>.  As I was speaking with the Co-Founder Ryan Carson last week, I wondered out loud, &ldquo;how many academics out there are using Git (and Github)?&rdquo;</p>
+
+<p>Today, you get the benefit of that curiousity. <strong>Are academics adopting
+Github?</strong></p>
+
+<p>Assuming that LaTeX is a good proxy for academic use of Github, <strong>yes, academics
+have been creating Github repositories at basically an exponential rate since
+the beginning of 2011</strong> and the pace has really picked up since August 2013.
+(makes sense given that it&rsquo;s the school year).</p>
+
+<p><img class="center <a" src="href="http://i.imgur.com/bVA4Pa9.png">http://i.imgur.com/bVA4Pa9.png</a>"></p>
+
+<p>&hellip;and on a log-scale (notice that the growth is linear on this scale), that means
+it&rsquo;s exponential growth since the beginning of 2011.</p>
+
+<p><img class="center <a" src="href="http://i.imgur.com/hmI9mpb.png">http://i.imgur.com/hmI9mpb.png</a>"></p>
+
+<p>This is just a raw look at the number of LaTeX repositories on Github by month.
+But I don&rsquo;t think the data needs to be spoiled by over-analysis.  As a next
+step, I&rsquo;d like to try forecasting the growth rate of these repositories by using
+the growth rates of other repositories.</p>
+
+<p>The idea of git and Github is so powerful, that I bet the academic community
+falls in love as much as the programming world has.  I also predict that those
+academics who adopt first will have a sigificant competitive advantage over
+their peers.  This is in an increasingly competitive job market where
+Ph.D-candidate after candidate hit a brick wall when searching for a
+tenure-track position.</p>
+
+<p>This data scientist is very proud of his human geographer for using version
+control in the place of snippets of MS Word documents.</p>
+
+<p>For those interested, the code I used to do this analysis was a mix of Python
+and R.  Here&rsquo;s the <a href="https://github.com/statwonk/academic-github-adoption">Github repo</a>, and relevant code snippets:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">requests</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">json</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">csv</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">time</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">times</span> <span class="o">=</span> <span class="p">[</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="mi">2010</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;,</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="mi">2011</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;,</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="mi">2012</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;]</span>
+</span><span class='line'><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">12</span><span class="p">):</span>
+</span><span class='line'>  <span class="n">times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="mi">2013</span><span class="p">)</span> <span class="o">+</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="o">&amp;</span><span class="n">ndash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)))</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">df</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span class='line'><span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">times</span><span class="p">:</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+</span><span class='line'>    <span class="c"># print &quot;Sleeping 15 seconds ... &quot;</span>
+</span><span class='line'>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">60</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;https://api.github.com/search/repositories?q=language:latex&amp;amp;&#39;</span> <span class="o">+</span> \
+</span><span class='line'>                     <span class="s">&#39;page=&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39;&amp;amp;per_page=100&#39;</span> <span class="o">+</span> \
+</span><span class='line'>                     <span class="s">&#39;&amp;amp;created=&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">))</span>
+</span><span class='line'>    <span class="k">if</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">ok</span><span class="p">):</span>
+</span><span class='line'>        <span class="n">repoItem</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</span><span class='line'>        <span class="k">print</span> <span class="s">&quot;page &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;, year &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+</span><span class='line'>        <span class="k">for</span> <span class="n">repo</span> <span class="ow">in</span> <span class="n">repoItem</span><span class="p">[</span><span class="s">&#39;items&#39;</span><span class="p">]:</span>
+</span><span class='line'>            <span class="n">df</span><span class="p">[</span><span class="n">repo</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">repo</span><span class="p">[</span><span class="s">&#39;created_at&#39;</span><span class="p">]</span>
+</span><span class='line'>    <span class="k">else</span><span class="p">:</span> <span class="k">print</span> <span class="s">&quot;oh nos! Page &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot; has a problem&quot;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="n">data</span><span class="o">.</span><span class="n">csv</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;,</span> <span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="n">wb</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;)</span> <span class="k">as</span> <span class="n">csvfile</span><span class="p">:</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">csvfile</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span> <span class="s">&#39;,&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+</span><span class='line'>    <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>&hellip; admittedly pretty basic.  Just learning Python! Plotting was done in R&rsquo;s
+<code>ggplot2</code> library.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'>library<span class="p">(</span>ggplot2<span class="p">)</span>
+</span><span class='line'>library<span class="p">(</span>lubridate<span class="p">)</span>
+</span><span class='line'>library<span class="p">(</span>ggthemes<span class="p">)</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>df <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> read.csv<span class="p">(</span><span class="o">&amp;</span>ldquo<span class="p">;</span>data.csv<span class="o">&amp;</span>rdquo<span class="p">;,</span> header <span class="o">=</span> <span class="k-Variable">F</span><span class="p">)</span>
+</span><span class='line'>names<span class="p">(</span>df<span class="p">)</span> <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> c<span class="p">(</span><span class="o">&amp;</span>ldquo<span class="p">;</span>repo<span class="o">&amp;</span>rdquo<span class="p">;,</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>created_at<span class="o">&amp;</span>rdquo<span class="p">;)</span>
+</span><span class='line'>df<span class="o">$</span>created_at <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> as.POSIXct<span class="p">(</span>df<span class="o">$</span>created_at<span class="p">)</span>
+</span><span class='line'>df <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> df<span class="p">[</span>df<span class="o">$</span>created_at <span class="o">&amp;</span>lt<span class="p">;</span> max<span class="p">(</span>df<span class="o">$</span>created_at<span class="p">)</span> <span class="o">&amp;</span>ndash<span class="p">;</span> days<span class="p">(</span><span class="m">14</span><span class="p">),</span> <span class="p">]</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>ggplot<span class="p">(</span>df<span class="p">,</span> aes<span class="p">(</span>x <span class="o">=</span> created_at<span class="p">))</span> <span class="o">+</span>
+</span><span class='line'>  scale_y_continuous<span class="p">(</span>breaks <span class="o">=</span> seq<span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">150</span><span class="p">,</span> <span class="m">25</span><span class="p">))</span> <span class="o">+</span>
+</span><span class='line'>  geom_hline<span class="p">(</span>yintercept <span class="o">=</span> <span class="m">25</span><span class="p">,</span> colour <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>red<span class="o">&amp;</span>rdquo<span class="p">;,</span> linetype<span class="o">=&amp;</span>ldquo<span class="p">;</span>dotted<span class="o">&amp;</span>rdquo<span class="p">;)</span> <span class="o">+</span>
+</span><span class='line'>  geom_hline<span class="p">(</span>yintercept <span class="o">=</span> <span class="m">50</span><span class="p">,</span> colour <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>red<span class="o">&amp;</span>rdquo<span class="p">;,</span> linetype<span class="o">=&amp;</span>ldquo<span class="p">;</span>dotted<span class="o">&amp;</span>rdquo<span class="p">;)</span> <span class="o">+</span>
+</span><span class='line'>  geom_hline<span class="p">(</span>yintercept <span class="o">=</span> <span class="m">75</span><span class="p">,</span> colour <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>red<span class="o">&amp;</span>rdquo<span class="p">;,</span> linetype<span class="o">=&amp;</span>ldquo<span class="p">;</span>dotted<span class="o">&amp;</span>rdquo<span class="p">;)</span> <span class="o">+</span>
+</span><span class='line'>  geom_hline<span class="p">(</span>yintercept <span class="o">=</span> <span class="m">100</span><span class="p">,</span> colour <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>red<span class="o">&amp;</span>rdquo<span class="p">;,</span> linetype<span class="o">=&amp;</span>ldquo<span class="p">;</span>dotted<span class="o">&amp;</span>rdquo<span class="p">;)</span> <span class="o">+</span>
+</span><span class='line'>  geom_hline<span class="p">(</span>yintercept <span class="o">=</span> <span class="m">125</span><span class="p">,</span> colour <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>red<span class="o">&amp;</span>rdquo<span class="p">;,</span> linetype<span class="o">=&amp;</span>ldquo<span class="p">;</span>dotted<span class="o">&amp;</span>rdquo<span class="p">;)</span> <span class="o">+</span>
+</span><span class='line'>  geom_histogram<span class="p">(</span>colour <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>black<span class="o">&amp;</span>rdquo<span class="p">;,</span> fill <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>tan<span class="o">&amp;</span>rdquo<span class="p">;,</span> binwidth <span class="o">=</span> <span class="m">60</span><span class="o">&lt;</span>em<span class="o">&gt;</span><span class="m">60</span><span class="o">&lt;/</span>em<span class="o">&gt;</span><span class="m">24</span><span class="o">*</span><span class="m">30.5</span><span class="p">,</span> stat <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>bin<span class="o">&amp;</span>rdquo<span class="p">;)</span> <span class="o">+</span>
+</span><span class='line'>  xlab<span class="p">(</span><span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">&amp;</span>rdquo<span class="p">;)</span> <span class="o">+</span>
+</span><span class='line'>  ylab<span class="p">(</span><span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">&amp;</span>rdquo<span class="p">;)</span> <span class="o">+</span>
+</span><span class='line'>  ggtitle<span class="p">(</span><span class="o">&amp;</span>ldquo<span class="p">;</span>Public Github Repositories\nwritten <span class="kr">in</span> LaTeX per Month<span class="o">&amp;</span>rdquo<span class="p">;)</span> <span class="o">+</span>
+</span><span class='line'>  theme_solarized<span class="p">(</span>light <span class="o">=</span> <span class="k-Variable">F</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>  theme<span class="p">(</span>axis.text.x <span class="o">=</span> element_text<span class="p">(</span>size <span class="o">=</span> <span class="m">32</span><span class="p">),</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>pre<span class="o">&gt;&lt;</span>code<span class="o">&gt;</span>    axis.text.y <span class="o">=</span> element_text<span class="p">(</span>size <span class="o">=</span> <span class="m">28</span><span class="p">),</span>
+</span><span class='line'>    plot.title <span class="o">=</span> element_text<span class="p">(</span>size <span class="o">=</span> <span class="m">30</span><span class="p">))</span>
+</span><span class='line'><span class="o">&lt;/</span>code<span class="o">&gt;&lt;/</span>pre<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>ggplot<span class="p">(</span>df<span class="p">,</span> aes<span class="p">(</span>x <span class="o">=</span> created_at<span class="p">))</span> <span class="o">+</span>
+</span><span class='line'>  scale_y_log10<span class="p">()</span> <span class="o">+</span>
+</span><span class='line'>  geom_hline<span class="p">(</span>yintercept <span class="o">=</span> <span class="m">10</span><span class="p">,</span> colour <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>red<span class="o">&amp;</span>rdquo<span class="p">;,</span> linetype<span class="o">=&amp;</span>ldquo<span class="p">;</span>dotted<span class="o">&amp;</span>rdquo<span class="p">;)</span> <span class="o">+</span>
+</span><span class='line'>  geom_hline<span class="p">(</span>yintercept <span class="o">=</span> <span class="m">100</span><span class="p">,</span> colour <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>red<span class="o">&amp;</span>rdquo<span class="p">;,</span> linetype<span class="o">=&amp;</span>ldquo<span class="p">;</span>dotted<span class="o">&amp;</span>rdquo<span class="p">;)</span> <span class="o">+</span>
+</span><span class='line'>  geom_histogram<span class="p">(</span>colour <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>black<span class="o">&amp;</span>rdquo<span class="p">;,</span> fill <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>tan<span class="o">&amp;</span>rdquo<span class="p">;,</span> binwidth <span class="o">=</span> <span class="m">60</span><span class="o">&lt;</span>em<span class="o">&gt;</span><span class="m">60</span><span class="o">&lt;/</span>em<span class="o">&gt;</span><span class="m">24</span><span class="o">*</span><span class="m">30.5</span><span class="p">,</span> stat <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>bin<span class="o">&amp;</span>rdquo<span class="p">;)</span> <span class="o">+</span>
+</span><span class='line'>  xlab<span class="p">(</span><span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">&amp;</span>rdquo<span class="p">;)</span> <span class="o">+</span>
+</span><span class='line'>  ylab<span class="p">(</span><span class="o">&amp;</span>ldquo<span class="p">;(</span>Log scale<span class="p">)</span><span class="o">&amp;</span>rdquo<span class="p">;)</span> <span class="o">+</span>
+</span><span class='line'>  ggtitle<span class="p">(</span><span class="o">&amp;</span>ldquo<span class="p">;</span>Public Github Repositories\nwritten <span class="kr">in</span> LaTeX per Month<span class="o">&amp;</span>rdquo<span class="p">;)</span> <span class="o">+</span>
+</span><span class='line'>  theme_solarized<span class="p">(</span>light <span class="o">=</span> <span class="k-Variable">F</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>  theme<span class="p">(</span>axis.title.y <span class="o">=</span> element_text<span class="p">(</span>size <span class="o">=</span> <span class="m">25</span><span class="p">),</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>pre<span class="o">&gt;&lt;</span>code<span class="o">&gt;</span>    axis.text.x <span class="o">=</span> element_text<span class="p">(</span>size <span class="o">=</span> <span class="m">32</span><span class="p">),</span>
+</span><span class='line'>    axis.text.y <span class="o">=</span> element_text<span class="p">(</span>size <span class="o">=</span> <span class="m">28</span><span class="p">),</span>
+</span><span class='line'>    plot.title <span class="o">=</span> element_text<span class="p">(</span>size <span class="o">=</span> <span class="m">30</span><span class="p">))</span>
+</span><span class='line'><span class="o">&lt;/</span>code<span class="o">&gt;&lt;/</span>pre<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+]]></content>
+  </entry>
+  
+</feed>

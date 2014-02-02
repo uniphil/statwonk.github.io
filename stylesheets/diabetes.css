@@ -1,0 +1,109 @@
+@import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:400,700);
+
+footer {
+  padding: 2em 0 1em 0;
+  font-size: 12px;
+}
+
+#charts {
+  padding: 10px 0;
+}
+
+.chart {
+  height: 151px;
+  width: 900px;
+  margin-bottom: 30px;
+}
+
+.reset {
+  padding-left: 1em;
+  font-size: smaller;
+  color: #ccc;
+}
+
+.background.bar {
+  fill: #ccc;
+}
+
+.foreground.bar {
+  fill: steelblue;
+}
+
+.axis path, .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.axis text {
+  font: 10px sans-serif;
+}
+
+.brush rect.extent {
+  fill: steelblue;
+  fill-opacity: .125;
+}
+
+.brush .resize path {
+  fill: #eee;
+  stroke: #666;
+}
+
+#hour-chart {
+  width: 7000px;
+}
+
+#delay-chart {
+  width: 700px;
+}
+
+#distance-chart {
+  width: 500px;
+}
+
+#date-chart {
+  width: 500px;
+}
+
+#flight-list {
+  min-height: 1024px;
+}
+
+#flight-list .date,
+#flight-list .day {
+  margin-bottom: .4em;
+}
+
+#flight-list .flight {
+  line-height: 1.5em;
+  background: #eee;
+  width: 225px;
+  margin-bottom: 1px;
+}
+
+#flight-list .time {
+  color: #999;
+}
+
+#flight-list .flight div {
+  display: inline-block;
+  width: 100px;
+}
+
+#flight-list div.delay {
+  width: 100px;
+  padding-right: 10px;
+  text-align: right;
+}
+
+#flight-list .inrange {
+  color: green;
+}
+
+#flight-list .highoutofrange {
+  color: black;
+}
+
+#flight-list .lowoutofrange {
+  color: red;
+}

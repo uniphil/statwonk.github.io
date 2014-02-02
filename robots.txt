@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://statwonk.github.io/sitemap.xml 

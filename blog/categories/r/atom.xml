@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: R, | @statwonk]]></title>
+  <link href="http://statwonk.github.io/blog/categories/r/atom.xml" rel="self"/>
+  <link href="http://statwonk.github.io/"/>
+  <updated>2014-02-02T10:04:33-05:00</updated>
+  <id>http://statwonk.github.io/</id>
+  <author>
+    <name><![CDATA[Christopher P. Peters]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Are academics adopting Github?]]></title>
+    <link href="http://statwonk.github.io/blog/2013/12/15/are-academics-adopting-github/"/>
+    <updated>2013-12-15T20:27:00-05:00</updated>
+    <id>http://statwonk.github.io/blog/2013/12/15/are-academics-adopting-github</id>
+    <content type="html"><![CDATA[<p>As the partner of one of the &ldquo;Piled Higher, and Deeper&rdquo; (a Ph.D student) crowd and also a data
+scientist, I couldn&rsquo;t help but introduce the &lsquo;git-way&rsquo; to Gentry.</p>
+
+<p>She&rsquo;s a geographer at Queen&rsquo;s university.  <strong>Like me, she&rsquo;s tech savvy, but coding
+is new to her.  Human geography, her field, is largely qualitative like the rest
+of the humanities.</strong></p>
+
+<p><a href="http://i.imgur.com/PDQx8tf.jpg"><span class='caption-wrapper right'><img class='caption' src='http://i.imgur.com/PDQx8tf.jpg' width='350' height='550' title='&ldquo;An academic&rsquo;s console command cheat sheet&rdquo;'><span class='caption-text'>&ldquo;An academic&rsquo;s console command cheat sheet&rdquo;</span></span></a></p>
+
+<p>At the end of her previous degree, I helped her cope with MS Word as it struggled under the weight of a 100+ page thesis.  We expanded the memory on her laptop.  She had &ldquo;sub-docs&rdquo; everywhere.  Bits and pieces of thoughts  put to the side, worked on independently, temporarily stricken.  But how to keep track of it all?</p>
+
+<p>I was learning Git at the same time on my path from statistician to data scientist.</p>
+
+<p>A year later, I&rsquo;ve come to use git and Github on a daily-basis.  I&rsquo;ve moved
+from an academic statistician to a commercial data scientist.  I work with a
+team of developers, and the Git-way has become really the only way for keeping track
+of my projects.</p>
+
+<p>Now, Gentry is working on her dissertation.  As a first step into coding, she&rsquo;s been learning LaTeX.  She&rsquo;s sold because she can annotate her own dissertation with comments.</p>
+
+<p>For those unfamiliar, LaTeX is a typsetting language. It creates beautiful documents with high-level style control. I recommend it to anyone that&rsquo;s ever tried to do formatting in
+MS Word. :&ndash;)</p>
+
+<p>LaTeX is also largely confined to academia.  I&rsquo;m not saying they don&rsquo;t exist,
+but I haven&rsquo;t met anyone that uses LaTeX who is not also an academic.</p>
+
+<p><strong>Now that Gentry was coding her dissertation, using Git and Github were open to
+her as tools.</strong></p>
+
+<p>I commonly relate Github to my non-programming friends by telling them it&rsquo;s the
+Facebook of code and programmers.  People instantly get this analogy.  &ldquo;Oh, so
+it lets you be social and interact?&rdquo;</p>
+
+<p>&ldquo;Precisely, but with code.&rdquo;</p>
+
+<p>Github is perfect for academics.  If they can use it by coding with LaTeX, even
+non-quantitative academics can work socially and openly (which is possibly more
+important).</p>
+
+<p>Gentry&rsquo;s sold and she&rsquo;s been been learning Git with my co-worker Tommy Morgan.  Tommy
+teaches an <a href="http://teamtreehouse.com/library/git-basics">excellent lesson on Git at Treehouse</a>.  As I was speaking with the Co-Founder Ryan Carson last week, I wondered out loud, &ldquo;how many academics out there are using Git (and Github)?&rdquo;</p>
+
+<p>Today, you get the benefit of that curiousity. <strong>Are academics adopting
+Github?</strong></p>
+
+<p>Assuming that LaTeX is a good proxy for academic use of Github, <strong>yes, academics
+have been creating Github repositories at basically an exponential rate since
+the beginning of 2011</strong> and the pace has really picked up since August 2013.
+(makes sense given that it&rsquo;s the school year).</p>
+
+<p><img class="center <a" src="href="http://i.imgur.com/bVA4Pa9.png">http://i.imgur.com/bVA4Pa9.png</a>"></p>
+
+<p>&hellip;and on a log-scale (notice that the growth is linear on this scale), that means
+it&rsquo;s exponential growth since the beginning of 2011.</p>
+
+<p><img class="center <a" src="href="http://i.imgur.com/hmI9mpb.png">http://i.imgur.com/hmI9mpb.png</a>"></p>
+
+<p>This is just a raw look at the number of LaTeX repositories on Github by month.
+But I don&rsquo;t think the data needs to be spoiled by over-analysis.  As a next
+step, I&rsquo;d like to try forecasting the growth rate of these repositories by using
+the growth rates of other repositories.</p>
+
+<p>The idea of git and Github is so powerful, that I bet the academic community
+falls in love as much as the programming world has.  I also predict that those
+academics who adopt first will have a sigificant competitive advantage over
+their peers.  This is in an increasingly competitive job market where
+Ph.D-candidate after candidate hit a brick wall when searching for a
+tenure-track position.</p>
+
+<p>This data scientist is very proud of his human geographer for using version
+control in the place of snippets of MS Word documents.</p>
+
+<p>For those interested, the code I used to do this analysis was a mix of Python
+and R.  Here&rsquo;s the <a href="https://github.com/statwonk/academic-github-adoption">Github repo</a>, and relevant code snippets:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">requests</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">json</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">csv</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">time</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">times</span> <span class="o">=</span> <span class="p">[</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="mi">2010</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;,</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="mi">2011</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;,</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="mi">2012</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;]</span>
+</span><span class='line'><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">12</span><span class="p">):</span>
+</span><span class='line'>  <span class="n">times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="mi">2013</span><span class="p">)</span> <span class="o">+</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="o">&amp;</span><span class="n">ndash</span><span class="p">;</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)))</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="n">df</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span class='line'><span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">times</span><span class="p">:</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+</span><span class='line'>    <span class="c"># print &quot;Sleeping 15 seconds ... &quot;</span>
+</span><span class='line'>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">60</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;https://api.github.com/search/repositories?q=language:latex&amp;amp;&#39;</span> <span class="o">+</span> \
+</span><span class='line'>                     <span class="s">&#39;page=&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39;&amp;amp;per_page=100&#39;</span> <span class="o">+</span> \
+</span><span class='line'>                     <span class="s">&#39;&amp;amp;created=&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">))</span>
+</span><span class='line'>    <span class="k">if</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">ok</span><span class="p">):</span>
+</span><span class='line'>        <span class="n">repoItem</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</span><span class='line'>        <span class="k">print</span> <span class="s">&quot;page &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;, year &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+</span><span class='line'>        <span class="k">for</span> <span class="n">repo</span> <span class="ow">in</span> <span class="n">repoItem</span><span class="p">[</span><span class="s">&#39;items&#39;</span><span class="p">]:</span>
+</span><span class='line'>            <span class="n">df</span><span class="p">[</span><span class="n">repo</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">repo</span><span class="p">[</span><span class="s">&#39;created_at&#39;</span><span class="p">]</span>
+</span><span class='line'>    <span class="k">else</span><span class="p">:</span> <span class="k">print</span> <span class="s">&quot;oh nos! Page &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot; has a problem&quot;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="n">data</span><span class="o">.</span><span class="n">csv</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;,</span> <span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="n">wb</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;)</span> <span class="k">as</span> <span class="n">csvfile</span><span class="p">:</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">csvfile</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span> <span class="s">&#39;,&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+</span><span class='line'>    <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>&hellip; admittedly pretty basic.  Just learning Python! Plotting was done in R&rsquo;s
+<code>ggplot2</code> library.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'>library<span class="p">(</span>ggplot2<span class="p">)</span>
+</span><span class='line'>library<span class="p">(</span>lubridate<span class="p">)</span>
+</span><span class='line'>library<span class="p">(</span>ggthemes<span class="p">)</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>df <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> read.csv<span class="p">(</span><span class="o">&amp;</span>ldquo<span class="p">;</span>data.csv<span class="o">&amp;</span>rdquo<span class="p">;,</span> header <span class="o">=</span> <span class="k-Variable">F</span><span class="p">)</span>
+</span><span class='line'>names<span class="p">(</span>df<span class="p">)</span> <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> c<span class="p">(</span><span class="o">&amp;</span>ldquo<span class="p">;</span>repo<span class="o">&amp;</span>rdquo<span class="p">;,</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>created_at<span class="o">&amp;</span>rdquo<span class="p">;)</span>
+</span><span class='line'>df<span class="o">$</span>created_at <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> as.POSIXct<span class="p">(</span>df<span class="o">$</span>created_at<span class="p">)</span>
+</span><span class='line'>df <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> df<span class="p">[</span>df<span class="o">$</span>created_at <span class="o">&amp;</span>lt<span class="p">;</span> max<span class="p">(</span>df<span class="o">$</span>created_at<span class="p">)</span> <span class="o">&amp;</span>ndash<span class="p">;</span> days<span class="p">(</span><span class="m">14</span><span class="p">),</span> <span class="p">]</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>ggplot<span class="p">(</span>df<span class="p">,</span> aes<span class="p">(</span>x <span class="o">=</span> created_at<span class="p">))</span> <span class="o">+</span>
+</span><span class='line'>  scale_y_continuous<span class="p">(</span>breaks <span class="o">=</span> seq<span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">150</span><span class="p">,</span> <span class="m">25</span><span class="p">))</span> <span class="o">+</span>
+</span><span class='line'>  geom_hline<span class="p">(</span>yintercept <span class="o">=</span> <span class="m">25</span><span class="p">,</span> colour <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>red<span class="o">&amp;</span>rdquo<span class="p">;,</span> linetype<span class="o">=&amp;</span>ldquo<span class="p">;</span>dotted<span class="o">&amp;</span>rdquo<span class="p">;)</span> <span class="o">+</span>
+</span><span class='line'>  geom_hline<span class="p">(</span>yintercept <span class="o">=</span> <span class="m">50</span><span class="p">,</span> colour <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>red<span class="o">&amp;</span>rdquo<span class="p">;,</span> linetype<span class="o">=&amp;</span>ldquo<span class="p">;</span>dotted<span class="o">&amp;</span>rdquo<span class="p">;)</span> <span class="o">+</span>
+</span><span class='line'>  geom_hline<span class="p">(</span>yintercept <span class="o">=</span> <span class="m">75</span><span class="p">,</span> colour <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>red<span class="o">&amp;</span>rdquo<span class="p">;,</span> linetype<span class="o">=&amp;</span>ldquo<span class="p">;</span>dotted<span class="o">&amp;</span>rdquo<span class="p">;)</span> <span class="o">+</span>
+</span><span class='line'>  geom_hline<span class="p">(</span>yintercept <span class="o">=</span> <span class="m">100</span><span class="p">,</span> colour <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>red<span class="o">&amp;</span>rdquo<span class="p">;,</span> linetype<span class="o">=&amp;</span>ldquo<span class="p">;</span>dotted<span class="o">&amp;</span>rdquo<span class="p">;)</span> <span class="o">+</span>
+</span><span class='line'>  geom_hline<span class="p">(</span>yintercept <span class="o">=</span> <span class="m">125</span><span class="p">,</span> colour <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>red<span class="o">&amp;</span>rdquo<span class="p">;,</span> linetype<span class="o">=&amp;</span>ldquo<span class="p">;</span>dotted<span class="o">&amp;</span>rdquo<span class="p">;)</span> <span class="o">+</span>
+</span><span class='line'>  geom_histogram<span class="p">(</span>colour <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>black<span class="o">&amp;</span>rdquo<span class="p">;,</span> fill <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>tan<span class="o">&amp;</span>rdquo<span class="p">;,</span> binwidth <span class="o">=</span> <span class="m">60</span><span class="o">&lt;</span>em<span class="o">&gt;</span><span class="m">60</span><span class="o">&lt;/</span>em<span class="o">&gt;</span><span class="m">24</span><span class="o">*</span><span class="m">30.5</span><span class="p">,</span> stat <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>bin<span class="o">&amp;</span>rdquo<span class="p">;)</span> <span class="o">+</span>
+</span><span class='line'>  xlab<span class="p">(</span><span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">&amp;</span>rdquo<span class="p">;)</span> <span class="o">+</span>
+</span><span class='line'>  ylab<span class="p">(</span><span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">&amp;</span>rdquo<span class="p">;)</span> <span class="o">+</span>
+</span><span class='line'>  ggtitle<span class="p">(</span><span class="o">&amp;</span>ldquo<span class="p">;</span>Public Github Repositories\nwritten <span class="kr">in</span> LaTeX per Month<span class="o">&amp;</span>rdquo<span class="p">;)</span> <span class="o">+</span>
+</span><span class='line'>  theme_solarized<span class="p">(</span>light <span class="o">=</span> <span class="k-Variable">F</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>  theme<span class="p">(</span>axis.text.x <span class="o">=</span> element_text<span class="p">(</span>size <span class="o">=</span> <span class="m">32</span><span class="p">),</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>pre<span class="o">&gt;&lt;</span>code<span class="o">&gt;</span>    axis.text.y <span class="o">=</span> element_text<span class="p">(</span>size <span class="o">=</span> <span class="m">28</span><span class="p">),</span>
+</span><span class='line'>    plot.title <span class="o">=</span> element_text<span class="p">(</span>size <span class="o">=</span> <span class="m">30</span><span class="p">))</span>
+</span><span class='line'><span class="o">&lt;/</span>code<span class="o">&gt;&lt;/</span>pre<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>ggplot<span class="p">(</span>df<span class="p">,</span> aes<span class="p">(</span>x <span class="o">=</span> created_at<span class="p">))</span> <span class="o">+</span>
+</span><span class='line'>  scale_y_log10<span class="p">()</span> <span class="o">+</span>
+</span><span class='line'>  geom_hline<span class="p">(</span>yintercept <span class="o">=</span> <span class="m">10</span><span class="p">,</span> colour <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>red<span class="o">&amp;</span>rdquo<span class="p">;,</span> linetype<span class="o">=&amp;</span>ldquo<span class="p">;</span>dotted<span class="o">&amp;</span>rdquo<span class="p">;)</span> <span class="o">+</span>
+</span><span class='line'>  geom_hline<span class="p">(</span>yintercept <span class="o">=</span> <span class="m">100</span><span class="p">,</span> colour <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>red<span class="o">&amp;</span>rdquo<span class="p">;,</span> linetype<span class="o">=&amp;</span>ldquo<span class="p">;</span>dotted<span class="o">&amp;</span>rdquo<span class="p">;)</span> <span class="o">+</span>
+</span><span class='line'>  geom_histogram<span class="p">(</span>colour <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>black<span class="o">&amp;</span>rdquo<span class="p">;,</span> fill <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>tan<span class="o">&amp;</span>rdquo<span class="p">;,</span> binwidth <span class="o">=</span> <span class="m">60</span><span class="o">&lt;</span>em<span class="o">&gt;</span><span class="m">60</span><span class="o">&lt;/</span>em<span class="o">&gt;</span><span class="m">24</span><span class="o">*</span><span class="m">30.5</span><span class="p">,</span> stat <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>bin<span class="o">&amp;</span>rdquo<span class="p">;)</span> <span class="o">+</span>
+</span><span class='line'>  xlab<span class="p">(</span><span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">&amp;</span>rdquo<span class="p">;)</span> <span class="o">+</span>
+</span><span class='line'>  ylab<span class="p">(</span><span class="o">&amp;</span>ldquo<span class="p">;(</span>Log scale<span class="p">)</span><span class="o">&amp;</span>rdquo<span class="p">;)</span> <span class="o">+</span>
+</span><span class='line'>  ggtitle<span class="p">(</span><span class="o">&amp;</span>ldquo<span class="p">;</span>Public Github Repositories\nwritten <span class="kr">in</span> LaTeX per Month<span class="o">&amp;</span>rdquo<span class="p">;)</span> <span class="o">+</span>
+</span><span class='line'>  theme_solarized<span class="p">(</span>light <span class="o">=</span> <span class="k-Variable">F</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>  theme<span class="p">(</span>axis.title.y <span class="o">=</span> element_text<span class="p">(</span>size <span class="o">=</span> <span class="m">25</span><span class="p">),</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>pre<span class="o">&gt;&lt;</span>code<span class="o">&gt;</span>    axis.text.x <span class="o">=</span> element_text<span class="p">(</span>size <span class="o">=</span> <span class="m">32</span><span class="p">),</span>
+</span><span class='line'>    axis.text.y <span class="o">=</span> element_text<span class="p">(</span>size <span class="o">=</span> <span class="m">28</span><span class="p">),</span>
+</span><span class='line'>    plot.title <span class="o">=</span> element_text<span class="p">(</span>size <span class="o">=</span> <span class="m">30</span><span class="p">))</span>
+</span><span class='line'><span class="o">&lt;/</span>code<span class="o">&gt;&lt;/</span>pre<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Goodbye scripts, hello R packages!]]></title>
+    <link href="http://statwonk.github.io/blog/2013/11/03/goodbye-scripts/"/>
+    <updated>2013-11-03T20:21:00-05:00</updated>
+    <id>http://statwonk.github.io/blog/2013/11/03/goodbye-scripts</id>
+    <content type="html"><![CDATA[<p>This weekend I reached the breaking point with my R codebase.  I&rsquo;ve heard it said before that the best thing about R is that it was created by statisticians and the worst thing about R is that was created by statisticians.</p>
+
+<p>R is a domain-specific language.  My perspective as a student of R, is that the culture is heavily oriented towards writing scripts.  Academic statisticians as a culture have, in my opinion, very poor programming skills.  There are exceptions like Hadley Wickham, but it appears even he has been forced to leave academia.  Probably because his game changing R packages weren&rsquo;t recognized in proportion to the mindless publication of p-values or yet another Fisherian SAS implementation.  I could be wrong, is it a sabbatical? are his R packages recognized as world-class by his collegues?</p>
+
+<p>My own academic experience was a mixed bag.  I had an absolutely wonderful advisor that programmed in R (and a couple of other professors, too).  The rest of the department were using SAS.  If you use R (and have used SAS), I don&rsquo;t have to tell you what that meant for me in terms of programming education in school.</p>
+
+<p>I&rsquo;ve been on my own when it comes to learning the fundamentals of modern programming.  Having only used procedural languages (R [mostly], SAS, and Stata), the transition to object-orientation was both difficult and a breath of fresh air.</p>
+
+<p>I understood that having hundreds and hundreds of scripts meant that I was effectively re-writting the wheel on a daily basis.  I want to escape from that. Luckily, I work for an <a href="http://teamtreehouse.com">amazing company</a> that happens to be in the tech. education business.</p>
+
+<p>It wasn&rsquo;t until a couple of coworkers suggested I learn Ruby (Treehouse rocks for learning this language by the way!), that I really began to engage object-orientation and modularization on a daily-basis.  &ldquo;Wait, you mean if I define this in a class with a given namespace, I can call the method from anywhere?&rdquo;</p>
+
+<p>R is also an object-oriented language, but it&rsquo;s application seems fairly limited and you&rsquo;re usually crossing your fingers in hopes that a package maintainer has thought to overload the <code>plot()</code> or <code>summary()</code> functions.</p>
+
+<p>Modularization appears to come largely through <code>source()</code> and R packages.</p>
+
+<p>To me, package development has always seemed intimidating.  I&rsquo;ve had several false starts.  That was made more likely by my past use of Windows as a development OS.  Bad bad bad choice.  For the past six months, I&rsquo;ve moved to Ubuntu (vim and tmux, and I have to give huge credit to <a href="http://www.rstudio.com/">RStudio</a> even though I&rsquo;m moving away from it) and not looked back.</p>
+
+<p>Today, in my frustration I decided to give package creation another shot.  And it worked!  To my delight, I was able to create the package, add some functions, compile it, load it, and start using my code in a clean re-usable and modular way.  Success!</p>
+
+<p>I have to give almost exclusive credit to Hadley Wickham and his super clear explaination of <a href="http://adv-r.had.co.nz/Package-basics.html">package authoring basics.</a></p>
+
+<p>Hadley has built some amazing package development tools, like <a href="https://github.com/hadley/devtools">devtools</a> which proports to make the package structure easier to use than not (and I believe it).  He actually says in the documentation that he&rsquo;ll send you a handwritten apology if you piss off the R-core team due to a <code>devtools</code> bug.  Sounds like a goal. :&ndash;)  He also has created a package for <a href="https://github.com/hadley/testthat">test-driven development</a> in R.  Another aspect of Ruby that I&rsquo;ve loved, but never used in R.  And I&rsquo;m not alone, I know that I&rsquo;m not.  I&rsquo;ve never met another R programmer face-to-face that uses unit tests.  Looking forward to it!  Finally, Hadley completes the grand slam (with Peter Danenberg and Manuel Eugster) with the <code>roxygen2</code> <a href="https://github.com/klutometis/roxygen">package</a>, which allows package developers to write self-documenting code.</p>
+
+<p>So today I&rsquo;m feeling great about getting my first package off the ground. I&rsquo;ve already spent a couple of hours breaking my old scripts into modules.  I&rsquo;m calling the package <code>treehouser</code> since it&rsquo;s for work, and follow&rsquo;s Hadley&rsquo;s naming convention.  I&rsquo;m hugely greatful to Hadley (I&rsquo;ve already gotten an amazing amount of milliage out of <code>ggplot2</code>).  Thank you!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Taking a quick peek at FDA adverse drug reactions]]></title>
+    <link href="http://statwonk.github.io/blog/2013/10/26/taking-a-quick-peek-at-fda-drug-reactions/"/>
+    <updated>2013-10-26T00:07:00-04:00</updated>
+    <id>http://statwonk.github.io/blog/2013/10/26/taking-a-quick-peek-at-fda-drug-reactions</id>
+    <content type="html"><![CDATA[<p>About a week ago my doctor put me on a new medication.  The drug is one that is known to have some unpleasant effects as you get used to it.  I was curious to see what the reported adverse reactions (to the U.S. FDA) were, so I decided to take a look at the data.</p>
+
+<p>The data actually wasn&rsquo;t very easy to find, but here&rsquo;s the current location: <a href="http://www.fda.gov/Drugs/GuidanceComplianceRegulatoryInformation/Surveillance/AdverseDrugEffects/ucm082193.htm">http://www.fda.gov/Drugs/GuidanceComplianceRegulatoryInformation/Surveillance/AdverseDrugEffects/ucm082193.htm</a>.</p>
+
+<p>Wow, look at the SEO value of that URL!</p>
+
+<p>It&rsquo;s pretty unbelievable to me that the latest data is now more than 10 months old. We&rsquo;ll have to see what the FDA says,</p>
+
+<blockquote class="twitter-tweet tw-center-align"><p><a
+href="https://twitter.com/FDA_Drug_Info">@FDA_Drug_Info</a> This info seems
+stale, what&#39;s going on? <a
+href="http://t.co/fVAkiJzS9i">http://t.co/fVAkiJzS9i</a></p>&mdash; Christopher
+Peters (@statwonk) <a
+href="https://twitter.com/statwonk/statuses/393945145030094848">October 26,
+2013</a></blockquote>
+
+
+<script async src="http://statwonk.github.io//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p>So I took a look at the drug reaction info and the top twenty reactions seemed relatively benign, so I feel a bit better.  It&rsquo;s a pretty simple way to go about things, but I&rsquo;d encourage you to take a look at some <a href="http://www.accessdata.fda.gov/scripts/cder/drugsatfda/index.cfm">FDA studies of drugs you take</a>.  The few I&rsquo;ve looked at are appallingly deficient.  Where are the power studies, yo?  If a study has a 5% likelihood of detecting a 20% increase in heart attacks, you&rsquo;d never know &mdash; that&rsquo;s why you should NOT blindly trust p-values > 0.05.  It doesn&rsquo;t mean that there isn&rsquo;t an effect and the study may not have had a good chance of detecting the increased risk from the get-go.</p>
+
+<p>You can find my little script on <a href="https://github.com/statwonk/FDA-adverse-drug-reactions">Github here</a>.</p>
+
+<p>I would love to collaborate with someone on this, let&rsquo;s dig into this data!</p>
+
+<p>Perhaps data mine to find not well known drug interactions?</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>h1<span class="o">&gt;</span>Author<span class="o">:</span> Christopher Peters<span class="o">&lt;/</span>h1<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>h1<span class="o">&gt;</span>Twitter<span class="o">:</span> <span class="o">@</span>statwonk<span class="o">&lt;/</span>h1<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>h1<span class="o">&gt;</span>Analysis of adverse reported drug events from FDA database<span class="o">&lt;/</span>h1<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>h1<span class="o">&gt;</span>Data found here<span class="o">:</span> <span class="o">&lt;</span>a href<span class="o">=</span><span class="s">&quot;http://www.fda.gov/Drugs/GuidanceComplianceRegulatoryInformation/Surveillance/AdverseDrugEffects/ucm082193.htm&quot;</span><span class="o">&gt;</span>http<span class="o">://</span>www.fda.gov<span class="o">/</span>Drugs<span class="o">/</span>GuidanceComplianceRegulatoryInformation<span class="o">/</span>Surveillance<span class="o">/</span>AdverseDrugEffects<span class="o">/</span>ucm082193.htm<span class="o">&lt;/</span>a<span class="o">&gt;&lt;/</span>h1<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>patient <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> read.table<span class="p">(</span><span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">~/</span>Downloads<span class="o">/</span>faers_ascii_2012q4<span class="o">/</span>ascii<span class="o">/</span>demo12q4.txt<span class="o">&amp;</span>rdquo<span class="p">;,</span> sep <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">$&amp;</span>rdquo<span class="p">;,</span> header <span class="o">=</span> <span class="k-Variable">T</span><span class="p">,</span> fill <span class="o">=</span> <span class="k-Variable">T</span><span class="p">,</span> quote <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">&amp;</span>rdquo<span class="p">;)</span>
+</span><span class='line'>drug <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> read.table<span class="p">(</span><span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">~/</span>Downloads<span class="o">/</span>faers_ascii_2012q4<span class="o">/</span>ascii<span class="o">/</span>drug12q4.txt<span class="o">&amp;</span>rdquo<span class="p">;,</span> sep <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">$&amp;</span>rdquo<span class="p">;,</span> header <span class="o">=</span> <span class="k-Variable">T</span><span class="p">,</span> fill <span class="o">=</span> <span class="k-Variable">T</span><span class="p">,</span> quote <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">&amp;</span>rdquo<span class="p">;)</span>
+</span><span class='line'>reaction <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> read.table<span class="p">(</span><span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">~/</span>Downloads<span class="o">/</span>faers_ascii_2012q4<span class="o">/</span>ascii<span class="o">/</span>reac12q4.txt<span class="o">&amp;</span>rdquo<span class="p">;,</span> sep <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">$&amp;</span>rdquo<span class="p">;,</span> header <span class="o">=</span> <span class="k-Variable">T</span><span class="p">,</span> fill <span class="o">=</span> <span class="k-Variable">T</span><span class="p">,</span> quote <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">&amp;</span>rdquo<span class="p">;)</span>
+</span><span class='line'>outcomes <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> read.table<span class="p">(</span><span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">~/</span>Downloads<span class="o">/</span>faers_ascii_2012q4<span class="o">/</span>ascii<span class="o">/</span>outc12q4.txt<span class="o">&amp;</span>rdquo<span class="p">;,</span> sep <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">$&amp;</span>rdquo<span class="p">;,</span> header <span class="o">=</span> <span class="k-Variable">T</span><span class="p">,</span> fill <span class="o">=</span> <span class="k-Variable">T</span><span class="p">,</span> quote <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">&amp;</span>rdquo<span class="p">;)</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>h1<span class="o">&gt;</span>You can find individual drugs and their reported adverse by specifying there names below<span class="o">&lt;/</span>h1<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>h1<span class="o">&gt;</span>There are commonly many names <span class="kr">for</span> a drug<span class="p">,</span> see below where I put three grepl statements<span class="o">&lt;/</span>h1<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>h1<span class="o">&gt;</span>with text like<span class="p">,</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>put drug brand name here<span class="o">&amp;</span>rdquo<span class="p">;,</span> you can replace this with drug brand names<span class="o">&lt;/</span>h1<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>h1<span class="o">&gt;</span>you can add or remote grepl statements depending on the number of brand names you want to look over.<span class="o">&lt;/</span>h1<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>df <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> drug<span class="p">[(</span>grepl<span class="p">(</span><span class="o">&amp;</span>ldquo<span class="p">;</span>put drug brand name <span class="m">1</span> here<span class="o">&amp;</span>rdquo<span class="p">;,</span> drug<span class="o">$</span>drugname<span class="p">,</span> ignore.case <span class="o">=</span> <span class="k-Variable">T</span><span class="p">)</span> <span class="o">|</span> <span class="c1"># drug is likely to be entered as many different brand names, use this to capture them individually&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>pre<span class="o">&gt;&lt;</span>code<span class="o">&gt;</span>          grepl<span class="p">(</span><span class="s">&quot;put drug brand name 2 here&quot;</span><span class="p">,</span> drug<span class="o">$</span>drugname<span class="p">,</span> ignore.case <span class="o">=</span> <span class="k-Variable">T</span><span class="p">)</span> <span class="o">|</span> <span class="c1"># enter drug names here, add or remove grepl() as needed with &quot;or&quot; statements \</span>
+</span><span class='line'>          grepl<span class="p">(</span><span class="s">&quot;put drug brand name 3 here ... add more grepl statements as necessary&quot;</span><span class="p">,</span> drug<span class="o">$</span>drugname<span class="p">,</span> ignore.case <span class="o">=</span> <span class="k-Variable">T</span><span class="p">))</span> <span class="o">&amp;</span>amp<span class="p">;</span> drug<span class="o">$</span>drug_seq <span class="o">==</span> <span class="m">1</span><span class="p">,</span> <span class="p">]</span> <span class="c1"># drug seq 1 == suspect drug of many possible that patient is taking</span>
+</span><span class='line'><span class="o">&lt;/</span>code<span class="o">&gt;&lt;/</span>pre<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>df <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> merge<span class="p">(</span>df<span class="p">,</span> reaction<span class="p">,</span> by <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>primaryid<span class="o">&amp;</span>rdquo<span class="p">;)</span> <span class="c1"># let&amp;rsquo;s merge the drug file with reactions</span>
+</span><span class='line'>df <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> merge<span class="p">(</span>df<span class="p">,</span> outcomes<span class="p">,</span> by <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>primaryid<span class="o">&amp;</span>rdquo<span class="p">;)</span> <span class="c1"># we&amp;rsquo;ll bring in outcomes, too</span>
+</span><span class='line'>df2 <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> as.data.frame<span class="p">(</span>table<span class="p">(</span>df<span class="o">$</span>pt<span class="p">,</span> df<span class="o">$</span>outc_code<span class="p">))</span> <span class="c1"># count the instances of reactions and their outcomes</span>
+</span><span class='line'>names<span class="p">(</span>df2<span class="p">)</span> <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> c<span class="p">(</span><span class="o">&amp;</span>ldquo<span class="p">;</span>reaction<span class="o">&amp;</span>rdquo<span class="p">;,</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>outcome<span class="o">&amp;</span>rdquo<span class="p">;,</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>count<span class="o">&amp;</span>rdquo<span class="p">;)</span>
+</span><span class='line'>df2 <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> df2<span class="p">[</span>order<span class="p">(</span>df2<span class="o">$</span>count<span class="p">,</span> decreasing <span class="o">=</span> <span class="k-Variable">T</span><span class="p">),</span> <span class="p">]</span>
+</span><span class='line'>head<span class="p">(</span>df2<span class="p">,</span> <span class="m">20</span><span class="p">)</span> <span class="c1"># top 20 reactions</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA['Reading CSV data into R']]></title>
+    <link href="http://statwonk.github.io/blog/2013/09/27/reading-csv-data-into-r/"/>
+    <updated>2013-09-27T12:27:00-04:00</updated>
+    <id>http://statwonk.github.io/blog/2013/09/27/reading-csv-data-into-r</id>
+    <content type="html"><![CDATA[<p>There are a variety of ways to import data into R.</p>
+
+<p>I most often work with CSV files.  In my experience, getting the file path
+correct is the trickiest part of bringing data into R.  I&rsquo;m going to show you how
+this works by first writing a piece of data to a CSV file and then we&rsquo;ll bring it back
+in.</p>
+
+<p>The <code>data()</code> function in R allows access to tons of toy datasets.  R programmers
+typically use these to <a href="http://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example">create reproducible examples</a> on sites like StackOverflow.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'>data<span class="p">(</span>mtcars<span class="p">)</span> <span class="c1"># first I get some toy data, so now we have access to the mtcars data.frame&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>head<span class="p">(</span>mtcars<span class="p">)</span> <span class="c1"># Let&amp;rsquo;s take a look&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>pre<span class="o">&gt;&lt;</span>code<span class="o">&gt;</span>              mpg cyl disp  hp drat    wt  qsec vs am gear carb
+</span><span class='line'><span class="o">&lt;/</span>code<span class="o">&gt;&lt;/</span>pre<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>Mazda RX4         <span class="m">21.0</span>   <span class="m">6</span>  <span class="m">160</span> <span class="m">110</span> <span class="m">3.90</span> <span class="m">2.620</span> <span class="m">16.46</span>  <span class="m">0</span>  <span class="m">1</span> <span class="m">4</span>    <span class="m">4</span>
+</span><span class='line'>Mazda RX4 Wag     <span class="m">21.0</span>   <span class="m">6</span>  <span class="m">160</span> <span class="m">110</span> <span class="m">3.90</span> <span class="m">2.875</span> <span class="m">17.02</span>  <span class="m">0</span>  <span class="m">1</span> <span class="m">4</span>    <span class="m">4</span>
+</span><span class='line'>Datsun <span class="m">710</span>        <span class="m">22.8</span>   <span class="m">4</span>  <span class="m">108</span>  <span class="m">93</span> <span class="m">3.85</span> <span class="m">2.320</span> <span class="m">18.61</span>  <span class="m">1</span>  <span class="m">1</span> <span class="m">4</span>    <span class="m">1</span>
+</span><span class='line'>Hornet <span class="m">4</span> Drive    <span class="m">21.4</span>   <span class="m">6</span>  <span class="m">258</span> <span class="m">110</span> <span class="m">3.08</span> <span class="m">3.215</span> <span class="m">19.44</span>  <span class="m">1</span>  <span class="m">0</span> <span class="m">3</span>    <span class="m">1</span>
+</span><span class='line'>Hornet Sportabout <span class="m">18.7</span>   <span class="m">8</span>  <span class="m">360</span> <span class="m">175</span> <span class="m">3.15</span> <span class="m">3.440</span> <span class="m">17.02</span>  <span class="m">0</span>  <span class="m">0</span> <span class="m">3</span>    <span class="m">2</span>
+</span><span class='line'>Valiant           <span class="m">18.1</span>   <span class="m">6</span>  <span class="m">225</span> <span class="m">105</span> <span class="m">2.76</span> <span class="m">3.460</span> <span class="m">20.22</span>  <span class="m">1</span>  <span class="m">0</span> <span class="m">3</span>    <span class="m">1</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>str<span class="p">(</span>mtcars<span class="p">)</span> <span class="c1"># we can see how each variable is coded here: num, chr, list, int, etc.&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;&amp;</span>lsquo<span class="p">;</span>data.frame<span class="o">&amp;</span>rsquo<span class="p">;</span><span class="o">:</span><span class="m">32</span> obs. of  <span class="m">11</span> variables<span class="o">:</span>
+</span><span class='line'>  <span class="o">$</span> mpg <span class="o">:</span> num  <span class="m">21</span> <span class="m">21</span> <span class="m">22.8</span> <span class="m">21.4</span> <span class="m">18.7</span> <span class="m">18.1</span> <span class="m">14.3</span> <span class="m">24.4</span> <span class="m">22.8</span> <span class="m">19.2</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'>  <span class="o">$</span> cyl <span class="o">:</span> num  <span class="m">6</span> <span class="m">6</span> <span class="m">4</span> <span class="m">6</span> <span class="m">8</span> <span class="m">6</span> <span class="m">8</span> <span class="m">4</span> <span class="m">4</span> <span class="m">6</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'>  <span class="o">$</span> disp<span class="o">:</span> num  <span class="m">160</span> <span class="m">160</span> <span class="m">108</span> <span class="m">258</span> <span class="m">360</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'>  <span class="o">$</span> hp  <span class="o">:</span> num  <span class="m">110</span> <span class="m">110</span> <span class="m">93</span> <span class="m">110</span> <span class="m">175</span> <span class="m">105</span> <span class="m">245</span> <span class="m">62</span> <span class="m">95</span> <span class="m">123</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'>  <span class="o">$</span> drat<span class="o">:</span> num  <span class="m">3.9</span> <span class="m">3.9</span> <span class="m">3.85</span> <span class="m">3.08</span> <span class="m">3.15</span> <span class="m">2.76</span> <span class="m">3.21</span> <span class="m">3.69</span> <span class="m">3.92</span> <span class="m">3.92</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'>  <span class="o">$</span> wt  <span class="o">:</span> num  <span class="m">2.62</span> <span class="m">2.88</span> <span class="m">2.32</span> <span class="m">3.21</span> <span class="m">3.44</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'>  <span class="o">$</span> qsec<span class="o">:</span> num  <span class="m">16.5</span> <span class="m">17</span> <span class="m">18.6</span> <span class="m">19.4</span> <span class="m">17</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'>  <span class="o">$</span> vs  <span class="o">:</span> num  <span class="m">0</span> <span class="m">0</span> <span class="m">1</span> <span class="m">1</span> <span class="m">0</span> <span class="m">1</span> <span class="m">0</span> <span class="m">1</span> <span class="m">1</span> <span class="m">1</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'>  <span class="o">$</span> am  <span class="o">:</span> num  <span class="m">1</span> <span class="m">1</span> <span class="m">1</span> <span class="m">0</span> <span class="m">0</span> <span class="m">0</span> <span class="m">0</span> <span class="m">0</span> <span class="m">0</span> <span class="m">0</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'>  <span class="o">$</span> gear<span class="o">:</span> num  <span class="m">4</span> <span class="m">4</span> <span class="m">4</span> <span class="m">3</span> <span class="m">3</span> <span class="m">3</span> <span class="m">3</span> <span class="m">4</span> <span class="m">4</span> <span class="m">4</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'>  <span class="o">$</span> carb<span class="o">:</span> num  <span class="m">4</span> <span class="m">4</span> <span class="m">1</span> <span class="m">1</span> <span class="m">2</span> <span class="m">1</span> <span class="m">4</span> <span class="m">2</span> <span class="m">2</span> <span class="m">4</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>So we have a <code>data.frame</code> with 32 observations and 11 variables.  Now let&rsquo;s
+use <code>write.csv()</code>. First we&rsquo;ll take a look at the inputs for the function. We
+can do this by putting a <code>?</code> in front of our empty function and running it with
+<code>R</code>.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'><span class="o">?</span>write.csv <span class="c1"># put a ? in front of any function to see its help page.</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>We&rsquo;re brought to <a href="http://stat.ethz.ch/R-manual/R-devel/library/utils/html/write.table.html">this page</a> which shows all the options we can use.  For now, we&rsquo;re only going to use the first two arguments (or parameters, which ever you prefer): <code>x</code>, some object and <code>file= ""</code>.</p>
+
+<p>If you use Linux, Mac, or Unix:
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'>write.csv<span class="p">(</span>mtcars<span class="p">,</span> file <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">~/</span>mtcars.csv<span class="o">&amp;</span>rdquo<span class="p">;)</span> <span class="c1"># &amp;lt;&amp;mdash; that file path would tell a Unix</span>
+</span><span class='line'>system to save the CSV <span class="kr">in</span> the home directory.
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>If you use Windows (Windows is not the OS you want to be programming R in, but
+it&rsquo;s okay to start on):
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'>write.csv<span class="p">(</span>mtcars<span class="p">,</span> file <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>C<span class="o">:/</span>Users<span class="o">/</span>Chris<span class="o">/</span>Documents<span class="o">/</span>mtcars.csv<span class="o">&amp;</span>rdquo<span class="p">;)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Notice the direction of the backslashes in the Windows path?  It&rsquo;s the opposite
+of how Windows does it.  The <code>\</code> character is considered special in R.  You can
+simply convert all the <code>\</code> backslashes that Windows shows you in a filepath to
+<code>/</code> forward slashes.  If you wanted to get fancy, you could actually put two
+backslashes, like this instead of single forward slashes <code>C:\\temp\\some-file.csv</code>.</p>
+
+<p>Both of these would work, <code>C:\\temp\\some-file.csv</code> and <code>C:/temp/some-file.csv</code>,
+while <code>C:\temp\some-file.csv</code> will not.</p>
+
+<p>Now that we know the exact path of the file, let&rsquo;s read it back in to R.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'>my_data_frame <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> read.csv<span class="p">(</span><span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">~/</span>mtcars.csv<span class="o">&amp;</span>rdquo<span class="p">;)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>or for Windows:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'>my_data_frame <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> read.csv<span class="p">(</span><span class="o">&amp;</span>ldquo<span class="p">;</span>C<span class="o">:/</span>Users<span class="o">/</span>Chris<span class="o">/</span>Documents<span class="o">/</span>mtcars.csv<span class="o">&amp;</span>rdquo<span class="p">;)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>I&rsquo;d encourage you to read <a href="http://stat.ethz.ch/R-manual/R-devel/library/utils/html/read.table.html">the documentation</a> on the <code>read.csv()</code>.</p>
+
+<p>You&rsquo;ll notice that when we take a look at the imported data the variables are
+coded differently.  This is because <code>read.csv()</code> looks at your data and makes a
+guess about which type they should be: <code>character</code>, <code>numeric</code>, <code>int</code>, <code>factor</code>,
+etc.  Commonly you&rsquo;ll want to control this with options like <code>stringsAsFactors =
+FALSE</code>.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'><span class="o">&amp;</span>lsquo<span class="p">;</span>data.frame<span class="o">&amp;</span>rsquo<span class="p">;</span><span class="o">:</span><span class="m">32</span> obs. of  <span class="m">12</span> variables<span class="o">:</span>
+</span><span class='line'>   <span class="o">$</span> X   <span class="o">:</span> Factor w<span class="o">/</span> <span class="m">32</span> levels <span class="o">&amp;</span>ldquo<span class="p">;</span>AMC Javelin<span class="o">&amp;</span>rdquo<span class="p">;,</span>..<span class="o">:</span> <span class="m">18</span> <span class="m">19</span> <span class="m">5</span> <span class="m">13</span> <span class="m">14</span> <span class="m">31</span> <span class="m">7</span> <span class="m">21</span> <span class="m">20</span> <span class="m">22</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'>   <span class="o">$</span> mpg <span class="o">:</span> num  <span class="m">21</span> <span class="m">21</span> <span class="m">22.8</span> <span class="m">21.4</span> <span class="m">18.7</span> <span class="m">18.1</span> <span class="m">14.3</span> <span class="m">24.4</span> <span class="m">22.8</span> <span class="m">19.2</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'>   <span class="o">$</span> cyl <span class="o">:</span> int  <span class="m">6</span> <span class="m">6</span> <span class="m">4</span> <span class="m">6</span> <span class="m">8</span> <span class="m">6</span> <span class="m">8</span> <span class="m">4</span> <span class="m">4</span> <span class="m">6</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'>   <span class="o">$</span> disp<span class="o">:</span> num  <span class="m">160</span> <span class="m">160</span> <span class="m">108</span> <span class="m">258</span> <span class="m">360</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'>   <span class="o">$</span> hp  <span class="o">:</span> int  <span class="m">110</span> <span class="m">110</span> <span class="m">93</span> <span class="m">110</span> <span class="m">175</span> <span class="m">105</span> <span class="m">245</span> <span class="m">62</span> <span class="m">95</span> <span class="m">123</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'>   <span class="o">$</span> drat<span class="o">:</span> num  <span class="m">3.9</span> <span class="m">3.9</span> <span class="m">3.85</span> <span class="m">3.08</span> <span class="m">3.15</span> <span class="m">2.76</span> <span class="m">3.21</span> <span class="m">3.69</span> <span class="m">3.92</span> <span class="m">3.92</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'>   <span class="o">$</span> wt  <span class="o">:</span> num  <span class="m">2.62</span> <span class="m">2.88</span> <span class="m">2.32</span> <span class="m">3.21</span> <span class="m">3.44</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'>   <span class="o">$</span> qsec<span class="o">:</span> num  <span class="m">16.5</span> <span class="m">17</span> <span class="m">18.6</span> <span class="m">19.4</span> <span class="m">17</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'>   <span class="o">$</span> vs  <span class="o">:</span> int  <span class="m">0</span> <span class="m">0</span> <span class="m">1</span> <span class="m">1</span> <span class="m">0</span> <span class="m">1</span> <span class="m">0</span> <span class="m">1</span> <span class="m">1</span> <span class="m">1</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'>   <span class="o">$</span> am  <span class="o">:</span> int  <span class="m">1</span> <span class="m">1</span> <span class="m">1</span> <span class="m">0</span> <span class="m">0</span> <span class="m">0</span> <span class="m">0</span> <span class="m">0</span> <span class="m">0</span> <span class="m">0</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'>   <span class="o">$</span> gear<span class="o">:</span> int  <span class="m">4</span> <span class="m">4</span> <span class="m">4</span> <span class="m">3</span> <span class="m">3</span> <span class="m">3</span> <span class="m">3</span> <span class="m">4</span> <span class="m">4</span> <span class="m">4</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'>   <span class="o">$</span> carb<span class="o">:</span> int  <span class="m">4</span> <span class="m">4</span> <span class="m">1</span> <span class="m">1</span> <span class="m">2</span> <span class="m">1</span> <span class="m">4</span> <span class="m">2</span> <span class="m">2</span> <span class="m">4</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>That&rsquo;s all for now.  Next time we&rsquo;ll do some basic visualization of this
+dataset.</p>
+]]></content>
+  </entry>
+  
+</feed>

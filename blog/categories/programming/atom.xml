@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: programming, | @statwonk]]></title>
+  <link href="http://statwonk.github.io/blog/categories/programming/atom.xml" rel="self"/>
+  <link href="http://statwonk.github.io/"/>
+  <updated>2014-02-02T10:04:33-05:00</updated>
+  <id>http://statwonk.github.io/</id>
+  <author>
+    <name><![CDATA[Christopher P. Peters]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Goodbye scripts, hello R packages!]]></title>
+    <link href="http://statwonk.github.io/blog/2013/11/03/goodbye-scripts/"/>
+    <updated>2013-11-03T20:21:00-05:00</updated>
+    <id>http://statwonk.github.io/blog/2013/11/03/goodbye-scripts</id>
+    <content type="html"><![CDATA[<p>This weekend I reached the breaking point with my R codebase.  I&rsquo;ve heard it said before that the best thing about R is that it was created by statisticians and the worst thing about R is that was created by statisticians.</p>
+
+<p>R is a domain-specific language.  My perspective as a student of R, is that the culture is heavily oriented towards writing scripts.  Academic statisticians as a culture have, in my opinion, very poor programming skills.  There are exceptions like Hadley Wickham, but it appears even he has been forced to leave academia.  Probably because his game changing R packages weren&rsquo;t recognized in proportion to the mindless publication of p-values or yet another Fisherian SAS implementation.  I could be wrong, is it a sabbatical? are his R packages recognized as world-class by his collegues?</p>
+
+<p>My own academic experience was a mixed bag.  I had an absolutely wonderful advisor that programmed in R (and a couple of other professors, too).  The rest of the department were using SAS.  If you use R (and have used SAS), I don&rsquo;t have to tell you what that meant for me in terms of programming education in school.</p>
+
+<p>I&rsquo;ve been on my own when it comes to learning the fundamentals of modern programming.  Having only used procedural languages (R [mostly], SAS, and Stata), the transition to object-orientation was both difficult and a breath of fresh air.</p>
+
+<p>I understood that having hundreds and hundreds of scripts meant that I was effectively re-writting the wheel on a daily basis.  I want to escape from that. Luckily, I work for an <a href="http://teamtreehouse.com">amazing company</a> that happens to be in the tech. education business.</p>
+
+<p>It wasn&rsquo;t until a couple of coworkers suggested I learn Ruby (Treehouse rocks for learning this language by the way!), that I really began to engage object-orientation and modularization on a daily-basis.  &ldquo;Wait, you mean if I define this in a class with a given namespace, I can call the method from anywhere?&rdquo;</p>
+
+<p>R is also an object-oriented language, but it&rsquo;s application seems fairly limited and you&rsquo;re usually crossing your fingers in hopes that a package maintainer has thought to overload the <code>plot()</code> or <code>summary()</code> functions.</p>
+
+<p>Modularization appears to come largely through <code>source()</code> and R packages.</p>
+
+<p>To me, package development has always seemed intimidating.  I&rsquo;ve had several false starts.  That was made more likely by my past use of Windows as a development OS.  Bad bad bad choice.  For the past six months, I&rsquo;ve moved to Ubuntu (vim and tmux, and I have to give huge credit to <a href="http://www.rstudio.com/">RStudio</a> even though I&rsquo;m moving away from it) and not looked back.</p>
+
+<p>Today, in my frustration I decided to give package creation another shot.  And it worked!  To my delight, I was able to create the package, add some functions, compile it, load it, and start using my code in a clean re-usable and modular way.  Success!</p>
+
+<p>I have to give almost exclusive credit to Hadley Wickham and his super clear explaination of <a href="http://adv-r.had.co.nz/Package-basics.html">package authoring basics.</a></p>
+
+<p>Hadley has built some amazing package development tools, like <a href="https://github.com/hadley/devtools">devtools</a> which proports to make the package structure easier to use than not (and I believe it).  He actually says in the documentation that he&rsquo;ll send you a handwritten apology if you piss off the R-core team due to a <code>devtools</code> bug.  Sounds like a goal. :&ndash;)  He also has created a package for <a href="https://github.com/hadley/testthat">test-driven development</a> in R.  Another aspect of Ruby that I&rsquo;ve loved, but never used in R.  And I&rsquo;m not alone, I know that I&rsquo;m not.  I&rsquo;ve never met another R programmer face-to-face that uses unit tests.  Looking forward to it!  Finally, Hadley completes the grand slam (with Peter Danenberg and Manuel Eugster) with the <code>roxygen2</code> <a href="https://github.com/klutometis/roxygen">package</a>, which allows package developers to write self-documenting code.</p>
+
+<p>So today I&rsquo;m feeling great about getting my first package off the ground. I&rsquo;ve already spent a couple of hours breaking my old scripts into modules.  I&rsquo;m calling the package <code>treehouser</code> since it&rsquo;s for work, and follow&rsquo;s Hadley&rsquo;s naming convention.  I&rsquo;m hugely greatful to Hadley (I&rsquo;ve already gotten an amazing amount of milliage out of <code>ggplot2</code>).  Thank you!</p>
+]]></content>
+  </entry>
+  
+</feed>

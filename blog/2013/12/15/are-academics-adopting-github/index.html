@@ -1,0 +1,546 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Are academics adopting Github? - @statwonk</title>
+  <meta name="author" content="Christopher P. Peters">
+
+  
+  <meta name="description" content="As the partner of one of the &ldquo;Piled Higher, and Deeper&rdquo; (a Ph.D student) crowd and also a data
+scientist, I couldn&rsquo;t help but &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://statwonk.github.io/blog/2013/12/15/are-academics-adopting-github">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="@statwonk" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-1432163-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">@statwonk</a></h1>
+  
+    <h2>mostly data science, statistics and applications.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:statwonk.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/about/">About</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <link rel="stylesheet" type="text/css" href="stylesheets/diabetes.css">
+<link rel="stylesheet" type="text/css" href="stylesheets/braces.css">
+<div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Are Academics Adopting Github?</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-15T20:27:00-05:00" pubdate data-updated="true">Dec 15<span>th</span>, 2013</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>As the partner of one of the &ldquo;Piled Higher, and Deeper&rdquo; (a Ph.D student) crowd and also a data
+scientist, I couldn&rsquo;t help but introduce the &lsquo;git-way&rsquo; to Gentry.</p>
+
+<p>She&rsquo;s a geographer at Queen&rsquo;s university.  <strong>Like me, she&rsquo;s tech savvy, but coding
+is new to her.  Human geography, her field, is largely qualitative like the rest
+of the humanities.</strong></p>
+
+<p><a href="http://i.imgur.com/PDQx8tf.jpg"><span class='caption-wrapper right'><img class='caption' src='http://i.imgur.com/PDQx8tf.jpg' width='350' height='550' title='"An academic's console command cheat sheet"'><span class='caption-text'>&ldquo;An academic&rsquo;s console command cheat sheet&rdquo;</span></span></a></p>
+
+<p>At the end of her previous degree, I helped her cope with MS Word as it struggled under the weight of a 100+ page thesis.  We expanded the memory on her laptop.  She had &ldquo;sub-docs&rdquo; everywhere.  Bits and pieces of thoughts  put to the side, worked on independently, temporarily stricken.  But how to keep track of it all?</p>
+
+<p>I was learning Git at the same time on my path from statistician to data scientist.</p>
+
+<p>A year later, I&rsquo;ve come to use git and Github on a daily-basis.  I&rsquo;ve moved
+from an academic statistician to a commercial data scientist.  I work with a
+team of developers, and the Git-way has become really the only way for keeping track
+of my projects.</p>
+
+<p>Now, Gentry is working on her dissertation.  As a first step into coding, she&rsquo;s been learning LaTeX.  She&rsquo;s sold because she can annotate her own dissertation with comments.</p>
+
+<p>For those unfamiliar, LaTeX is a typsetting language. It creates beautiful documents with high-level style control. I recommend it to anyone that&rsquo;s ever tried to do formatting in
+MS Word. :&ndash;)</p>
+
+<p>LaTeX is also largely confined to academia.  I&rsquo;m not saying they don&rsquo;t exist,
+but I haven&rsquo;t met anyone that uses LaTeX who is not also an academic.</p>
+
+<p><strong>Now that Gentry was coding her dissertation, using Git and Github were open to
+her as tools.</strong></p>
+
+<p>I commonly relate Github to my non-programming friends by telling them it&rsquo;s the
+Facebook of code and programmers.  People instantly get this analogy.  &ldquo;Oh, so
+it lets you be social and interact?&rdquo;</p>
+
+<p>&ldquo;Precisely, but with code.&rdquo;</p>
+
+<p>Github is perfect for academics.  If they can use it by coding with LaTeX, even
+non-quantitative academics can work socially and openly (which is possibly more
+important).</p>
+
+<p>Gentry&rsquo;s sold and she&rsquo;s been been learning Git with my co-worker Tommy Morgan.  Tommy
+teaches an <a href="http://teamtreehouse.com/library/git-basics">excellent lesson on Git at Treehouse</a>.  As I was speaking with the Co-Founder Ryan Carson last week, I wondered out loud, &ldquo;how many academics out there are using Git (and Github)?&rdquo;</p>
+
+<p>Today, you get the benefit of that curiousity. <strong>Are academics adopting
+Github?</strong></p>
+
+<p>Assuming that LaTeX is a good proxy for academic use of Github, <strong>yes, academics
+have been creating Github repositories at basically an exponential rate since
+the beginning of 2011</strong> and the pace has really picked up since August 2013.
+(makes sense given that it&rsquo;s the school year).</p>
+
+<p><img class="center" src="http://i.imgur.com/bVA4Pa9.png"></p>
+
+<p>&hellip;and on a log-scale (notice that the growth is linear on this scale), that means
+it&rsquo;s exponential growth since the beginning of 2011.</p>
+
+<p><img class="center" src="http://i.imgur.com/hmI9mpb.png"></p>
+
+<p>This is just a raw look at the number of LaTeX repositories on Github by month.
+But I don&rsquo;t think the data needs to be spoiled by over-analysis.  As a next
+step, I&rsquo;d like to try forecasting the growth rate of these repositories by using
+the growth rates of other repositories.</p>
+
+<p>The idea of git and Github is so powerful, that I bet the academic community
+falls in love as much as the programming world has.  I also predict that those
+academics who adopt first will have a sigificant competitive advantage over
+their peers.  This is in an increasingly competitive job market where
+Ph.D-candidate after candidate hit a brick wall when searching for a
+tenure-track position.</p>
+
+<p>This data scientist is very proud of his human geographer for using version
+control in the place of snippets of MS Word documents.</p>
+
+<p>For those interested, the code I used to do this analysis was a mix of Python
+and R.  Here&rsquo;s the <a href="https://github.com/statwonk/academic-github-adoption">Github repo</a>, and relevant code snippets:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">requests</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">json</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">csv</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">time</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">times</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;2010&quot;</span><span class="p">,</span> <span class="s">&quot;2011&quot;</span><span class="p">,</span> <span class="s">&quot;2012&quot;</span><span class="p">]</span>
+</span><span class='line'><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">12</span><span class="p">):</span>
+</span><span class='line'>  <span class="n">times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="mi">2013</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;-&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)))</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">df</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span class='line'><span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">times</span><span class="p">:</span>
+</span><span class='line'>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+</span><span class='line'>        <span class="c"># print &quot;Sleeping 15 seconds ... &quot;</span>
+</span><span class='line'>        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">60</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;https://api.github.com/search/repositories?q=language:latex&amp;&#39;</span> <span class="o">+</span> \
+</span><span class='line'>                         <span class="s">&#39;page=&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39;&amp;per_page=100&#39;</span> <span class="o">+</span> \
+</span><span class='line'>                         <span class="s">&#39;&amp;created=&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">))</span>
+</span><span class='line'>        <span class="k">if</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">ok</span><span class="p">):</span>
+</span><span class='line'>            <span class="n">repoItem</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</span><span class='line'>            <span class="k">print</span> <span class="s">&quot;page &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;, year &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+</span><span class='line'>            <span class="k">for</span> <span class="n">repo</span> <span class="ow">in</span> <span class="n">repoItem</span><span class="p">[</span><span class="s">&#39;items&#39;</span><span class="p">]:</span>
+</span><span class='line'>                <span class="n">df</span><span class="p">[</span><span class="n">repo</span><span class="p">[</span><span class="s">&#39;name&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">repo</span><span class="p">[</span><span class="s">&#39;created_at&#39;</span><span class="p">]</span>
+</span><span class='line'>        <span class="k">else</span><span class="p">:</span> <span class="k">print</span> <span class="s">&quot;oh nos! Page &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot; has a problem&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;data.csv&#39;</span><span class="p">,</span> <span class="s">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">csvfile</span><span class="p">:</span>
+</span><span class='line'>    <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">csvfile</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span> <span class="s">&#39;,&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+</span><span class='line'>        <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>&hellip; admittedly pretty basic.  Just learning Python! Plotting was done in R&rsquo;s
+<code>ggplot2</code> library.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'>library<span class="p">(</span>ggplot2<span class="p">)</span>
+</span><span class='line'>library<span class="p">(</span>lubridate<span class="p">)</span>
+</span><span class='line'>library<span class="p">(</span>ggthemes<span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>df <span class="o">&lt;-</span> read.csv<span class="p">(</span><span class="s">&quot;data.csv&quot;</span><span class="p">,</span> header <span class="o">=</span> <span class="k-Variable">F</span><span class="p">)</span>
+</span><span class='line'>names<span class="p">(</span>df<span class="p">)</span> <span class="o">&lt;-</span> c<span class="p">(</span><span class="s">&quot;repo&quot;</span><span class="p">,</span> <span class="s">&quot;created_at&quot;</span><span class="p">)</span>
+</span><span class='line'>df<span class="o">$</span>created_at <span class="o">&lt;-</span> as.POSIXct<span class="p">(</span>df<span class="o">$</span>created_at<span class="p">)</span>
+</span><span class='line'>df <span class="o">&lt;-</span> df<span class="p">[</span>df<span class="o">$</span>created_at <span class="o">&lt;</span> max<span class="p">(</span>df<span class="o">$</span>created_at<span class="p">)</span> <span class="o">-</span> days<span class="p">(</span><span class="m">14</span><span class="p">),</span> <span class="p">]</span>
+</span><span class='line'>
+</span><span class='line'>ggplot<span class="p">(</span>df<span class="p">,</span> aes<span class="p">(</span>x <span class="o">=</span> created_at<span class="p">))</span> <span class="o">+</span>
+</span><span class='line'>  scale_y_continuous<span class="p">(</span>breaks <span class="o">=</span> seq<span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">150</span><span class="p">,</span> <span class="m">25</span><span class="p">))</span> <span class="o">+</span>
+</span><span class='line'>  geom_hline<span class="p">(</span>yintercept <span class="o">=</span> <span class="m">25</span><span class="p">,</span> colour <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> linetype<span class="o">=</span><span class="s">&quot;dotted&quot;</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>  geom_hline<span class="p">(</span>yintercept <span class="o">=</span> <span class="m">50</span><span class="p">,</span> colour <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> linetype<span class="o">=</span><span class="s">&quot;dotted&quot;</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>  geom_hline<span class="p">(</span>yintercept <span class="o">=</span> <span class="m">75</span><span class="p">,</span> colour <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> linetype<span class="o">=</span><span class="s">&quot;dotted&quot;</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>  geom_hline<span class="p">(</span>yintercept <span class="o">=</span> <span class="m">100</span><span class="p">,</span> colour <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> linetype<span class="o">=</span><span class="s">&quot;dotted&quot;</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>  geom_hline<span class="p">(</span>yintercept <span class="o">=</span> <span class="m">125</span><span class="p">,</span> colour <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> linetype<span class="o">=</span><span class="s">&quot;dotted&quot;</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>  geom_histogram<span class="p">(</span>colour <span class="o">=</span> <span class="s">&quot;black&quot;</span><span class="p">,</span> fill <span class="o">=</span> <span class="s">&quot;tan&quot;</span><span class="p">,</span> binwidth <span class="o">=</span> <span class="m">60</span><span class="o">*</span><span class="m">60</span><span class="o">*</span><span class="m">24</span><span class="o">*</span><span class="m">30.5</span><span class="p">,</span> stat <span class="o">=</span> <span class="s">&quot;bin&quot;</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>  xlab<span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>  ylab<span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>  ggtitle<span class="p">(</span><span class="s">&quot;Public Github Repositories\nwritten in LaTeX per Month&quot;</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>  theme_solarized<span class="p">(</span>light <span class="o">=</span> <span class="k-Variable">F</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>  theme<span class="p">(</span>axis.text.x <span class="o">=</span> element_text<span class="p">(</span>size <span class="o">=</span> <span class="m">32</span><span class="p">),</span>
+</span><span class='line'>        axis.text.y <span class="o">=</span> element_text<span class="p">(</span>size <span class="o">=</span> <span class="m">28</span><span class="p">),</span>
+</span><span class='line'>        plot.title <span class="o">=</span> element_text<span class="p">(</span>size <span class="o">=</span> <span class="m">30</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'>ggplot<span class="p">(</span>df<span class="p">,</span> aes<span class="p">(</span>x <span class="o">=</span> created_at<span class="p">))</span> <span class="o">+</span>
+</span><span class='line'>  scale_y_log10<span class="p">()</span> <span class="o">+</span>
+</span><span class='line'>  geom_hline<span class="p">(</span>yintercept <span class="o">=</span> <span class="m">10</span><span class="p">,</span> colour <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> linetype<span class="o">=</span><span class="s">&quot;dotted&quot;</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>  geom_hline<span class="p">(</span>yintercept <span class="o">=</span> <span class="m">100</span><span class="p">,</span> colour <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> linetype<span class="o">=</span><span class="s">&quot;dotted&quot;</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>  geom_histogram<span class="p">(</span>colour <span class="o">=</span> <span class="s">&quot;black&quot;</span><span class="p">,</span> fill <span class="o">=</span> <span class="s">&quot;tan&quot;</span><span class="p">,</span> binwidth <span class="o">=</span> <span class="m">60</span><span class="o">*</span><span class="m">60</span><span class="o">*</span><span class="m">24</span><span class="o">*</span><span class="m">30.5</span><span class="p">,</span> stat <span class="o">=</span> <span class="s">&quot;bin&quot;</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>  xlab<span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>  ylab<span class="p">(</span><span class="s">&quot;(Log scale)&quot;</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>  ggtitle<span class="p">(</span><span class="s">&quot;Public Github Repositories\nwritten in LaTeX per Month&quot;</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>  theme_solarized<span class="p">(</span>light <span class="o">=</span> <span class="k-Variable">F</span><span class="p">)</span> <span class="o">+</span>
+</span><span class='line'>  theme<span class="p">(</span>axis.title.y <span class="o">=</span> element_text<span class="p">(</span>size <span class="o">=</span> <span class="m">25</span><span class="p">),</span>
+</span><span class='line'>        axis.text.x <span class="o">=</span> element_text<span class="p">(</span>size <span class="o">=</span> <span class="m">32</span><span class="p">),</span>
+</span><span class='line'>        axis.text.y <span class="o">=</span> element_text<span class="p">(</span>size <span class="o">=</span> <span class="m">28</span><span class="p">),</span>
+</span><span class='line'>        plot.title <span class="o">=</span> element_text<span class="p">(</span>size <span class="o">=</span> <span class="m">30</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Christopher P. Peters</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-15T20:27:00-05:00" pubdate data-updated="true">Dec 15<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/python/'>Python</a>, <a class='category' href='/blog/categories/r/'>R,</a>, <a class='category' href='/blog/categories/academia/'>academia,</a>, <a class='category' href='/blog/categories/control/'>control,</a>, <a class='category' href='/blog/categories/git/'>git,</a>, <a class='category' href='/blog/categories/github/'>github,</a>, <a class='category' href='/blog/categories/version/'>version</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://statwonk.github.io/blog/2013/12/15/are-academics-adopting-github/" data-via="statwonk" data-counturl="http://statwonk.github.io/blog/2013/12/15/are-academics-adopting-github/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/11/24/washing-dishes-with-bayes/" title="Previous Post: Washing dishes with Bayes">&laquo; Washing dishes with Bayes</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/01/05/visualizing-diabetes-data/" title="Next Post: Visualizing my bionic partner's data">Visualizing my bionic partner's data &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <a href="http://stackoverflow.com/users/1408640/statwonk">
+<img src="http://stackoverflow.com/users/flair/1408640.png" width="208" height="58" alt="profile for Statwonk at Stack Overflow, Q&amp;A for professional and enthusiast programmers" title="profile for Statwonk at Stack Overflow, Q&amp;A for professional and enthusiast programmers">
+</a>
+<a href="https://twitter.com/statwonk" class="twitter-follow-button"
+  data-show-count="false" data-size="large">Follow @statwonk</a>
+<script>!function(d,s,id){var
+js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document,
+'script', 'twitter-wjs');</script>
+<br><br>
+<script src="//platform.linkedin.com/in.js"
+type="text/javascript"></script>
+<script type="IN/MemberProfile" data-id="http://www.linkedin.com/in/statwonk"
+data-format="hover" data-text="Christopher Peters"></script>
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/u/1/111908970327115332394/posts?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/statwonk">@statwonk</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'statwonk',
+            count: 8,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+<section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/01/18/resizing-tmux-panes-with-the-bind-key/">Resizing Tmux Panes With the Bind-key</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/01/05/visualizing-diabetes-data/">Visualizing My Bionic Partner's Data</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/12/15/are-academics-adopting-github/">Are Academics Adopting Github?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/11/24/washing-dishes-with-bayes/">Washing Dishes With Bayes</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/11/03/goodbye-scripts/">Goodbye Scripts, Hello R Packages!</a>
+      </li>
+    
+  </ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Christopher P. Peters -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'statwonk';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://statwonk.github.io/blog/2013/12/15/are-academics-adopting-github/';
+        var disqus_url = 'http://statwonk.github.io/blog/2013/12/15/are-academics-adopting-github/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

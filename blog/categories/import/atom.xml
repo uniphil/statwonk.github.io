@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: import | @statwonk]]></title>
+  <link href="http://statwonk.github.io/blog/categories/import/atom.xml" rel="self"/>
+  <link href="http://statwonk.github.io/"/>
+  <updated>2014-02-02T10:04:33-05:00</updated>
+  <id>http://statwonk.github.io/</id>
+  <author>
+    <name><![CDATA[Christopher P. Peters]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA['Reading CSV data into R']]></title>
+    <link href="http://statwonk.github.io/blog/2013/09/27/reading-csv-data-into-r/"/>
+    <updated>2013-09-27T12:27:00-04:00</updated>
+    <id>http://statwonk.github.io/blog/2013/09/27/reading-csv-data-into-r</id>
+    <content type="html"><![CDATA[<p>There are a variety of ways to import data into R.</p>
+
+<p>I most often work with CSV files.  In my experience, getting the file path
+correct is the trickiest part of bringing data into R.  I&rsquo;m going to show you how
+this works by first writing a piece of data to a CSV file and then we&rsquo;ll bring it back
+in.</p>
+
+<p>The <code>data()</code> function in R allows access to tons of toy datasets.  R programmers
+typically use these to <a href="http://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example">create reproducible examples</a> on sites like StackOverflow.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'>data<span class="p">(</span>mtcars<span class="p">)</span> <span class="c1"># first I get some toy data, so now we have access to the mtcars data.frame&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>head<span class="p">(</span>mtcars<span class="p">)</span> <span class="c1"># Let&amp;rsquo;s take a look&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>pre<span class="o">&gt;&lt;</span>code<span class="o">&gt;</span>              mpg cyl disp  hp drat    wt  qsec vs am gear carb
+</span><span class='line'><span class="o">&lt;/</span>code<span class="o">&gt;&lt;/</span>pre<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>Mazda RX4         <span class="m">21.0</span>   <span class="m">6</span>  <span class="m">160</span> <span class="m">110</span> <span class="m">3.90</span> <span class="m">2.620</span> <span class="m">16.46</span>  <span class="m">0</span>  <span class="m">1</span> <span class="m">4</span>    <span class="m">4</span>
+</span><span class='line'>Mazda RX4 Wag     <span class="m">21.0</span>   <span class="m">6</span>  <span class="m">160</span> <span class="m">110</span> <span class="m">3.90</span> <span class="m">2.875</span> <span class="m">17.02</span>  <span class="m">0</span>  <span class="m">1</span> <span class="m">4</span>    <span class="m">4</span>
+</span><span class='line'>Datsun <span class="m">710</span>        <span class="m">22.8</span>   <span class="m">4</span>  <span class="m">108</span>  <span class="m">93</span> <span class="m">3.85</span> <span class="m">2.320</span> <span class="m">18.61</span>  <span class="m">1</span>  <span class="m">1</span> <span class="m">4</span>    <span class="m">1</span>
+</span><span class='line'>Hornet <span class="m">4</span> Drive    <span class="m">21.4</span>   <span class="m">6</span>  <span class="m">258</span> <span class="m">110</span> <span class="m">3.08</span> <span class="m">3.215</span> <span class="m">19.44</span>  <span class="m">1</span>  <span class="m">0</span> <span class="m">3</span>    <span class="m">1</span>
+</span><span class='line'>Hornet Sportabout <span class="m">18.7</span>   <span class="m">8</span>  <span class="m">360</span> <span class="m">175</span> <span class="m">3.15</span> <span class="m">3.440</span> <span class="m">17.02</span>  <span class="m">0</span>  <span class="m">0</span> <span class="m">3</span>    <span class="m">2</span>
+</span><span class='line'>Valiant           <span class="m">18.1</span>   <span class="m">6</span>  <span class="m">225</span> <span class="m">105</span> <span class="m">2.76</span> <span class="m">3.460</span> <span class="m">20.22</span>  <span class="m">1</span>  <span class="m">0</span> <span class="m">3</span>    <span class="m">1</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>str<span class="p">(</span>mtcars<span class="p">)</span> <span class="c1"># we can see how each variable is coded here: num, chr, list, int, etc.&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;&amp;</span>lsquo<span class="p">;</span>data.frame<span class="o">&amp;</span>rsquo<span class="p">;</span><span class="o">:</span><span class="m">32</span> obs. of  <span class="m">11</span> variables<span class="o">:</span>
+</span><span class='line'>  <span class="o">$</span> mpg <span class="o">:</span> num  <span class="m">21</span> <span class="m">21</span> <span class="m">22.8</span> <span class="m">21.4</span> <span class="m">18.7</span> <span class="m">18.1</span> <span class="m">14.3</span> <span class="m">24.4</span> <span class="m">22.8</span> <span class="m">19.2</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'>  <span class="o">$</span> cyl <span class="o">:</span> num  <span class="m">6</span> <span class="m">6</span> <span class="m">4</span> <span class="m">6</span> <span class="m">8</span> <span class="m">6</span> <span class="m">8</span> <span class="m">4</span> <span class="m">4</span> <span class="m">6</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'>  <span class="o">$</span> disp<span class="o">:</span> num  <span class="m">160</span> <span class="m">160</span> <span class="m">108</span> <span class="m">258</span> <span class="m">360</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'>  <span class="o">$</span> hp  <span class="o">:</span> num  <span class="m">110</span> <span class="m">110</span> <span class="m">93</span> <span class="m">110</span> <span class="m">175</span> <span class="m">105</span> <span class="m">245</span> <span class="m">62</span> <span class="m">95</span> <span class="m">123</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'>  <span class="o">$</span> drat<span class="o">:</span> num  <span class="m">3.9</span> <span class="m">3.9</span> <span class="m">3.85</span> <span class="m">3.08</span> <span class="m">3.15</span> <span class="m">2.76</span> <span class="m">3.21</span> <span class="m">3.69</span> <span class="m">3.92</span> <span class="m">3.92</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'>  <span class="o">$</span> wt  <span class="o">:</span> num  <span class="m">2.62</span> <span class="m">2.88</span> <span class="m">2.32</span> <span class="m">3.21</span> <span class="m">3.44</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'>  <span class="o">$</span> qsec<span class="o">:</span> num  <span class="m">16.5</span> <span class="m">17</span> <span class="m">18.6</span> <span class="m">19.4</span> <span class="m">17</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'>  <span class="o">$</span> vs  <span class="o">:</span> num  <span class="m">0</span> <span class="m">0</span> <span class="m">1</span> <span class="m">1</span> <span class="m">0</span> <span class="m">1</span> <span class="m">0</span> <span class="m">1</span> <span class="m">1</span> <span class="m">1</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'>  <span class="o">$</span> am  <span class="o">:</span> num  <span class="m">1</span> <span class="m">1</span> <span class="m">1</span> <span class="m">0</span> <span class="m">0</span> <span class="m">0</span> <span class="m">0</span> <span class="m">0</span> <span class="m">0</span> <span class="m">0</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'>  <span class="o">$</span> gear<span class="o">:</span> num  <span class="m">4</span> <span class="m">4</span> <span class="m">4</span> <span class="m">3</span> <span class="m">3</span> <span class="m">3</span> <span class="m">3</span> <span class="m">4</span> <span class="m">4</span> <span class="m">4</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'>  <span class="o">$</span> carb<span class="o">:</span> num  <span class="m">4</span> <span class="m">4</span> <span class="m">1</span> <span class="m">1</span> <span class="m">2</span> <span class="m">1</span> <span class="m">4</span> <span class="m">2</span> <span class="m">2</span> <span class="m">4</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>So we have a <code>data.frame</code> with 32 observations and 11 variables.  Now let&rsquo;s
+use <code>write.csv()</code>. First we&rsquo;ll take a look at the inputs for the function. We
+can do this by putting a <code>?</code> in front of our empty function and running it with
+<code>R</code>.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'><span class="o">?</span>write.csv <span class="c1"># put a ? in front of any function to see its help page.</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>We&rsquo;re brought to <a href="http://stat.ethz.ch/R-manual/R-devel/library/utils/html/write.table.html">this page</a> which shows all the options we can use.  For now, we&rsquo;re only going to use the first two arguments (or parameters, which ever you prefer): <code>x</code>, some object and <code>file= ""</code>.</p>
+
+<p>If you use Linux, Mac, or Unix:
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'>write.csv<span class="p">(</span>mtcars<span class="p">,</span> file <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">~/</span>mtcars.csv<span class="o">&amp;</span>rdquo<span class="p">;)</span> <span class="c1"># &amp;lt;&amp;mdash; that file path would tell a Unix</span>
+</span><span class='line'>system to save the CSV <span class="kr">in</span> the home directory.
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>If you use Windows (Windows is not the OS you want to be programming R in, but
+it&rsquo;s okay to start on):
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'>write.csv<span class="p">(</span>mtcars<span class="p">,</span> file <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>C<span class="o">:/</span>Users<span class="o">/</span>Chris<span class="o">/</span>Documents<span class="o">/</span>mtcars.csv<span class="o">&amp;</span>rdquo<span class="p">;)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Notice the direction of the backslashes in the Windows path?  It&rsquo;s the opposite
+of how Windows does it.  The <code>\</code> character is considered special in R.  You can
+simply convert all the <code>\</code> backslashes that Windows shows you in a filepath to
+<code>/</code> forward slashes.  If you wanted to get fancy, you could actually put two
+backslashes, like this instead of single forward slashes <code>C:\\temp\\some-file.csv</code>.</p>
+
+<p>Both of these would work, <code>C:\\temp\\some-file.csv</code> and <code>C:/temp/some-file.csv</code>,
+while <code>C:\temp\some-file.csv</code> will not.</p>
+
+<p>Now that we know the exact path of the file, let&rsquo;s read it back in to R.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'>my_data_frame <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> read.csv<span class="p">(</span><span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">~/</span>mtcars.csv<span class="o">&amp;</span>rdquo<span class="p">;)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>or for Windows:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'>my_data_frame <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> read.csv<span class="p">(</span><span class="o">&amp;</span>ldquo<span class="p">;</span>C<span class="o">:/</span>Users<span class="o">/</span>Chris<span class="o">/</span>Documents<span class="o">/</span>mtcars.csv<span class="o">&amp;</span>rdquo<span class="p">;)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>I&rsquo;d encourage you to read <a href="http://stat.ethz.ch/R-manual/R-devel/library/utils/html/read.table.html">the documentation</a> on the <code>read.csv()</code>.</p>
+
+<p>You&rsquo;ll notice that when we take a look at the imported data the variables are
+coded differently.  This is because <code>read.csv()</code> looks at your data and makes a
+guess about which type they should be: <code>character</code>, <code>numeric</code>, <code>int</code>, <code>factor</code>,
+etc.  Commonly you&rsquo;ll want to control this with options like <code>stringsAsFactors =
+FALSE</code>.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'><span class="o">&amp;</span>lsquo<span class="p">;</span>data.frame<span class="o">&amp;</span>rsquo<span class="p">;</span><span class="o">:</span><span class="m">32</span> obs. of  <span class="m">12</span> variables<span class="o">:</span>
+</span><span class='line'>   <span class="o">$</span> X   <span class="o">:</span> Factor w<span class="o">/</span> <span class="m">32</span> levels <span class="o">&amp;</span>ldquo<span class="p">;</span>AMC Javelin<span class="o">&amp;</span>rdquo<span class="p">;,</span>..<span class="o">:</span> <span class="m">18</span> <span class="m">19</span> <span class="m">5</span> <span class="m">13</span> <span class="m">14</span> <span class="m">31</span> <span class="m">7</span> <span class="m">21</span> <span class="m">20</span> <span class="m">22</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'>   <span class="o">$</span> mpg <span class="o">:</span> num  <span class="m">21</span> <span class="m">21</span> <span class="m">22.8</span> <span class="m">21.4</span> <span class="m">18.7</span> <span class="m">18.1</span> <span class="m">14.3</span> <span class="m">24.4</span> <span class="m">22.8</span> <span class="m">19.2</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'>   <span class="o">$</span> cyl <span class="o">:</span> int  <span class="m">6</span> <span class="m">6</span> <span class="m">4</span> <span class="m">6</span> <span class="m">8</span> <span class="m">6</span> <span class="m">8</span> <span class="m">4</span> <span class="m">4</span> <span class="m">6</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'>   <span class="o">$</span> disp<span class="o">:</span> num  <span class="m">160</span> <span class="m">160</span> <span class="m">108</span> <span class="m">258</span> <span class="m">360</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'>   <span class="o">$</span> hp  <span class="o">:</span> int  <span class="m">110</span> <span class="m">110</span> <span class="m">93</span> <span class="m">110</span> <span class="m">175</span> <span class="m">105</span> <span class="m">245</span> <span class="m">62</span> <span class="m">95</span> <span class="m">123</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'>   <span class="o">$</span> drat<span class="o">:</span> num  <span class="m">3.9</span> <span class="m">3.9</span> <span class="m">3.85</span> <span class="m">3.08</span> <span class="m">3.15</span> <span class="m">2.76</span> <span class="m">3.21</span> <span class="m">3.69</span> <span class="m">3.92</span> <span class="m">3.92</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'>   <span class="o">$</span> wt  <span class="o">:</span> num  <span class="m">2.62</span> <span class="m">2.88</span> <span class="m">2.32</span> <span class="m">3.21</span> <span class="m">3.44</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'>   <span class="o">$</span> qsec<span class="o">:</span> num  <span class="m">16.5</span> <span class="m">17</span> <span class="m">18.6</span> <span class="m">19.4</span> <span class="m">17</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'>   <span class="o">$</span> vs  <span class="o">:</span> int  <span class="m">0</span> <span class="m">0</span> <span class="m">1</span> <span class="m">1</span> <span class="m">0</span> <span class="m">1</span> <span class="m">0</span> <span class="m">1</span> <span class="m">1</span> <span class="m">1</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'>   <span class="o">$</span> am  <span class="o">:</span> int  <span class="m">1</span> <span class="m">1</span> <span class="m">1</span> <span class="m">0</span> <span class="m">0</span> <span class="m">0</span> <span class="m">0</span> <span class="m">0</span> <span class="m">0</span> <span class="m">0</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'>   <span class="o">$</span> gear<span class="o">:</span> int  <span class="m">4</span> <span class="m">4</span> <span class="m">4</span> <span class="m">3</span> <span class="m">3</span> <span class="m">3</span> <span class="m">3</span> <span class="m">4</span> <span class="m">4</span> <span class="m">4</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span><span class='line'>   <span class="o">$</span> carb<span class="o">:</span> int  <span class="m">4</span> <span class="m">4</span> <span class="m">1</span> <span class="m">1</span> <span class="m">2</span> <span class="m">1</span> <span class="m">4</span> <span class="m">2</span> <span class="m">2</span> <span class="m">4</span> <span class="o">&amp;</span>hellip<span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>That&rsquo;s all for now.  Next time we&rsquo;ll do some basic visualization of this
+dataset.</p>
+]]></content>
+  </entry>
+  
+</feed>
