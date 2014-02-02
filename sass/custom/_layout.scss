@@ -21,10 +21,11 @@
 //$sidebar-width-wide: 300px;
 
 body > header h1 {
-      padding-left:2.5em;
+      padding-left:3em;
       text-align:right;
       @media only screen and (min-width: 432px) {
               text-align:left;
+	      padding-left:3em;
       }
       @media only screen and (min-width: 768px) {
               padding-left:3em;
@@ -39,7 +40,7 @@ body > header h2 {
       text-align:right;
       @media only screen and (min-width: 432px) {
               text-align:left;
-              padding-left:3.9em;
+              padding-left:6.9em;
       }
       @media only screen and (min-width: 768px) {
               padding-left:5em;
@@ -61,8 +62,12 @@ body > header h1:before {
       text-align:right;
       background-image:url('/images/headshot.jpeg');
       background-repeat:no-repeat;
+      @media only screen and (max-width: 432px) {
+              background-image:none;
+      } 
       @media only screen and (min-width: 432px) {
               top:.32em;
+	      left:.32em;
       }
       @media only screen and (min-width: 768px) {
               left:0em;
