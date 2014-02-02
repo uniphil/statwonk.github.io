@@ -5,11 +5,11 @@ date: 2014-02-02 11:03
 comments: true
 categories: node JavaScript R CoffeeScript closure first-class functions 
 ---
-I've recently been attracted to learning JavaScript by way of D3.js.  We all know from the Hacker News posts that 'ole JS has seen a huge revitalization and if you want to push data around with D3, you might as well take advantage of the powerful language its build on. So I started with [Crockford's](http://crockford.com) *JavaScript: The Good Parts.*
+I've recently been attracted to learning JavaScript by way of D3.js.  We all know from the Hacker News posts that ole JS has seen a huge revitalization and if you want to push data around with D3, you might as well take advantage of the powerful language its build on. So I started with [Crockford's](http://crockford.com) *JavaScript: The Good Parts.*
 
 Before reading the book, JavaScript was a means to take care of incidental calculations that may need to be done when creating graphs.  Dates are always a pain in the ass, so hey, "I might want some JS ability to work with them."
 
-Instead, I'm now looking at JavaScript as a potential alternative to R in certain spaces. Having the ability to jump from language to language (maybe even tie them together with a shell script) is a huge boon for data science work.  Each language has it's pros and cons and usually some mix of them is the best most efficient path from raw data to inights.
+Instead, I'm now looking at JavaScript as a potential alternative to R in certain spaces. Having the ability to jump from language to language (maybe even tie them together with a shell script) is a huge boon for data science work.  Each language has its pros and cons and usually some mix of them is the best most efficient path from raw data to inights.
 
 Only recently did I even realize that the browser is a compiler while reading up on Google's [V8 engine](https://code.google.com/p/v8/) and Mozilla's [Gecko engine](http://en.wikipedia.org/wiki/Gecko_(layout_engine\)). An aquantance at a recent party put it, " ... Google put tons of work into V8, it's a very efficient and speedy." This is pretty exciting in that it turns the browser from a space simply to display data to a computing engine.
 
