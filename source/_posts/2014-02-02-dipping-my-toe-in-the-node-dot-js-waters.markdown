@@ -3,7 +3,8 @@ layout: post
 title: "Dipping my toes in the JavaScript and Node.js waters"
 date: 2014-02-02 11:03
 comments: true
-categories: node JavaScript R CoffeeScript closure first-class functions 
+categories: node JavaScript R CoffeeScript closure first-class functions
+description: A look at using JavaScript and Node.js to work with anonymous functions (lambdas) and closures. I also talk about first-class functions in JavaScript and R.
 ---
 I've recently been attracted to learning JavaScript by way of D3.js.  We all know from the Hacker News posts that ole JS has seen a huge revitalization and if you want to push data around with D3, you might as well take advantage of the powerful language its build on. So I started with [Crockford's](http://crockford.com) *JavaScript: The Good Parts.*
 
