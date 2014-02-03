@@ -4,6 +4,7 @@ title: "Visualizing my bionic partner's data"
 date: 2014-01-05 16:44
 comments: true
 categories: diabetes, d3, javascript, visualization
+description: This is an analysis and data visualization of diabetes blood glucose data.
 ---
 
 <link rel="stylesheet" type="text/css" href="../../../../../stylesheets/diabetes.css">

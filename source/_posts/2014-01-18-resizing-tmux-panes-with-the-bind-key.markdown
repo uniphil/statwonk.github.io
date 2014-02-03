@@ -4,6 +4,7 @@ title: "Resizing tmux panes with the bind-key"
 date: 2014-01-18 14:06
 comments: true
 categories: tmux, resize panes 
+description: In this post I show how to resize tmux panes by reassigning bind-keys.
 ---
 
 <iframe align="center" width="600" height="450" src="//www.youtube.com/embed/oGs7h9ECL0Y" frameborder="0" allowfullscreen></iframe>

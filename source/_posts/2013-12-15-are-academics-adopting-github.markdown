@@ -4,6 +4,7 @@ title: "Are academics adopting Github?"
 date: 2013-12-15 20:27
 comments: true
 categories: academia, git, github, version control, R, Python
+description: Version control like git and github is becoming an important tool for academics.
 ---
 
 As the partner of one of the "Piled Higher, and Deeper" (a Ph.D student) crowd and also a data

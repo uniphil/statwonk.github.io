@@ -4,6 +4,7 @@ title: Goodbye scripts, hello R packages!
 date: 2013-11-03 20:21
 comments: true
 categories: R, programming, development, modularization
+description: Moving from long R scripts to consice and DRY R code requires using R packages.  Here I document my first interaction with creating packages.
 ---
 
 
