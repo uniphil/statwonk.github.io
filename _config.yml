@@ -57,7 +57,16 @@ default_asides: [asides/recent_posts.html, asides/stackoverflow.html, asides/twi
 # blog_index_asides:
 # post_asides:
 # page_asides:
-
+#
+# ----------------------- #
+#   Link log settings     #
+# ----------------------- #
+permalink_label: "&infin;"
+permalink_label_feed: "&infin; Permalink"
+linklog_marker: "&rarr;"
+linklog_marker_position: after
+linklog_marker_position_feed: after
+standard_post_marker:
 # ----------------------- #
 #   3rd Party Settings    #
 # ----------------------- #
