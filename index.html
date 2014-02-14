@@ -9,8 +9,7 @@
   <meta name="author" content="Christopher P. Peters">
 
   
-  <meta name="description" content="
-">
+  <meta name="description" content="I&rsquo;ve recently needed to process some pretty large log files. The files accrue about 2gb a week. For now, it&rsquo;s possible to read the files &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -85,6 +84,116 @@ js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';i
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      
+          <h1 class="entry-title"><a href="/blog/2014/02/14/mawk-or-awk/">Mawk or Awk? Munging Large Log Files</a></h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-14T09:26:00-05:00" pubdate data-updated="true">Feb 14<span>th</span>, 2014</time>
+        
+         | <a href="/blog/2014/02/14/mawk-or-awk/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&rsquo;ve recently needed to process some pretty large log files.  The files accrue about 2gb a week.  For now, it&rsquo;s possible to read the files into <code>R</code>, but very soon it won&rsquo;t be possible without a key-value store, or serving it off of a MySQL server <a href="http://brenocon.com/blog/2009/02/comparison-of-data-analysis-packages-r-matlab-scipy-excel-sas-spss-stata/#comment-5714">as Jim Porzack suggests.</a></p>
+
+<p>Big data is relatively new to me.  I don&rsquo;t have a Hadoop cluster to work on, so going that route doesn&rsquo;t get me much miliage right now. R only runs on one cluster by default, though, so I&rsquo;ve learned efficiency techniques can make amazing things possible locally.  Julia, for example shines:</p>
+
+<div class="figure">
+<table class="benchmarks">
+<colgroup>
+<col class="name"></col>
+<col class="relative" span="9"></col>
+</colgroup>
+<thead>
+<tr><td></td><th class="system">Fortran</th><th class="system">Julia</th><th class="system">Python</th><th class="system">R</th><th class="system">Matlab</th><th class="system">Octave</th><th class="system">Mathe-matica</th><th class="system">JavaScript</th><th class="system">Go</th></tr>
+<tr><td></td><td class="version">gcc 4.8.1
+</td><td class="version">0.2</td><td class="version">2.7.3
+</td><td class="version">3.0.2
+</td><td class="version">R2012a
+</td><td class="version">3.6.4
+</td><td class="version">8.0
+</td><td class="version">V8 3.7.12.22
+</td><td class="version">go1
+</td></tr>
+</thead>
+<tbody>
+<tr><th>fib</th><td class="data">0.26</td><td class="data">0.91</td><td class="data">30.37</td><td class="data">411.36</td><td class="data">1992.00</td><td class="data">3211.81</td><td class="data">64.46</td><td class="data">2.18</td><td class="data">1.03</td></tr>
+<tr><th>parse_int</th><td class="data">5.03</td><td class="data">1.60</td><td class="data">13.95</td><td class="data">59.40</td><td class="data">1463.16</td><td class="data">7109.85</td><td class="data">29.54</td><td class="data">2.43</td><td class="data">4.79</td></tr>
+<tr><th>quicksort</th><td class="data">1.11</td><td class="data">1.14</td><td class="data">31.98</td><td class="data">524.29</td><td class="data">101.84</td><td class="data">1132.04</td><td class="data">35.74</td><td class="data">3.51</td><td class="data">1.25</td></tr>
+<tr><th>mandel</th><td class="data">0.86</td><td class="data">0.85</td><td class="data">14.19</td><td class="data">106.97</td><td class="data">64.58</td><td class="data">316.95</td><td class="data">6.07</td><td class="data">3.49</td><td class="data">2.36</td></tr>
+<tr><th>pi_sum</th><td class="data">0.80</td><td class="data">1.00</td><td class="data">16.33</td><td class="data">15.42</td><td class="data">1.29</td><td class="data">237.41</td><td class="data">1.32</td><td class="data">0.84</td><td class="data">1.41</td></tr>
+<tr><th>rand_mat_stat</th><td class="data">0.64</td><td class="data">1.66</td><td class="data">13.52</td><td class="data">10.84</td><td class="data">6.61</td><td class="data">14.98</td><td class="data">4.52</td><td class="data">3.28</td><td class="data">8.12</td></tr>
+<tr><th>rand_mat_mul</th><td class="data">0.96</td><td class="data">1.01</td><td class="data">3.41</td><td class="data">3.98</td><td class="data">1.10</td><td class="data">3.41</td><td class="data">1.16</td><td class="data">14.60</td><td class="data">8.51</td></tr>
+</tbody>
+</table>
+
+<p class="caption"><b>Figure:</b>
+benchmark times relative to C (smaller is better, C performance = 1.0).
+</p>
+<p class="note">
+Source and all work attributable to: [http://julialang.org](http://julialang.org); C compiled by gcc 4.8.1, taking best timing from all optimization levels (-O0 through -O3).
+C, Fortran and Julia use <a href="https://github.com/xianyi/OpenBLAS">OpenBLAS</a> v0.2.8.
+The Python implementations of <tt>rand_mat_stat</tt> and <tt>rand_mat_mul</tt> use NumPy (v1.6.1) functions; the rest are pure Python implementations.<br/>
+Benchmarks can also be seen <a href="http://julialang.org/benchmarks/">here as a plot</a> created with <a href="https://github.com/dcjones/Gadfly.jl">Gadfly</a>.
+</p>
+</div>
+
+
+<p>However not shown on that table is <code>awk</code> or it&rsquo;s cousin <code>mawk</code>.  Since I&rsquo;m working with a log file that&rsquo;s mostly text, I want quick and easy ability to apply regular expressions.  The file is not fully structured, so it will need to be parsed.</p>
+
+<p>I&rsquo;ve recently been exploring Unix tools.  I moved from Windows to Unix about a year ago and haven&rsquo;t looked back.</p>
+
+<p>Last weekend I spent about three hours or so learning <code>awk</code> with this <a href="http://cm.bell-labs.com/cm/cs/awkbook/">gem of a book.</a></p>
+
+<p>I knew that the program was great at text processing, but I wasn&rsquo;t sure if there was something better.</p>
+
+<p>The response in this StackOverflow post pushed me over the edge:</p>
+
+<blockquote><p>If you quickly learn the basics of awk, you can indeed do amazing things on the command line.</p><p>But the real reason to learn awk is to have an excuse to read the superb book The AWK Programming Language by its authors Aho, Kernighan, and Weinberger. You would think, from the name, that it simply teaches you awk. Actually, that is just the beginning. Launching into the vast array of problems that can be tackled once one is using a concise scripting language that makes string manipulation easy — and awk was one of the first — it proceeds to teach the reader how to implement a database, a parser, an interpreter, and (if memory serves me) a compiler for a small project-specific computer language! If only they had also programmed an example operating system using awk, the book would have been a fairly complete survey introduction to computer science!</p><p>Famously clear and concise, like the original C Language book, it also is a wonderful example of friendly technical writing done right. Even the index is a piece of craftsmanship.</p><p>Awk? If you know it, you&#8217;ll use it at the command-line occasionally, but for anything larger you&#8217;ll feel trapped, unable to access the wider features of your system and the Internet that something like Python provides access to. But the book? You&#8217;ll always be glad you read it!</p></blockquote>
+
+
+<p>So I read the book.  The authors are right, the book is very clear and can allow you to do some pretty neat things with the language in an hour or so.</p>
+
+<p>As an aside, I&rsquo;m also very interested in <a href="http://en.wikipedia.org/wiki/Sed"><code>sed</code></a>.  It&rsquo;s a stream editor, which means that it applies rules to lines of data one at a time and can allow for the processing of HUGE files without actually opening them.</p>
+
+<p>After playing around with awk a bit, I came across <a href="http://brenocon.com/blog/2009/09/dont-mawk-awk-the-fastest-and-most-elegant-big-data-munging-language/">this confusing blog title</a>. The post compares mawk and awk in terms of speed.  <strong>mawk is way faster and can apparently beat C++ and Java-speed!</strong>  The post also talks about potential problems with mawk historically, but it appears that those have been fixed.  Also, I definitely plan to check operations with awk.</p>
+
+<p>See my simple speed comparisons below simply counting 5.2 million records:</p>
+
+<p><img class="center" src="http://i.imgur.com/BUeJ2LM.png"></p>
+
+<p>mawk is about double the speed of awk!</p>
+
+<p>Finally, the post mentions something exciting.  It imagines an awk on <a href="http://en.wikipedia.org/wiki/LLVM">LLVM</a>. Since the post is a couple years old, I did a little search and found what appears to be <a href="http://lawk.sourceforge.net/">an implementation!</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1422,124 +1531,6 @@ href="https://twitter.com/statwonk/statuses/393945145030094848">October 26,
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      
-          <h1 class="entry-title"><a href="/blog/2013/10/11/how-statisticians-lost-their-business-mojo/">How Statisticians Lost Their Business Mojo</a></h1>
-      
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-10-11T09:45:00-04:00" pubdate data-updated="true">Oct 11<span>th</span>, 2013</time>
-        
-         | <a href="/blog/2013/10/11/how-statisticians-lost-their-business-mojo/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>The manufacturers of Japan will tell you of W. Edwards Deming.  His famous 1950s lectures in Japan popularized quality control and continuous improvement. Six sigma strategy is born out of Deming&rsquo;s vision.</p>
-
-<p><img class="left" src="/images/deming.gif" width="200" height="250" title="Deming" ></p>
-
-<p>Consider when you drink your Guiness beer, world reknown, that it&rsquo;s recipe was
-perfected by a statistician, W. S. Gosset.  (He created the t-distribution in
-1909 to do this).</p>
-
-<p><span style="font-weight:bold">These statisticians had an amazing sense of business mojo.</span></p>
-
-<p>Since the 1960s, we [statisticians] have lost this mojo.  And the reason is that
-they&rsquo;ve followed R.A. Fisher&rsquo;s significance testing orthodoxy without question.  Fisher created the p-value we know today and many
-think of as synonymous with statistics.  P-value measures precision, not effect size.  That&rsquo;s it, that&rsquo;s why our business mojo is gone. P-values are the gate keeper to academic publication, NOT effect sizes.</p>
-
-<p>Effect size is &ldquo;oomph&rdquo;, &ldquo;mojo&rdquo;, &ldquo;level of profit&rdquo;, &ldquo;return on investment.&rdquo;  Yet
-statistician&rsquo;s obsession with the p-value and precision alone leads to
-hilariously inept results.</p>
-
-<p>Take this extract from a leading journal of management science,</p>
-
-<blockquote><p>Our first hypothesis suggested that visionary leadership was related to higher<br/>levels of internal and external cooperation.  We used two measures to represent<br/>internal and external cooperation, quality philosophy and supplier cooperation.<br/>Top management team involvement, our measure of visionary leadership, was<br/>significantly related to both quality philosophy (t = 10.80, p < .001) and<br/>suplier involvement (t = 7.59, p < .001). <span style="background-color: #ffe026">Therefore, Hypothesis I is supported.</span></p><footer><strong>Thomas J. Douglas and Lawrence D. Fredendall</strong> <cite>Decision Sciences 35 (3 Summer 2004)</cite></footer></blockquote>
-
-
-<p>Notice that there&rsquo;s zero mention of effect size?  Just that the p-values are
-less than 0.05.  Ironically this article is titled, &ldquo;Evaluating the Deming
-Management Model of Total Quality in Services.&rdquo;  So how much did Deming&rsquo;s model
-contribute to internal and external cooperation?  The authors never say.  They
-technically report it in one table, but never mention it as a conclusion of
-worth.</p>
-
-<p>This is what Deming says about significance testing,</p>
-
-<blockquote><p>Ther are many other books on so-called quality control [Deming wrote].  Each<br/>book has something good in it, and nearly every author is a friend and colleague<br/>of mine.  Most of the books nevertheless contain bear traps, such as reject<br/>limits, &#8230; areas under the normal curve, acceptangce sampling &#8230; The student<br/> should also <span style="background-color: #ffe026">avoid passages in books that treat confidence intervals and tests of<br/>significance, as such calculations have no appliction in analytic problems in science and industry.</span></p><footer><strong>Deming</strong> <cite><a href='http://books.google.com/books?id=JWLIRr_ROgAC&pg=PA116&lpg=PA116&dq=avoid+passages+in+books+that+treat+confidence+intervals+and+tests+ofsignificance,+as+such+calculations+have+no+appliction+in+analytic+problems+in+science+and+industry&source=bl&ots=GvsUzNkqEf&sig=B0otz7pBntQaNhEocw4hFaWBl_U&hl=en&sa=X&ei=KjJYUtjIEMTgyQGthICADw&redir_esc=y#v=onepage&q=avoid%20passages%20in%20books%20that%20treat%20confidence%20intervals%20and%20tests%20ofsignificance%2C%20as%20such%20calculations%20have%20no%20appliction%20in%20analytic%20problems%20in%20science%20and%20industry&f=false'>1982</a></cite></footer></blockquote>
-
-
-<p><span style="background-color:#ffe026">So how can statisticians get their business mojo back?</span></p>
-
-<p>As <a href="http://www.deirdremccloskey.com/docs/jsm.pdf">Stephen T. Ziliak and Deirdre McCloskey</a> note, &ldquo;Deming himself asked of any service or product how in the eyes of the user it could be improved. No matter.&rdquo;</p>
-
-<p>Fisher (p-value inventor) was very much against using measures of
-productivity, profit, reliability, etc. in science. He states the difference,</p>
-
-<blockquote><p>I am casting no contempt on acceptance procedures [read effect size, read profit, revenue, cost reduction], and I am thankful, whenever I travel by air, that the high level of precision and reliability required can really be achieved by such means.  But the logical differences between such an operation and the work of scientific discovery by physical or biological experimentation seem to me so wide that the analogy between them is not helpful, and the identification of the two sorts of operation is decidedly misleading.</p><footer><strong>Fisher</strong> <cite><a href='http://www.phil.vt.edu/dmayo/personal_website/Fisher-1955.pdf'>1955</a></cite></footer></blockquote>
-
-
-<p><span style="background-color: #ffe026">So Fisher is very quietly telling us, yes, my methods are not for
-business.  They&rsquo;re for science.</span>  The massive implications of that for past research aside, what can we replace Fisher&rsquo;s methods with?</p>
-
-<p>We want to apply newer more sophisticated methods that respect effect sizes, and will lead us to large gains for the company.  If we have to go back over the mechanism with Fisherian testing to enhance precision, fine.  Search for large effects first as Deming&rsquo;s philosophy suggests.</p>
-
-<p>We should also listen to Leo Brieman when he suggests, &ldquo;we can move away from exclusive dependence on data models and adopt a more diverse set of tools.&rdquo;  In his seminal,&ldquo;<a href="http://projecteuclid.org/DPubS?service=UI&amp;version=1.0&amp;verb=Display&amp;handle=euclid.ss/1009213726">Statistical Modeling: The Two Cultures</a>,&rdquo; he proposes statisticians be humble in the face of problems.  Refrain from imposing linearity and variable selection by tests of significance (p-values).  Instead minimize rates of error in held out test set data using a training set.  This opens up a HUGE new space to do analysis, all without p-values! Non-parametric methods like <a href="http://stackoverflow.com/questions/tagged/random-forest"><code>random-forest</code></a>, SVM, boosting, bagging, sophisticated loss functions (read maximizing revenue with respect to minimizing cost, profit!).</p>
-
-<p>There are other methods, too, such as Bayesian inference.  These methods are really great for giving you degrees of a belief in a hypothesis.  If you&rsquo;re working on marketing problems, like I am, then you know pretty well ahead of time what to expect in terms of a conversion rate.  And if you use Chi-square or t-tests to choose winners, you know that your experiments commonly require 200k plus participants to achieve statistical significance (p-value &lt; .05) even for a 20% increase in conversion rate.  Fishers methods are much much too coarse for web app startup companies.  Instead, we&rsquo;re more accepting of Type 1 error, which for us is that a marketing campaign under performs.  We are also looking for ostensibly the best user experience possible, or increase in profit, something meaninful in effect size: a game changer.  Amazingly, Fisher will miss these game changers.  Bayes methods allow us to use our prior knowledge that conversion rates range between 1 &ndash; 5% (and follow a beta distribution) to get much more sensitive tools.</p>
-
-<p><span style="font-weight:bold">Summary:</span></p>
-
-<ol>
-<li><span style="background-color:#ffe026">Don&rsquo;t use p-values and significance testing in business.</span></li>
-<li>Use algoritmic methods that minimize or maximize something that matters to you.</li>
-<li>Focus on the effect size (Deming).  Let&rsquo;s be certain of having a meaningful effect on our customer&rsquo;s experience, not just certainty about some effect regardless of of the size (Fisher).</li>
-</ol>
-
-
-<p>Who am I to critize 70+ years of statistical application?  I&rsquo;m a data
-scientist, a business statistician who tried to use Fisherian methods in
-business.  I have quickly learned that they&rsquo;re nearly useless here.
-Instead, there&rsquo;s a whole new set of useful tools that open up to the
-business analyst that realizes significance testing is nearly worthless.
-We&rsquo;ll no longer be plagued with a lack of observations.  W.S. Gosset was able to
-improve Guinness beer sometimes 3 obsevations at a time.  No longer will the
-practicioners (marketers, management, stakeholders) scratch their head when you
-come back with a 30% a/b test lift and a p-value of 0.60.  Neither will they be
-fluxomed when you say, &ldquo;look, the p-value is less than .05, we have a
-relationship here!&rdquo;  So, what?  If you are very certain that you convert 2 more
-users out of 1 billion clicks, who cares?  What Deming, Gossett, and now myself
-are looking for are large effect sizes, even if they vary!</p>
-
-<p>I have to give huge thanks to Stephen T. Ziliak and Deirdre N. McCloskey for
-nurturing my thoughts in this area, who&rsquo;s book, &ldquo;<a href="http://projecteuclid.org/DPubS?service=UI&amp;version=1.0&amp;verb=Display&amp;handle=euclid.ss/1009213726">The Cult of Statistical Significance</a>&rdquo; should revolutionize scientific statistical application, even if it fails to do so like those before those authors.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -1553,6 +1544,10 @@ nurturing my thoughts in this area, who&rsquo;s book, &ldquo;<a href="http://pro
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/02/14/mawk-or-awk/">Mawk or Awk? Munging Large Log Files</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2014/02/07/passing-a-rails-array-to-javascript/">Passing a Rails Array to JavaScript in Well-formed JSON</a>
