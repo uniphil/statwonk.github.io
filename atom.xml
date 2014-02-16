@@ -4,7 +4,7 @@
   <title><![CDATA[@statwonk]]></title>
   <link href="http://statwonk.github.io/atom.xml" rel="self"/>
   <link href="http://statwonk.github.io/"/>
-  <updated>2014-02-16T13:03:03-05:00</updated>
+  <updated>2014-02-16T13:04:00-05:00</updated>
   <id>http://statwonk.github.io/</id>
   <author>
     <name><![CDATA[Christopher P. Peters]]></name>
@@ -68,7 +68,7 @@
 
 <p>So there you have it!  This is a view into how a data scientist and Type 1 get along to manage diabetes!</p>
 
-<p><strong>Bonus</strong>: For other data nerds, for what it&rsquo;s worth, lognormal seems like a reasonable fit for this data.  Though we can see that values above 250 are over estimated, same for lows.  The lognormal is symetrical, so we might be able to do better with Weibull or something slightly asymmetric.  Up until now I&rsquo;ve been non-parametric, but I might start doing some parametric and/or survival analysis on the data.</p>
+<p><strong>Bonus</strong>: For other data nerds, for what it&rsquo;s worth, lognormal seems like a reasonable fit for this data.  Though we can see that values above 250 are over estimated, same for lows.  The lognormal is symetrical, so we might be able to do better with Weibull or something slightly asymmetric.  Up until now I&rsquo;ve used non-parametric methods, but I might start doing some parametric and/or survival analysis on the data.</p>
 
 <p><img class="center" src="http://i.imgur.com/gksDnOu.png"></p>
 ]]></content>
