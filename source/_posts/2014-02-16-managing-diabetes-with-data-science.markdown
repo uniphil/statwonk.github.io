@@ -6,7 +6,7 @@ comments: true
 categories: 
 ---
 
-As I've [written about before](http://statwonk.github.io/blog/2014/01/05/visualizing-diabetes-data/), my partner has Type 1 diabetes.  The disease is incredibly complex and its manifestation is the product of many environmental factors.  The way it basically works is called "basal / bolus".  Each non-diabetic person has a baseline rate of insulin (basal) produced by their pancreas.  When that person eats the pancreas gives a burst of insulin called a bolus.
+As I've [written about before](http://statwonk.github.io/blog/2014/01/05/visualizing-diabetes-data/), my partner has Type 1 diabetes.  The disease is incredibly complex and its manifestation is the product of many genetic and environmental factors.  The way it basically works is called "basal / bolus".  Each non-diabetic person has a baseline rate of insulin (basal) produced by their pancreas.  When that person eats the pancreas gives a burst of insulin called a bolus.
 
 The diabetic tries to emulate this process either with needles, pills, or an insulin pump. The side, [Diabetes Manager](http://diabetesmanager.pbworks.com/w/page/17680318/The%20Management%20of%20Type%201%20Diabetes%20) has a great pictoral representation of the process:
 
