@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Washing dishes with Bayes - @statwonk</title>
+  <title>Managing diabetes with data science - @statwonk</title>
   <meta name="author" content="Christopher P. Peters">
 
   
-  <meta name="description" content="Cutting board to wash. Where do I focus my effort? The dirtiest part.
-">
+  <meta name="description" content="As I&rsquo;ve written about before, my partner has Type 1 diabetes. The disease is incredibly complex and its manifestation is the product of many &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://statwonk.github.io/blog/2013/11/24/washing-dishes-with-bayes">
+  <link rel="canonical" href="http://statwonk.github.io/blog/2014/02/16/managing-diabetes-with-data-science">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="@statwonk" type="application/atom+xml">
@@ -90,7 +89,7 @@ js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';i
   
   <header>
     
-      <h1 class="entry-title">Washing Dishes With Bayes</h1>
+      <h1 class="entry-title">Managing Diabetes With Data Science</h1>
     
     
       <p class="meta">
@@ -106,7 +105,7 @@ js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';i
   
 
 
-<time datetime="2013-11-24T16:08:00-05:00" pubdate data-updated="true">Nov 24<span>th</span>, 2013</time>
+<time datetime="2014-02-16T11:13:00-05:00" pubdate data-updated="true">Feb 16<span>th</span>, 2014</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -115,11 +114,45 @@ js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';i
   </header>
 
 
-<div class="entry-content"><p>Cutting board to wash.</p>
+<div class="entry-content"><p>As I&rsquo;ve <a href="http://statwonk.github.io/blog/2014/01/05/visualizing-diabetes-data/">written about before</a>, my partner has Type 1 diabetes.  The disease is incredibly complex and its manifestation is the product of many environmental factors.  The way it basically works is called &ldquo;basal / bolus&rdquo;.  Each non-diabetic person has a baseline rate of insulin (basal) produced by their pancreas.  When that person eats the pancreas gives a burst of insulin called a bolus.</p>
 
-<p>Where do I focus my effort?</p>
+<p>The diabetic tries to emulate this process either with needles, pills, or an insulin pump. The side, <a href="http://diabetesmanager.pbworks.com/w/page/17680318/The%20Management%20of%20Type%201%20Diabetes%20">Diabetes Manager</a> has a great pictoral representation of the process:</p>
 
-<p>The dirtiest part.</p>
+<p><img class="center" src="http://i.imgur.com/cfu1OQZ.png"></p>
+
+<p>With an insulin pump there are a number of levers you can toggle to try and emulate the process above.</p>
+
+<p><strong>For example:</strong></p>
+
+<ol>
+<li>The basal rate (a little bit of insulin every 15 minutes).</li>
+<li>The size of the bolus given the size of the meal.</li>
+<li>Since boluses can be stacked (think several course meal), the rate that they have an effect is an input parameter.</li>
+<li>The degree to which your body responds to insulin (sensitivity), which determines the size of &ldquo;corrections&rdquo; necessary given blood glucose vs. target.</li>
+</ol>
+
+
+<p>There are other levers as well, but these are the main ones.</p>
+
+<p>Normally a diabetic would take their data to an endocrinologist that would change these levers every three months. However, we&rsquo;ve found that three months is much too long of a period to wait for adjustments.  The body&rsquo;s chemistry is complex, if one is stressed rates may need to go up, if one is eating more of a low-carb diet they may need to come down.</p>
+
+<p>This is where my expertise can be helpful.  My partner&rsquo;s pump records all kinds of measurements, one of which is every blood glucose reading taken.</p>
+
+<p>One way I&rsquo;ve found helpful in looking at the data is a cross-section on hour of the day.  Diabetic patterns move widly intra-day but there tends to be patterns over time. If you&rsquo;re &ldquo;high&rdquo; in the morning today, you&rsquo;re likely to be high in the morning tomorrow without some kind of intervention.  Or it could be a fluke.</p>
+
+<p>The following graph shows the last three month&rsquo;s of my partner&rsquo;s blood glucose data.  It shows a boxplot for each hour of the data and the actual data plotted behind. The desired range is between the horizontal red lines (70 &ndash; 200)  Also I added a blue smoother.  Each element has a purpose.  The data makes sure that I know where the data is sparse and boxplots may be less reliable.  The boxplots show me where 50% of the datais contained and gives me an idea of variance by hour.  Finally the blue smoother keeps me focused on the underlying trend:</p>
+
+<p><img class="center" src="http://i.imgur.com/AgfoJOC.png"></p>
+
+<p>It&rsquo;s really amazing how the eyes can pick out patterns without numeric statistics.  The boxplots above definitely use statistics, but they show the results in a visual way that makes things much clearer than I think a table would.</p>
+
+<p>This is where I need to insert my &lsquo;fairness explaination&rsquo;.  You may notice that my partner has some readings out of range (below 70 or 200 mg/dL). No diabetic can manage all of the factors they&rsquo;re faced with in a perfect manner.  No person is perfect. However, my partner by conventional medical standards is an A+ patient.</p>
+
+<p><strong>Recommendations</strong></p>
+
+<p>Given the data above, we plan to make a 10% &ndash; 15% increase in her basal rate starting 17h (5pm) to about 3h (3am). We want to make sure that we give plenty of time for this high amount to burn off before 7h (7am), when hypoglycemic events (&lt; 70) tend to start. Also, spikes after 5pm and 9pm are likely due to snacks, this indicates we need to increase the bolus size at this part of the day.</p>
+
+<p>So there you have it!  This is a view into how a data scientist and Type 1 get along to manage diabetes!</p>
 </div>
 
 
@@ -142,21 +175,15 @@ js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';i
   
 
 
-<time datetime="2013-11-24T16:08:00-05:00" pubdate data-updated="true">Nov 24<span>th</span>, 2013</time>
+<time datetime="2014-02-16T11:13:00-05:00" pubdate data-updated="true">Feb 16<span>th</span>, 2014</time>
       
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/bayesianism/'>bayesianism</a>, <a class='category' href='/blog/categories/poem/'>poem,</a>
-  
-</span>
 
 
     </p>
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://statwonk.github.io/blog/2013/11/24/washing-dishes-with-bayes/" data-via="statwonk" data-counturl="http://statwonk.github.io/blog/2013/11/24/washing-dishes-with-bayes/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://statwonk.github.io/blog/2014/02/16/managing-diabetes-with-data-science/" data-via="statwonk" data-counturl="http://statwonk.github.io/blog/2014/02/16/managing-diabetes-with-data-science/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -169,10 +196,8 @@ js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';i
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/11/03/goodbye-scripts/" title="Previous Post: Goodbye scripts, hello R packages!">&laquo; Goodbye scripts, hello R packages!</a>
+        <a class="basic-alignment left" href="/blog/2014/02/14/mawk-or-awk/" title="Previous Post: mawk or awk? Munging large log files">&laquo; mawk or awk? Munging large log files</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/12/15/are-academics-adopting-github/" title="Next Post: Are academics adopting Github?">Are academics adopting Github? &raquo;</a>
       
     </p>
   </footer>
@@ -332,8 +357,8 @@ data-format="hover" data-text="Christopher Peters"></script>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://statwonk.github.io/blog/2013/11/24/washing-dishes-with-bayes/';
-        var disqus_url = 'http://statwonk.github.io/blog/2013/11/24/washing-dishes-with-bayes/';
+        var disqus_identifier = 'http://statwonk.github.io/blog/2014/02/16/managing-diabetes-with-data-science/';
+        var disqus_url = 'http://statwonk.github.io/blog/2014/02/16/managing-diabetes-with-data-science/';
         var disqus_script = 'embed.js';
       
     (function () {
