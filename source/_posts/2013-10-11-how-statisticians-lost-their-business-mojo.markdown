@@ -32,7 +32,7 @@ levels of internal and external cooperation.  We used two measures to represent
 internal and external cooperation, quality philosophy and supplier cooperation.
 Top management team involvement, our measure of visionary leadership, was
 significantly related to both quality philosophy (t = 10.80, p < .001) and
-suplier involvement (t = 7.59, p < .001). <span style="background-color: #ffe026">Therefore, Hypothesis I is supported.</span>
+supplier involvement (t = 7.59, p < .001). <span style="background-color: #ffe026">Therefore, Hypothesis I is supported.</span>
 {% endblockquote %}
 
 Notice that there's zero mention of effect size?  Just that the p-values are
@@ -48,9 +48,9 @@ This is what Deming says about significance testing,
 Ther are many other books on so-called quality control [Deming wrote].  Each
 book has something good in it, and nearly every author is a friend and colleague
 of mine.  Most of the books nevertheless contain bear traps, such as reject
-limits, ... areas under the normal curve, acceptangce sampling ... The student
+limits, ... areas under the normal curve, acceptance sampling ... The student
  should also <span style="background-color: #ffe026">avoid passages in books that treat confidence intervals and tests of
-significance, as such calculations have no appliction in analytic problems in science and industry.</span>
+significance, as such calculations have no application in analytic problems in science and industry.</span>
 {% endblockquote %}
 
 <span style="background-color:#ffe026">So how can statisticians get their business mojo back?</span>
