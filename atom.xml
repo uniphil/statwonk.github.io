@@ -4,7 +4,7 @@
   <title><![CDATA[@statwonk]]></title>
   <link href="http://statwonk.github.io/atom.xml" rel="self"/>
   <link href="http://statwonk.github.io/"/>
-  <updated>2014-02-16T11:47:01-05:00</updated>
+  <updated>2014-02-16T11:55:11-05:00</updated>
   <id>http://statwonk.github.io/</id>
   <author>
     <name><![CDATA[Christopher P. Peters]]></name>
@@ -50,7 +50,7 @@
 
 <p>It&rsquo;s really amazing how the eyes can pick out patterns without numeric statistics.  The boxplots above definitely use statistics, but they show the results in a visual way that makes things much clearer than I think a table would.</p>
 
-<p>This is where I need to insert my &lsquo;fairness explaination&rsquo;.  You may notice that my partner has some readings out of range (below 70 or 200 mg/dL). No diabetic can manage all of the factors they&rsquo;re faced with in a perfect manner.  No person is perfect. However, my partner by conventional medical standards is an A+ patient.</p>
+<p>This is where I need to insert my &lsquo;fairness explaination&rsquo;.  You may notice that my partner has some readings out of range (below 70 or 200 mg/dL). No diabetic can manage all of the factors they&rsquo;re faced with in a perfect manner.  No person is perfect. The way I see what we&rsquo;re doing is trying to engineer the settings to be robust to what she&rsquo;s doing during the day.  Things that aren&rsquo;t very predictable like, is she shoveling snow today? Walking around campus? Skipping a snack to teach a lecturem, etc.</p>
 
 <p><strong>Recommendations</strong></p>
 
