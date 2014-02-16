@@ -4,7 +4,7 @@
   <title><![CDATA[Category: d3, | @statwonk]]></title>
   <link href="http://statwonk.github.io/blog/categories/d3/atom.xml" rel="self"/>
   <link href="http://statwonk.github.io/"/>
-  <updated>2014-02-16T13:41:37-05:00</updated>
+  <updated>2014-02-16T13:42:48-05:00</updated>
   <id>http://statwonk.github.io/</id>
   <author>
     <name><![CDATA[Christopher P. Peters]]></name>
@@ -33,7 +33,7 @@ pump that automatically doses insulin for her diabetes. The pump has a few
 
 <p>This is her exact model:</p>
 
-<p><img class="center <a" src="href="http://www.medtronicdiabetes.com/res/img/misc/revel-pump-introducing.png">http://www.medtronicdiabetes.com/res/img/misc/revel-pump-introducing.png</a>" width="400" height="400"></p>
+<p>{%img center <a href="http://www.medtronicdiabetes.com/res/img/misc/revel-pump-introducing.png">http://www.medtronicdiabetes.com/res/img/misc/revel-pump-introducing.png</a> 400 400 %}</p>
 
 <p>The beauty for a data scientist, like me, is that the pump records every blood
 glucose measurement.  Blood glucose is basically what keeps your body fueled
@@ -51,11 +51,11 @@ glucose.  If you&rsquo;re not diabetic, you probably never stray from 70 &ndash;
 see that many happen after 4pm, likely after lunch and/or dinner.  It makes
 sense, right?</p>
 
-<p><img class="center <a" src="href="http://i.imgur.com/S7HOtYb.png">http://i.imgur.com/S7HOtYb.png</a>"></p>
+<p>{% img center <a href="http://i.imgur.com/S7HOtYb.png">http://i.imgur.com/S7HOtYb.png</a> %}</p>
 
 <p>If you select values less than 70, you&rsquo;ll see three spikes.</p>
 
-<p><img class="center <a" src="href="http://i.imgur.com/4mUfiCg.png">http://i.imgur.com/4mUfiCg.png</a>"></p>
+<p>{%img center <a href="http://i.imgur.com/4mUfiCg.png">http://i.imgur.com/4mUfiCg.png</a> %}</p>
 
 <p>These are likely do to insulin mis-calculations before eating breakfast, lunch
 and a late snack. At these times, the diabetic gives themself a large quantity

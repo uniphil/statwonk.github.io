@@ -4,7 +4,7 @@
   <title><![CDATA[Category: statistics, | @statwonk]]></title>
   <link href="http://statwonk.github.io/blog/categories/statistics/atom.xml" rel="self"/>
   <link href="http://statwonk.github.io/"/>
-  <updated>2014-02-16T13:41:37-05:00</updated>
+  <updated>2014-02-16T13:42:48-05:00</updated>
   <id>http://statwonk.github.io/</id>
   <author>
     <name><![CDATA[Christopher P. Peters]]></name>
@@ -46,77 +46,42 @@ href="https://twitter.com/statwonk/statuses/393945145030094848">October 26,
 
 <p>Perhaps data mine to find not well known drug interactions?</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-</pre></td><td class='code'><pre><code class='r'><span class='line'><span class="o">&lt;/</span>p<span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span>h1<span class="o">&gt;</span>Author<span class="o">:</span> Christopher Peters<span class="o">&lt;/</span>h1<span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span>h1<span class="o">&gt;</span>Twitter<span class="o">:</span> <span class="o">@</span>statwonk<span class="o">&lt;/</span>h1<span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span>h1<span class="o">&gt;</span>Analysis of adverse reported drug events from FDA database<span class="o">&lt;/</span>h1<span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span>h1<span class="o">&gt;</span>Data found here<span class="o">:</span> <span class="o">&lt;</span>a href<span class="o">=</span><span class="s">&quot;http://www.fda.gov/Drugs/GuidanceComplianceRegulatoryInformation/Surveillance/AdverseDrugEffects/ucm082193.htm&quot;</span><span class="o">&gt;</span>http<span class="o">://</span>www.fda.gov<span class="o">/</span>Drugs<span class="o">/</span>GuidanceComplianceRegulatoryInformation<span class="o">/</span>Surveillance<span class="o">/</span>AdverseDrugEffects<span class="o">/</span>ucm082193.htm<span class="o">&lt;/</span>a<span class="o">&gt;&lt;/</span>h1<span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>patient <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> read.table<span class="p">(</span><span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">~/</span>Downloads<span class="o">/</span>faers_ascii_2012q4<span class="o">/</span>ascii<span class="o">/</span>demo12q4.txt<span class="o">&amp;</span>rdquo<span class="p">;,</span> sep <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">$&amp;</span>rdquo<span class="p">;,</span> header <span class="o">=</span> <span class="k-Variable">T</span><span class="p">,</span> fill <span class="o">=</span> <span class="k-Variable">T</span><span class="p">,</span> quote <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">&amp;</span>rdquo<span class="p">;)</span>
-</span><span class='line'>drug <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> read.table<span class="p">(</span><span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">~/</span>Downloads<span class="o">/</span>faers_ascii_2012q4<span class="o">/</span>ascii<span class="o">/</span>drug12q4.txt<span class="o">&amp;</span>rdquo<span class="p">;,</span> sep <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">$&amp;</span>rdquo<span class="p">;,</span> header <span class="o">=</span> <span class="k-Variable">T</span><span class="p">,</span> fill <span class="o">=</span> <span class="k-Variable">T</span><span class="p">,</span> quote <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">&amp;</span>rdquo<span class="p">;)</span>
-</span><span class='line'>reaction <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> read.table<span class="p">(</span><span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">~/</span>Downloads<span class="o">/</span>faers_ascii_2012q4<span class="o">/</span>ascii<span class="o">/</span>reac12q4.txt<span class="o">&amp;</span>rdquo<span class="p">;,</span> sep <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">$&amp;</span>rdquo<span class="p">;,</span> header <span class="o">=</span> <span class="k-Variable">T</span><span class="p">,</span> fill <span class="o">=</span> <span class="k-Variable">T</span><span class="p">,</span> quote <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">&amp;</span>rdquo<span class="p">;)</span>
-</span><span class='line'>outcomes <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> read.table<span class="p">(</span><span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">~/</span>Downloads<span class="o">/</span>faers_ascii_2012q4<span class="o">/</span>ascii<span class="o">/</span>outc12q4.txt<span class="o">&amp;</span>rdquo<span class="p">;,</span> sep <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">$&amp;</span>rdquo<span class="p">;,</span> header <span class="o">=</span> <span class="k-Variable">T</span><span class="p">,</span> fill <span class="o">=</span> <span class="k-Variable">T</span><span class="p">,</span> quote <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">&amp;</span>rdquo<span class="p">;)</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span>h1<span class="o">&gt;</span>You can find individual drugs and their reported adverse by specifying there names below<span class="o">&lt;/</span>h1<span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span>h1<span class="o">&gt;</span>There are commonly many names <span class="kr">for</span> a drug<span class="p">,</span> see below where I put three grepl statements<span class="o">&lt;/</span>h1<span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span>h1<span class="o">&gt;</span>with text like<span class="p">,</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>put drug brand name here<span class="o">&amp;</span>rdquo<span class="p">;,</span> you can replace this with drug brand names<span class="o">&lt;/</span>h1<span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span>h1<span class="o">&gt;</span>you can add or remote grepl statements depending on the number of brand names you want to look over.<span class="o">&lt;/</span>h1<span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>df <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> drug<span class="p">[(</span>grepl<span class="p">(</span><span class="o">&amp;</span>ldquo<span class="p">;</span>put drug brand name <span class="m">1</span> here<span class="o">&amp;</span>rdquo<span class="p">;,</span> drug<span class="o">$</span>drugname<span class="p">,</span> ignore.case <span class="o">=</span> <span class="k-Variable">T</span><span class="p">)</span> <span class="o">|</span> <span class="c1"># drug is likely to be entered as many different brand names, use this to capture them individually&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span>pre<span class="o">&gt;&lt;</span>code<span class="o">&gt;</span>          grepl<span class="p">(</span><span class="s">&quot;put drug brand name 2 here&quot;</span><span class="p">,</span> drug<span class="o">$</span>drugname<span class="p">,</span> ignore.case <span class="o">=</span> <span class="k-Variable">T</span><span class="p">)</span> <span class="o">|</span> <span class="c1"># enter drug names here, add or remove grepl() as needed with &quot;or&quot; statements \</span>
-</span><span class='line'>          grepl<span class="p">(</span><span class="s">&quot;put drug brand name 3 here ... add more grepl statements as necessary&quot;</span><span class="p">,</span> drug<span class="o">$</span>drugname<span class="p">,</span> ignore.case <span class="o">=</span> <span class="k-Variable">T</span><span class="p">))</span> <span class="o">&amp;</span>amp<span class="p">;</span> drug<span class="o">$</span>drug_seq <span class="o">==</span> <span class="m">1</span><span class="p">,</span> <span class="p">]</span> <span class="c1"># drug seq 1 == suspect drug of many possible that patient is taking</span>
-</span><span class='line'><span class="o">&lt;/</span>code<span class="o">&gt;&lt;/</span>pre<span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>df <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> merge<span class="p">(</span>df<span class="p">,</span> reaction<span class="p">,</span> by <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>primaryid<span class="o">&amp;</span>rdquo<span class="p">;)</span> <span class="c1"># let&amp;rsquo;s merge the drug file with reactions</span>
-</span><span class='line'>df <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> merge<span class="p">(</span>df<span class="p">,</span> outcomes<span class="p">,</span> by <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>primaryid<span class="o">&amp;</span>rdquo<span class="p">;)</span> <span class="c1"># we&amp;rsquo;ll bring in outcomes, too</span>
-</span><span class='line'>df2 <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> as.data.frame<span class="p">(</span>table<span class="p">(</span>df<span class="o">$</span>pt<span class="p">,</span> df<span class="o">$</span>outc_code<span class="p">))</span> <span class="c1"># count the instances of reactions and their outcomes</span>
-</span><span class='line'>names<span class="p">(</span>df2<span class="p">)</span> <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> c<span class="p">(</span><span class="o">&amp;</span>ldquo<span class="p">;</span>reaction<span class="o">&amp;</span>rdquo<span class="p">;,</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>outcome<span class="o">&amp;</span>rdquo<span class="p">;,</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>count<span class="o">&amp;</span>rdquo<span class="p">;)</span>
-</span><span class='line'>df2 <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> df2<span class="p">[</span>order<span class="p">(</span>df2<span class="o">$</span>count<span class="p">,</span> decreasing <span class="o">=</span> <span class="k-Variable">T</span><span class="p">),</span> <span class="p">]</span>
-</span><span class='line'>head<span class="p">(</span>df2<span class="p">,</span> <span class="m">20</span><span class="p">)</span> <span class="c1"># top 20 reactions</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock lang:r %}</p>
+
+<h1>Author: Christopher Peters</h1>
+
+<h1>Twitter: @statwonk</h1>
+
+<h1>Analysis of adverse reported drug events from FDA database</h1>
+
+<h1>Data found here: <a href="http://www.fda.gov/Drugs/GuidanceComplianceRegulatoryInformation/Surveillance/AdverseDrugEffects/ucm082193.htm">http://www.fda.gov/Drugs/GuidanceComplianceRegulatoryInformation/Surveillance/AdverseDrugEffects/ucm082193.htm</a></h1>
+
+<p>patient &lt;&ndash; read.table(&ldquo;~/Downloads/faers_ascii_2012q4/ascii/demo12q4.txt&rdquo;, sep = &ldquo;$&rdquo;, header = T, fill = T, quote = &ldquo;&rdquo;)
+drug &lt;&ndash; read.table(&ldquo;~/Downloads/faers_ascii_2012q4/ascii/drug12q4.txt&rdquo;, sep = &ldquo;$&rdquo;, header = T, fill = T, quote = &ldquo;&rdquo;)
+reaction &lt;&ndash; read.table(&ldquo;~/Downloads/faers_ascii_2012q4/ascii/reac12q4.txt&rdquo;, sep = &ldquo;$&rdquo;, header = T, fill = T, quote = &ldquo;&rdquo;)
+outcomes &lt;&ndash; read.table(&ldquo;~/Downloads/faers_ascii_2012q4/ascii/outc12q4.txt&rdquo;, sep = &ldquo;$&rdquo;, header = T, fill = T, quote = &ldquo;&rdquo;)</p>
+
+<h1>You can find individual drugs and their reported adverse by specifying there names below</h1>
+
+<h1>There are commonly many names for a drug, see below where I put three grepl statements</h1>
+
+<h1>with text like, &ldquo;put drug brand name here&rdquo;, you can replace this with drug brand names</h1>
+
+<h1>you can add or remote grepl statements depending on the number of brand names you want to look over.</h1>
+
+<p>df &lt;&ndash; drug[(grepl(&ldquo;put drug brand name 1 here&rdquo;, drug$drugname, ignore.case = T) | # drug is likely to be entered as many different brand names, use this to capture them individually</p>
+
+<pre><code>          grepl("put drug brand name 2 here", drug$drugname, ignore.case = T) | # enter drug names here, add or remove grepl() as needed with "or" statements \
+          grepl("put drug brand name 3 here ... add more grepl statements as necessary", drug$drugname, ignore.case = T)) &amp; drug$drug_seq == 1, ] # drug seq 1 == suspect drug of many possible that patient is taking
+</code></pre>
+
+<p>df &lt;&ndash; merge(df, reaction, by = &ldquo;primaryid&rdquo;) # let&rsquo;s merge the drug file with reactions
+df &lt;&ndash; merge(df, outcomes, by = &ldquo;primaryid&rdquo;) # we&rsquo;ll bring in outcomes, too
+df2 &lt;&ndash; as.data.frame(table(df$pt, df$outc_code)) # count the instances of reactions and their outcomes
+names(df2) &lt;&ndash; c(&ldquo;reaction&rdquo;, &ldquo;outcome&rdquo;, &ldquo;count&rdquo;)
+df2 &lt;&ndash; df2[order(df2$count, decreasing = T), ]
+head(df2, 20) # top 20 reactions
+{% endcodeblock %}</p>
 ]]></content>
   </entry>
   
@@ -125,26 +90,20 @@ href="https://twitter.com/statwonk/statuses/393945145030094848">October 26,
     <link href="http://statwonk.github.io/blog/2013/10/06/the-p-in-p-value-does-not-stand-for-profit-dot/"/>
     <updated>2013-10-06T16:26:00-04:00</updated>
     <id>http://statwonk.github.io/blog/2013/10/06/the-p-in-p-value-does-not-stand-for-profit-dot</id>
-    <content type="html"><![CDATA[<p>With the data science revolution, a whole new round of statisticans will be thrust into dealing with business problems.  What they&rsquo;re bound to find is that their beloved p-value is not going to stand up to the market as it does in academic journals.  For the past thirty years, the computational cost of the simple t-test has fallen dramatically, while the academic reward of publication has stayed the same.  The result is that more newly minted analysts than ever are confused by the blank stare they receive from their manager when they tell the manager, &ldquo;these two samples are statistically significantly different at the 5% level.&rdquo;  The manager asks, &ldquo;<span style="background-color:#ffe026">so what? How much profit will we make?</span>&rdquo; To which the statistician replies, &ldquo;<span style="background-color:#ffe026">the p-value is less than 5%.</span>&rdquo;</p>
+    <content type="html"><![CDATA[<p>With the data science revolution, a whole new round of statisticans will be thrust into dealing with business problems.  What they&rsquo;re bound to find is that their beloved p-value is not going to stand up to the market as it does in academic journals.  For the past thirty years, the computational cost of the simple t-test has fallen dramatically, while the academic reward of publication has stayed the same.  The result is that more newly minted analysts than ever are confused by the blank stare they receive from their manager when they tell the manager, &ldquo;these two samples are statistically significantly different at the 5% level.&rdquo;  The manager asks, &ldquo;{% raw %}<span style="background-color:#ffe026">so what? How much profit will we make?</span>{% endraw %}&rdquo; To which the statistician replies, &ldquo;{% raw %}<span style="background-color:#ffe026">the p-value is less than 5%.</span>{% endraw %}&rdquo;</p>
 
-<p><span style="background-color:#ffe026"></span>
+<p>{% raw %}<span style="background-color:#ffe026"></span>{% endraw %}
 Here&rsquo;s one simple example. Suppose I have two site variations I want to test.  I&rsquo;d like to test a new red button against our old green button.  I&rsquo;m interested to know if the red button outperforms green with respect to clicks.</p>
 
 <p>We&rsquo;ll simulate this with the <code>R</code> language.  We can draw a <code>0</code> or <code>1</code> with known probabilities to model our buttons.  I&rsquo;ll set the conversion rate for the green button at 3% and 5% for our new red button, a 66% percent improvement.</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='r'><span class='line'><span class="o">&lt;/</span>p<span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>old_green_button <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> rbinom<span class="p">(</span>n <span class="o">=</span> <span class="m">100000</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> p <span class="o">=</span> <span class="m">0.03</span><span class="p">)</span>
-</span><span class='line'>new_red_button <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> rbinom<span class="p">(</span>n <span class="o">=</span> <span class="m">100000</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> p <span class="o">=</span> <span class="m">0.05</span><span class="p">)</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>prop.test<span class="p">(</span>table<span class="p">(</span>old_green_button<span class="p">,</span> new_red_button<span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock lang:r %}</p>
+
+<p>old_green_button &lt;&ndash; rbinom(n = 100000, 1, p = 0.03)
+new_red_button &lt;&ndash; rbinom(n = 100000, 1, p = 0.05)</p>
+
+<p>prop.test(table(old_green_button, new_red_button))
+{% endcodeblock %}</p>
 
 <p>In the code above, I first randomly generate <code>100k</code> binomial outcomes (really bernoulli r.v.) for each button. Remember, the conversion rates are 3% and 5%, respectively.  Next, I apply the Chi-square test for equality of proportions.  This is the standard statistical test for testing if two proportions (conv. rates) come from the same population.  That is, should I expect these two buttons to yield a different conversion rate (and profit) going forward?</p>
 
@@ -152,112 +111,61 @@ Here&rsquo;s one simple example. Suppose I have two site variations I want to te
 better than the green button, our p-value sits at 90%, well above the
 traditional statistician&rsquo;s 5% p-value cutoff.</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='r'><span class='line'><span class="o">&lt;/</span>p<span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span><span class="m">2</span><span class="o">-</span>sample test <span class="kr">for</span> equality of proportions with continuity correction<span class="o">&lt;/</span>p<span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>data<span class="o">:</span>  table<span class="p">(</span>old_green_button<span class="p">,</span> new_red_button<span class="p">)</span>
-</span><span class='line'>X<span class="o">-</span>squared <span class="o">=</span> <span class="m">0.0185</span><span class="p">,</span> df <span class="o">=</span> <span class="m">1</span><span class="p">,</span> p<span class="o">-</span>value <span class="o">=</span> <span class="m">0.8919</span>
-</span><span class='line'>alternative hypothesis<span class="o">:</span> two.sided
-</span><span class='line'><span class="m">95</span> percent confidence interval<span class="o">:</span>
-</span><span class='line'> <span class="m">-0.008662492</span>  <span class="m">0.007240556</span>
-</span><span class='line'> sample estimates<span class="o">:&lt;/</span>p<span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span>pre<span class="o">&gt;&lt;</span>code<span class="o">&gt;</span>prop <span class="m">1</span>    prop <span class="m">2</span>
-</span><span class='line'><span class="m">0.9498581</span> <span class="m">0.9505691</span>
-</span><span class='line'><span class="o">&lt;/</span>code<span class="o">&gt;&lt;/</span>pre<span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock lang:r %}</p>
+
+<p>2-sample test for equality of proportions with continuity correction</p>
+
+<p>data:  table(old_green_button, new_red_button)
+X-squared = 0.0185, df = 1, p-value = 0.8919
+alternative hypothesis: two.sided
+95 percent confidence interval:
+ -0.008662492  0.007240556
+ sample estimates:</p>
+
+<pre><code>prop 1    prop 2 
+0.9498581 0.9505691 
+</code></pre>
+
+<p>{% endcodeblock %}</p>
 
 <p>Now, I&rsquo;ll repeat this experiment 1000 times and show you how the p-value
 shakes out.</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-</pre></td><td class='code'><pre><code class='r'><span class='line'>library<span class="p">(</span>ggplot2<span class="p">)</span>
-</span><span class='line'>library<span class="p">(</span>ggthemes<span class="p">)</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>times <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> <span class="m">1000</span>
-</span><span class='line'>p_values <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> rep<span class="p">(</span><span class="kc">NA</span><span class="p">,</span> times<span class="p">)</span>
-</span><span class='line'><span class="kr">for</span><span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span>times<span class="p">){</span>
-</span><span class='line'>  set.seed<span class="p">(</span>i<span class="p">)</span>
-</span><span class='line'>  old_green_button <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> rbinom<span class="p">(</span>n <span class="o">=</span> <span class="m">100000</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> p <span class="o">=</span> <span class="m">0.03</span><span class="p">)</span>
-</span><span class='line'>  new_red_button <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> rbinom<span class="p">(</span><span class="m">100000</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> p <span class="o">=</span> <span class="m">0.05</span><span class="p">)</span>
-</span><span class='line'>  p_values<span class="p">[</span>i<span class="p">]</span> <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> prop.test<span class="p">(</span>table<span class="p">(</span>old_green_button<span class="p">,</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span>pre<span class="o">&gt;&lt;</span>code<span class="o">&gt;</span>                             new_red_button<span class="p">))</span><span class="o">$</span>p.value
-</span><span class='line'><span class="o">&lt;/</span>code<span class="o">&gt;&lt;/</span>pre<span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>  print<span class="p">(</span>i<span class="p">)</span>
-</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>df <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> as.data.frame<span class="p">(</span>p_values<span class="p">)</span>
-</span><span class='line'>ggplot<span class="p">(</span>df<span class="p">,</span> aes<span class="p">(</span>x <span class="o">=</span> p_values<span class="p">))</span> <span class="o">+</span>
-</span><span class='line'>  geom_density<span class="p">(</span>fill <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>grey50<span class="o">&amp;</span>rdquo<span class="p">;,</span> alpha <span class="o">=</span> <span class="m">0.5</span><span class="p">)</span> <span class="o">+</span>
-</span><span class='line'>  geom_vline<span class="p">(</span>xintercept <span class="o">=</span> <span class="m">0.05</span><span class="p">,</span> colour <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>red<span class="o">&amp;</span>rdquo<span class="p">;,</span> size <span class="o">=</span> <span class="m">2</span><span class="p">)</span> <span class="o">+</span>
-</span><span class='line'>  ggtitle<span class="p">(</span><span class="o">&amp;</span>ldquo<span class="p">;</span>Only <span class="m">6</span>% of p<span class="o">-</span>values are less than <span class="m">0.05</span><span class="o">&amp;</span>rdquo<span class="p">;)</span> <span class="o">+&lt;/</span>p<span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span>pre<span class="o">&gt;&lt;</span>code<span class="o">&gt;</span>ylab<span class="p">(</span><span class="s">&quot;Density&quot;</span><span class="p">)</span> <span class="o">+</span>
-</span><span class='line'>xlab<span class="p">(</span><span class="s">&quot;P-values&quot;</span><span class="p">)</span> <span class="o">+</span>
-</span><span class='line'><span class="o">&lt;/</span>code<span class="o">&gt;&lt;/</span>pre<span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>  theme_few<span class="p">()</span> <span class="o">+</span>
-</span><span class='line'>  theme<span class="p">(</span>axis.text <span class="o">=</span> element_text<span class="p">(</span>size <span class="o">=</span> <span class="m">15</span><span class="p">),</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span>pre<span class="o">&gt;&lt;</span>code<span class="o">&gt;</span>    plot.title <span class="o">=</span> element_text<span class="p">(</span>size <span class="o">=</span> <span class="m">20</span><span class="p">))</span>
-</span><span class='line'><span class="o">&lt;/</span>code<span class="o">&gt;&lt;/</span>pre<span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock lang:r %}
+library(ggplot2)
+library(ggthemes)</p>
+
+<p>times &lt;&ndash; 1000
+p_values &lt;&ndash; rep(NA, times)
+for(i in 1:times){
+  set.seed(i)
+  old_green_button &lt;&ndash; rbinom(n = 100000, 1, p = 0.03)
+  new_red_button &lt;&ndash; rbinom(100000, 1, p = 0.05)
+  p_values[i] &lt;&ndash; prop.test(table(old_green_button,</p>
+
+<pre><code>                             new_red_button))$p.value
+</code></pre>
+
+<p>  print(i)
+}</p>
+
+<p>df &lt;&ndash; as.data.frame(p_values)
+ggplot(df, aes(x = p_values)) +
+  geom_density(fill = &ldquo;grey50&rdquo;, alpha = 0.5) +
+  geom_vline(xintercept = 0.05, colour = &ldquo;red&rdquo;, size = 2) +
+  ggtitle(&ldquo;Only 6% of p-values are less than 0.05&rdquo;) +</p>
+
+<pre><code>ylab("Density") +
+xlab("P-values") +
+</code></pre>
+
+<p>  theme_few() +
+  theme(axis.text = element_text(size = 15),</p>
+
+<pre><code>    plot.title = element_text(size = 20))
+</code></pre>
+
+<p>{% endcodeblock %}</p>
 
 <p>The result shows that only 6% of p-values will be less than 0.05%!  The
 sacred statistical decision rule would have you leave a 66% percent

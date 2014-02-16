@@ -4,7 +4,7 @@
   <title><![CDATA[Category: knitr, | @statwonk]]></title>
   <link href="http://statwonk.github.io/blog/categories/knitr/atom.xml" rel="self"/>
   <link href="http://statwonk.github.io/"/>
-  <updated>2014-02-16T13:41:37-05:00</updated>
+  <updated>2014-02-16T13:42:48-05:00</updated>
   <id>http://statwonk.github.io/</id>
   <author>
     <name><![CDATA[Christopher P. Peters]]></name>
@@ -27,89 +27,52 @@ that I answered: <a href="http://stackoverflow.com/questions/18936330/placing-kn
 
 <p>The author was having difficulties with this code snippet:</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-</pre></td><td class='code'><pre><code class='latex'><span class='line'><span class="k">\documentclass</span><span class="nb">{</span>article<span class="nb">}</span>
-</span><span class='line'><span class="k">\usepackage</span><span class="nb">{</span>float<span class="nb">}</span>&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;<span class="k">\begin</span><span class="nb">{</span>document<span class="nb">}</span>
-</span><span class='line'>  <span class="k">\begin</span><span class="nb">{</span>table<span class="nb">}</span>&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;pre&gt;&lt;code&gt;<span class="k">\begin</span><span class="nb">{</span>tabular<span class="nb">}{</span>ll<span class="nb">}</span>
-</span><span class='line'>A <span class="nb">&amp;</span>amp;
-</span><span class='line'><span class="nb">&amp;</span>lt;<span class="nb">&amp;</span>lt;results1<span class="nb">&amp;</span>gt;<span class="nb">&amp;</span>gt;=
-</span><span class='line'>plot(1,1)
-</span><span class='line'>@ <span class="k">\\</span>
-</span><span class='line'>B <span class="nb">&amp;</span>amp;
-</span><span class='line'><span class="nb">&amp;</span>lt;<span class="nb">&amp;</span>lt;results2<span class="nb">&amp;</span>gt;<span class="nb">&amp;</span>gt;=
-</span><span class='line'>table(rnorm(10))
-</span><span class='line'>@
-</span><span class='line'><span class="k">\end</span><span class="nb">{</span>tabular<span class="nb">}</span>
-</span><span class='line'>&lt;/code&gt;&lt;/pre&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;  <span class="k">\end</span><span class="nb">{</span>table<span class="nb">}</span>
-</span><span class='line'><span class="k">\end</span><span class="nb">{</span>document<span class="nb">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock lang:latex %}
+\documentclass{article}
+\usepackage{float}</p>
+
+<p>\begin{document}
+  \begin{table}</p>
+
+<pre><code>\begin{tabular}{ll}
+A &amp; 
+&lt;&lt;results1&gt;&gt;=
+plot(1,1)
+@ \\
+B &amp; 
+&lt;&lt;results2&gt;&gt;=
+table(rnorm(10))
+@
+\end{tabular}
+</code></pre>
+
+<p>  \end{table}
+\end{document}
+{% endcodeblock %}</p>
 
 <p>My solution was to move <code>\\</code> from line 10 to its own line, change the first chunk&rsquo;s option <code>echo=FALSE</code> to false. I also put the second bit of R code in an inline block using the <code>\Sexpr{}</code> command and appended a new line break <code>\\</code>.</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class='latex'><span class='line'><span class="k">\documentclass</span><span class="nb">{</span>article<span class="nb">}</span>
-</span><span class='line'><span class="k">\usepackage</span><span class="nb">{</span>float<span class="nb">}</span>&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;<span class="k">\begin</span><span class="nb">{</span>document<span class="nb">}</span>
-</span><span class='line'>  <span class="k">\begin</span><span class="nb">{</span>table<span class="nb">}</span>&lt;/p&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;pre&gt;&lt;code&gt;<span class="k">\begin</span><span class="nb">{</span>tabular<span class="nb">}{</span>ll<span class="nb">}</span>
-</span><span class='line'>A <span class="nb">&amp;</span>amp;
-</span><span class='line'><span class="nb">&amp;</span>lt;<span class="nb">&amp;</span>lt;results1, echo=FALSE<span class="nb">&amp;</span>gt;<span class="nb">&amp;</span>gt;=
-</span><span class='line'>plot(1,1)
-</span><span class='line'>@
-</span><span class='line'><span class="k">\\</span>
-</span><span class='line'>B <span class="nb">&amp;</span>amp; <span class="k">\Sexpr</span><span class="nb">{</span>table(rnorm(10))<span class="nb">}</span>
-</span><span class='line'><span class="k">\\</span>
-</span><span class='line'><span class="k">\end</span><span class="nb">{</span>tabular<span class="nb">}</span>
-</span><span class='line'>&lt;/code&gt;&lt;/pre&gt;
-</span><span class='line'>
-</span><span class='line'>&lt;p&gt;  <span class="k">\end</span><span class="nb">{</span>table<span class="nb">}</span>
-</span><span class='line'><span class="k">\end</span><span class="nb">{</span>document<span class="nb">}</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+<p>{% codeblock lang:latex %}
+\documentclass{article}
+\usepackage{float}</p>
+
+<p>\begin{document}
+  \begin{table}</p>
+
+<pre><code>\begin{tabular}{ll}
+A &amp; 
+&lt;&lt;results1, echo=FALSE&gt;&gt;=
+plot(1,1)
+@ 
+\\
+B &amp; \Sexpr{table(rnorm(10))}
+\\
+\end{tabular}
+</code></pre>
+
+<p>  \end{table}
+\end{document}
+{% endcodeblock %}</p>
 
 <p>Enjoyed playing with this little chunk of knitr!</p>
 ]]></content>
