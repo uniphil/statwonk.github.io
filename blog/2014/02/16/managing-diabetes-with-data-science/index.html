@@ -146,7 +146,17 @@ js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';i
 
 <p>It&rsquo;s really amazing how the eyes can pick out patterns without numeric statistics.  The boxplots above definitely use statistics, but they show the results in a visual way that makes things much clearer than I think a table would.</p>
 
-<p>This is where I need to insert my &lsquo;fairness explaination&rsquo;.  You may notice that my partner has some readings out of range (below 70 or 200 mg/dL). No diabetic can manage all of the factors they&rsquo;re faced with in a perfect manner.  No person is perfect. The way I see what we&rsquo;re doing is trying to engineer the settings to be robust to what she&rsquo;s doing during the day.  Things that aren&rsquo;t very predictable like, is she shoveling snow today? Walking around campus? Skipping a snack to teach a lecturem, etc.</p>
+<p>This is where I need to insert my &lsquo;fairness explaination&rsquo;.  You may notice that my partner has some readings out of range (below 70 or 200 mg/dL). No diabetic can manage all of the factors they&rsquo;re faced with in a perfect manner.  No person is perfect. The way I see what we&rsquo;re doing is trying to engineer the settings to be robust to what she&rsquo;s doing during the day.  Things that aren&rsquo;t very predictable like, is she shoveling snow today? Walking around campus? Skipping a snack to teach a lecture, etc.</p>
+
+<p>We can also look at the empirical cumulative density functions of the blood glucose readings.  This is the statistician&rsquo;s version of percentiles.  I&rsquo;ve broken down my partner&rsquo;s day into four parts: morning, afternoon, evening, overnight.  Then I plot the percentiles for each of those bins.  From this we can see the if we want to reduce highs, we should probably start with the evening and overnight.  About 25% of readings in these times are high readings.</p>
+
+<p><img class="center" src="http://i.imgur.com/HhZE827.png"></p>
+
+<p>We can also see that lows happen less than 5% of readings for each time period.  Let&rsquo;s zoom in on this area.</p>
+
+<p><img class="center" src="http://i.imgur.com/5p4FUNZ.png"></p>
+
+<p>From this we can see that lows are most likely to happen in the afternoon or evening and least likely in the morning.  This is an important aspect of diabetes, the more you clamp down on highs, the more you increase the likelihood of lows.  We plan to raise the basal rate at night, but we might want to simultaneously reduce the bolus&rsquo;s &ldquo;carb ratio&rdquo;. Lows are frequently due to miscalculations of how many carbs you&rsquo;re putting into your body.  By being more aggressive with the basal rate and less aggresive with the bolus&rsquo;s carb ratio, we might be able to knock out some of these highs while avoiding increased hypoglycemic events.</p>
 
 <p><strong>Recommendations</strong></p>
 
