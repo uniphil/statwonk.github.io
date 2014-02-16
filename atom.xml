@@ -4,7 +4,7 @@
   <title><![CDATA[@statwonk]]></title>
   <link href="http://statwonk.github.io/atom.xml" rel="self"/>
   <link href="http://statwonk.github.io/"/>
-  <updated>2014-02-16T11:42:33-05:00</updated>
+  <updated>2014-02-16T11:47:01-05:00</updated>
   <id>http://statwonk.github.io/</id>
   <author>
     <name><![CDATA[Christopher P. Peters]]></name>
@@ -20,7 +20,7 @@
     <id>http://statwonk.github.io/blog/2014/02/16/managing-diabetes-with-data-science</id>
     <content type="html"><![CDATA[<p>As I&rsquo;ve <a href="http://statwonk.github.io/blog/2014/01/05/visualizing-diabetes-data/">written about before</a>, my partner has Type 1 diabetes.  The disease is incredibly complex and its manifestation is the product of many genetic and environmental factors.  The way it basically works is called &ldquo;basal / bolus&rdquo;.  Each non-diabetic person has a baseline rate of insulin (basal) produced by their pancreas.  When that person eats the pancreas gives a burst of insulin called a bolus.</p>
 
-<p>The diabetic tries to emulate this process either with needles, pills, or an insulin pump. The side, <a href="http://diabetesmanager.pbworks.com/w/page/17680318/The%20Management%20of%20Type%201%20Diabetes%20">Diabetes Manager</a> has a great pictoral representation of the process:</p>
+<p>The diabetic tries to emulate this process either with needles, pills, or an insulin pump. The site, <a href="http://diabetesmanager.pbworks.com/w/page/17680318/The%20Management%20of%20Type%201%20Diabetes%20">Diabetes Manager</a> has a great pictoral representation of the process:</p>
 
 <p><img class="center" src="http://i.imgur.com/cfu1OQZ.png"></p>
 
