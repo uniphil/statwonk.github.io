@@ -1,6 +1,9 @@
 // This File is imported last, and will override other styles in the cascade
 // Add styles here to make changes without digging in too much
 
+p {
+ margin: 1em 0;
+}
 
 a {
   text-decoration: none;
@@ -38,4 +41,51 @@ article p  {
 
 p a {
   font-weight:bold;
+}
+/* benchmarks table */
+
+.caption {
+  text-align: center;
+}
+  .figure p.note { font-size: 75%; }
+
+hr {
+  margin: 40px 0 10px 0;
+}
+table.benchmarks {
+  margin-left: auto;
+  margin-right: auto;
+  border-collapse: collapse;
+}
+table.benchmarks thead {
+/* border-top: 1px solid black; */
+  border-bottom: 1px solid black;
+}
+table.benchmarks tbody {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+table.benchmarks colgroup col.relative {
+  border-left: 1px solid black;
+}
+table.benchmarks thead th,
+table.benchmarks thead td {
+  width: 10ex;
+  text-align: center;
+  padding: 0 1ex;
+}
+table.benchmarks thead td {
+  padding-bottom: 0.75ex;
+}
+table.benchmarks tbody {
+    font: 60% Monaco, Courier, mono;
+}
+table.benchmarks tbody th {
+  font-weight: normal;
+  text-align: left;
+  padding: 0 1em;
+}
+table.benchmarks tbody td.data {
+    text-align: right;
+    padding: 0 2em 0 0;
 }
