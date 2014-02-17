@@ -29,7 +29,7 @@ This is where my expertise can be helpful.  My partner's pump records all kinds 
 
 One way I've found helpful in looking at the data is a cross-section on hour of the day.  Diabetic patterns move widly intra-day but there tends to be patterns over time. If you're "high" in the morning today, you're likely to be high in the morning tomorrow without some kind of intervention.  Or it could be a fluke.
 
-The following graph shows the last three month's of my partner's blood glucose data.  It shows a boxplot for each hour of the data and the actual data plotted behind. The desired range is between the horizontal red lines (70 - 200)  Also I added a blue smoother.  Each element has a purpose.  The data makes sure that I know where the data is sparse and boxplots may be less reliable.  The boxplots show me where 50% of the datais contained and gives me an idea of variance by hour.  Finally the blue smoother keeps me focused on the underlying trend:
+The following graph shows the last three month's of my partner's blood glucose data.  It shows a boxplot for each hour of the data and the actual data plotted behind. The desired range is between the horizontal red lines (70 - 200) Each element has a purpose.  The data points make sure I know where the data is sparse and thus the boxplots less reliable.  The boxplots show me where 50% of the data is contained and gives me an idea of variance by hour. If there's less variance I'm more certain, more and I may suggest we stay conservative.  Finally the white smoother keeps me focused on the underlying trend:
 
 {% img center http://i.imgur.com/AgfoJOC.png %}
 
