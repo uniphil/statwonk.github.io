@@ -2,91 +2,91 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://statwonk.github.io/blog/2013/09/17/activemodel-dirty/</loc>
-        <lastmod>2014-02-02T10:03:57-05:00</lastmod>
+        <lastmod>2014-02-16T14:23:23-05:00</lastmod>
     </url>
     <url>
         <loc>http://statwonk.github.io/blog/2013/09/22/placing-knitr-chunks-in-a-table/</loc>
-        <lastmod>2014-02-02T10:03:57-05:00</lastmod>
+        <lastmod>2014-02-16T14:23:23-05:00</lastmod>
     </url>
     <url>
         <loc>http://statwonk.github.io/blog/2013/09/27/reading-csv-data-into-r/</loc>
-        <lastmod>2014-02-02T10:03:57-05:00</lastmod>
+        <lastmod>2014-02-16T14:23:23-05:00</lastmod>
     </url>
     <url>
         <loc>
             http://statwonk.github.io/blog/2013/10/06/the-p-in-p-value-does-not-stand-for-profit-dot/
         </loc>
-        <lastmod>2014-02-02T10:03:57-05:00</lastmod>
+        <lastmod>2014-02-16T14:23:23-05:00</lastmod>
     </url>
     <url>
         <loc>
             http://statwonk.github.io/blog/2013/10/11/how-statisticians-lost-their-business-mojo/
         </loc>
-        <lastmod>2014-02-16T13:13:23-05:00</lastmod>
+        <lastmod>2014-02-16T14:23:23-05:00</lastmod>
     </url>
     <url>
         <loc>
             http://statwonk.github.io/blog/2013/10/26/taking-a-quick-peek-at-fda-drug-reactions/
         </loc>
-        <lastmod>2014-02-02T10:03:57-05:00</lastmod>
+        <lastmod>2014-02-16T14:23:23-05:00</lastmod>
     </url>
     <url>
         <loc>
             http://statwonk.github.io/blog/2013/11/03/5-cool-unix-hacks-for-fun-and-productivity/
         </loc>
-        <lastmod>2014-02-02T10:03:57-05:00</lastmod>
+        <lastmod>2014-02-16T14:23:23-05:00</lastmod>
     </url>
     <url>
         <loc>http://statwonk.github.io/blog/2013/11/03/goodbye-scripts/</loc>
-        <lastmod>2014-02-02T19:36:16-05:00</lastmod>
+        <lastmod>2014-02-16T14:23:23-05:00</lastmod>
     </url>
     <url>
         <loc>http://statwonk.github.io/blog/2013/11/24/washing-dishes-with-bayes/</loc>
-        <lastmod>2014-02-02T10:03:57-05:00</lastmod>
+        <lastmod>2014-02-16T14:23:23-05:00</lastmod>
     </url>
     <url>
         <loc>http://statwonk.github.io/blog/2013/12/15/are-academics-adopting-github/</loc>
-        <lastmod>2014-02-02T19:35:25-05:00</lastmod>
+        <lastmod>2014-02-16T14:23:23-05:00</lastmod>
     </url>
     <url>
         <loc>http://statwonk.github.io/blog/2014/01/05/visualizing-diabetes-data/</loc>
-        <lastmod>2014-02-02T19:34:39-05:00</lastmod>
+        <lastmod>2014-02-16T14:23:23-05:00</lastmod>
     </url>
     <url>
         <loc>
             http://statwonk.github.io/blog/2014/01/18/resizing-tmux-panes-with-the-bind-key/
         </loc>
-        <lastmod>2014-02-02T19:33:46-05:00</lastmod>
+        <lastmod>2014-02-16T14:23:23-05:00</lastmod>
     </url>
     <url>
         <loc>
             http://statwonk.github.io/blog/2014/02/02/dipping-my-toe-in-the-node-dot-js-waters/
         </loc>
-        <lastmod>2014-02-02T19:27:16-05:00</lastmod>
+        <lastmod>2014-02-16T14:23:23-05:00</lastmod>
     </url>
     <url>
         <loc>http://statwonk.github.io/blog/2014/02/07/passing-a-rails-array-to-javascript/</loc>
-        <lastmod>2014-02-07T17:31:41-05:00</lastmod>
+        <lastmod>2014-02-16T14:23:23-05:00</lastmod>
     </url>
     <url>
         <loc>http://statwonk.github.io/blog/2014/02/14/mawk-or-awk/</loc>
-        <lastmod>2014-02-14T10:18:24-05:00</lastmod>
+        <lastmod>2014-02-16T14:23:23-05:00</lastmod>
     </url>
     <url>
         <loc>http://statwonk.github.io/blog/2014/02/16/managing-diabetes-with-data-science/</loc>
-        <lastmod>2014-02-16T13:03:54-05:00</lastmod>
+        <lastmod>2014-02-16T21:00:22-05:00</lastmod>
     </url>
     <url>
         <loc>http://statwonk.github.io/about/</loc>
-        <lastmod>2014-02-02T10:03:57-05:00</lastmod>
+        <lastmod>2014-02-16T14:23:23-05:00</lastmod>
     </url>
     <url>
         <loc>http://statwonk.github.io/blog/archives/</loc>
-        <lastmod>2014-02-16T13:13:23-05:00</lastmod>
+        <lastmod>2014-02-16T21:00:22-05:00</lastmod>
     </url>
     <url>
         <loc>http://statwonk.github.io/</loc>
-        <lastmod>2014-02-16T13:13:23-05:00</lastmod>
+        <lastmod>2014-02-16T21:00:22-05:00</lastmod>
     </url>
     <url>
         <loc>http://statwonk.github.io/robots.txt</loc>
