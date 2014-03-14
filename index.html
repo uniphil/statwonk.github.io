@@ -158,7 +158,7 @@ mean(df$days_to_capture[df$days_to_capture &gt; 0], na.rm = T)
 [1] 402.9637 # days</code></pre></noscript></div>
 
 
-<p>Currently that average function says 402 days free. Let&rsquo;s get a distribution of this statistic by boostrapping.  For those unfamiliar, bootstrapping means to take a sample of the 491 fugutives <a href="http://en.wikipedia.org/wiki/Sampling_(statistics">with replacement</a>#Replacement_of_selected_units), say 30% of the 491, calculate the mean, save it, and repeat say 1,000 times. You end up with a distribution for your mean statistic.</p>
+<p>Currently that average function says 402 days free. Let&rsquo;s get a distribution of this statistic by boostrapping.  For those unfamiliar, bootstrapping means to take a sample of the 491 fugutives <a href="http://en.wikipedia.org/wiki/Sampling_(statistics)#Replacement_of_selected_units)">with replacement</a>, say 30% of the 491, calculate the mean, save it, and repeat say 1,000 times. You end up with a distribution for your mean statistic.</p>
 
 <p><img class="center" src="http://i.imgur.com/F4Xqubg.png"></p>
 
@@ -168,7 +168,7 @@ mean(df$days_to_capture[df$days_to_capture &gt; 0], na.rm = T)
 
 <p>I start by marking each fugitive as caught or not caught. In SA-speak this is censoring.  You&rsquo;re &lsquo;censored&rsquo; if you haven&rsquo;t been caught and you&rsquo;ve &lsquo;died&rsquo; if you&rsquo;ve been caught. Survival analysis uses simplifying language so that all the statisticians can communicate such that problem-specific language is abstracted. Another label for &lsquo;died&rsquo; is &lsquo;failure.&rsquo; This can lead to funny situations like me calling a fugitive being caught a &lsquo;death.&rsquo;  Why death?  Well much of survival analysis was developed with medical trials in mind.</p>
 
-<p>Once I&rsquo;ve coded the fugitives, I measure the time from being put on the list to time caught OR today.  At that point I can use the [Kaplan-Meier estimator] (KM estimator) to get a non-parametric estimate of the mean that includes all of our data.</p>
+<p>Once I&rsquo;ve coded the fugitives, I measure the time from being put on the list to time caught OR today.  At that point I can use the Kaplan-Meier estimator (KM estimator) to get a non-parametric estimate of the mean that includes all of our data.[^2]</p>
 
 <p>The KM estimator calculates the share that were captured for each duration in our dataset, of those that could have been captured.</p>
 
