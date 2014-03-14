@@ -3,14 +3,15 @@ layout: post
 title: You've just been added to the FBI's Ten Most Wanted List, how long will you survive?
 date: 2014-03-08 19:28
 comments: true
-categories: 
+categories:
+- survival analysis
 ---
-My current best-guess is,
+My best guess is,
 {% blockquote %}
-613 days
+613 days, but there's a 50-50 shot you'll be caught within 2.7 months.
 {% endblockquote %}
 
-That's my best guess.
+Now I'll give some background and show you how I arrived at that number.
 
 The FBI's Ten Most Wanted Fugitives List has publicized America's deadliest criminals for nearly 65 years, since March 14th, 1950.  The list is available nearly [everywhere](http://www.fbi.gov/wanted), from America's post offices to the streets of Venezuela, criminals have been noticed and captured.  The list makes life difficult for fugitives and some end up collaborating with the FBI as criminal informants.  In other cases, the FBI has removed fugitives when charges were dismissed or the critera for being on the list was not met (in their eyes).
 
@@ -118,6 +119,6 @@ So the probability that you're caught within 5.34 days is about 10 percent.  Usi
 
 What strikes me about this is that there is a 1 in 5 shot you're caught within two weeks. After another two weeks it rises to a 1-in-3 shot you're caught.  The first two weeks are very much so the most crucial to the fugitive.  The first two weeks is equivalent to the 16 weeks after in terms of risk.
 
-So there you have it!  The FBI's Ten Most Wanted list as analyzed with survival analysis.  
+So there you have it!  The FBI's Ten Most Wanted list as analyzed with survival analysis.
 
 [^1]: The FBI removes fugitives, but I don't think that's really a fair measure.  I'm after a measure of my likelihood to get locked up once I'm put on the list.  It's hard to believe that the pressure the List creates simply disappears after a fugitive is removed. Apparently Leo is in Canada, where I live, yikes!  He's been free for 15,892 days or over 43 years!
