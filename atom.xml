@@ -4,7 +4,7 @@
   <title><![CDATA[@statwonk]]></title>
   <link href="http://statwonk.github.io/atom.xml" rel="self"/>
   <link href="http://statwonk.github.io/"/>
-  <updated>2014-02-16T21:00:29-05:00</updated>
+  <updated>2014-03-14T18:08:52-04:00</updated>
   <id>http://statwonk.github.io/</id>
   <author>
     <name><![CDATA[Christopher P. Peters]]></name>
@@ -12,6 +12,167 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[You've just been added to the FBI's Ten Most Wanted List, how long will you survive?]]></title>
+    <link href="http://statwonk.github.io/blog/2014/03/08/survival-analysis-of-running-from-the-law-the-fbis-most-wanted/"/>
+    <updated>2014-03-08T19:28:00-05:00</updated>
+    <id>http://statwonk.github.io/blog/2014/03/08/survival-analysis-of-running-from-the-law-the-fbis-most-wanted</id>
+    <content type="html"><![CDATA[<p>My current best-guess is,</p>
+
+<blockquote><p>613 days</p></blockquote>
+
+
+<p>That&rsquo;s my best guess.</p>
+
+<p>The FBI&rsquo;s Ten Most Wanted Fugitives List has publicized America&rsquo;s deadliest criminals for nearly 65 years, since March 14th, 1950.  The list is available nearly <a href="http://www.fbi.gov/wanted">everywhere</a>, from America&rsquo;s post offices to the streets of Venezuela, criminals have been noticed and captured.  The list makes life difficult for fugitives and some end up collaborating with the FBI as criminal informants.  In other cases, the FBI has removed fugitives when charges were dismissed or the critera for being on the list was not met (in their eyes).</p>
+
+<p>The list is interesting to me because it&rsquo;s all about durations.</p>
+
+<blockquote><p>-  How long will a fugitive remain free once they&#8217;re added to the list?</p><p>-  How does our risk of getting captured change over time after being added to the list?</p><p>-  What&#8217;s the probability that we&#8217;re caught over the next week, two weeks, year after being added to the list?</p></blockquote>
+
+
+<p>Analysis of durations falls squarely on the survival analysis statistical toolset.  The survival framework was designed ground-up to deal with these types of problems.  You might be thinking, &lsquo;Woah, this guy just took a simple set of questions probably solvable with Excel&rsquo;s Average function and made it sound complicated.&rsquo; But if that&rsquo;s your tool as a fugitive, you&rsquo;ll underestimate the length free and perhaps act reckless in your escape.</p>
+
+<p>Let&rsquo;s take the average lenth of time-to-capture simply by averaging the duration from being added to the list to capture.</p>
+
+<div><script src='https://gist.github.com/9448932.js'></script>
+<noscript><pre><code>df &lt;- read.csv(&quot;data.csv&quot;,
+                 header = T,
+                 stringsAsFactors = F)
+
+df$date_put_on_list &lt;- as.POSIXct(df$date_put_on_list, format = &quot;%m/%d/%Y&quot;, tz = &quot;EST&quot;)
+
+df$follow_up_date &lt;- as.POSIXct(df$follow_up_date, format = &quot;%m/%d/%Y&quot;, tz = &quot;EST&quot;)
+
+df$days_to_capture &lt;- ifelse(!is.na(df$follow_up_date) | df$follow_up_date == &quot;&quot;,
+                              difftime(df$follow_up_date, df$date_put_on_list, units = &quot;days&quot;),
+                              difftime(Sys.time(), df$date_put_on_list, units = &quot;days&quot;))
+                              
+df$censor &lt;- ifelse(!is.na(df$follow_up_date), 1, 0)
+
+mean(df$days_to_capture[df$days_to_capture &gt; 0], na.rm = T)
+
+[1] 402.9637 # days</code></pre></noscript></div>
+
+
+<p>Currently that average function says 402 days free. Let&rsquo;s get a distribution of this statistic by boostrapping.  For those unfamiliar, bootstrapping means to take a sample of the 491 fugutives <a href="http://en.wikipedia.org/wiki/Sampling_(statistics">with replacement</a>#Replacement_of_selected_units), say 30% of the 491, calculate the mean, save it, and repeat say 1,000 times. You end up with a distribution for your mean statistic.</p>
+
+<p><img class="center" src="http://i.imgur.com/F4Xqubg.png"></p>
+
+<p>You can see that the statistic is centered around 402 days.  The 5% and 95% percentiles are 309 and 512 days, respectively.  So 402 +/&ndash; 101 days is your guess by this method.</p>
+
+<p>What about the fact that we left 12 fugitives our of our analysis?  If we say that today is their &ldquo;duration free&rdquo;, then we&rsquo;re assuming they&rsquo;re all captured today.  But they&rsquo;re not, we can do better.</p>
+
+<p>I start by marking each fugitive as caught or not caught. In SA-speak this is censoring.  You&rsquo;re &lsquo;censored&rsquo; if you haven&rsquo;t been caught and you&rsquo;ve &lsquo;died&rsquo; if you&rsquo;ve been caught. Survival analysis uses simplifying language so that all the statisticians can communicate such that problem-specific language is abstracted. Another label for &lsquo;died&rsquo; is &lsquo;failure.&rsquo; This can lead to funny situations like me calling a fugitive being caught a &lsquo;death.&rsquo;  Why death?  Well much of survival analysis was developed with medical trials in mind.</p>
+
+<p>Once I&rsquo;ve coded the fugitives, I measure the time from being put on the list to time caught OR today.  At that point I can use the [Kaplan-Meier estimator] (KM estimator) to get a non-parametric estimate of the mean that includes all of our data.</p>
+
+<p>The KM estimator calculates the share that were captured for each duration in our dataset, of those that could have been captured.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>df &lt;- df[!is.na(df$censor) & df$days_to_capture >= 0, ]
+</span><span class='line'>
+</span><span class='line'># install.packages("survival"); library(survival)
+</span><span class='line'>print(fit &lt;- survfit(Surv(days_to_capture, censor) ~ 1, data = df), rmean = "common")
+</span><span class='line'>Call: survfit(formula = Surv(days_to_capture, censor) ~ 1, data = df)
+</span><span class='line'>
+</span><span class='line'>   records      n.max    n.start     events     **rmean** se(rmean)     median    0.95LCL    0.95UCL 
+</span><span class='line'>          491        491        491        479        613         92         84         69        106 
+</span><span class='line'>        * restricted mean with upper limit =  15895</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So we have 491 records.  Out of the 500 on the list, nine fugitives were captured before their listings were publicized.  I&rsquo;ve removed these because we&rsquo;re playing that part of the fugitive and it&rsquo;s more fun to assume you&rsquo;re free when the publication happens.</p>
+
+<p>The key is that our mean here is 613 days, more than 50 percent longer than our estimate that didn&rsquo;t take into account censoring (current fugitives).  Also our 5% to 95% confidence interval is wider, 368 days instead of 202 days.  That makese sense because we&rsquo;re including some long-free fugitives now.  By itself, it should make us suspicious that the confidence interval of the simple mean is too narrow, which would lead us to believe the mean more precise than it really is at estimating time free.</p>
+
+<p><img class="center" src="http://i.imgur.com/5krTTdB.png"></p>
+
+<p>Wow, your odds of surviving in the wild after 10 years is pretty minisucle.  We can see our mean-time estimate of 613 days depicted as a vertical <span style="color:red">red line</span>.</p>
+
+<p><img class="center" src="http://i.imgur.com/AyXmo6e.png"></p>
+
+<p>The cool thing about the survival framework is that you have many ways you can pivot.  There&rsquo;s all kinds of alternative interpretations that can be derived.  For example, by taking the probability of being caught over the survival curve yields a hazard rate:</p>
+
+<p><img class="center" src="http://i.imgur.com/v3oMzIb.png"></p>
+
+<p>It may not seem sexy, but it&rsquo;s a k-means nearest-neighbor smoothed hazard function fit to our data. It&rsquo;s interpretation is neat &mdash; instananeous likelihood of being caught. See it fall from 0.025 to 0.005 in about three months? That means in just three months your risk of being caught falls 80%!  Also notice how flat it is after 90 days, your risk of being caught basically stays the same after a few months of running.</p>
+
+<p>We can also take the integral of this hazard function and figure out cumulative risk of being caught.</p>
+
+<p><img class="center" src="http://i.imgur.com/slMPDsL.png"></p>
+
+<p>The cumulative hazard function (CHF) measures rate of risk. Think Sonic the Hedgehog, or Mario without a mushroom.  Getting caught is like dying in those games, you&rsquo;re reset.  Die in Sonic?  Boom, new Sonic.  That&rsquo;s what the graph above shows for a typical fugtive.  So by day 1,000, you&rsquo;re already likely to have been captured twice (and reset twice).</p>
+
+<p>This is how the full CHF looks through the <a href="http://en.wikipedia.org/wiki/Leo_Burt">longest fugitive</a>, out at 15,000+ days.<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>  So whereas most fugitives would have been caught four times over, he&rsquo;s been going strong:</p>
+
+<p><img class="center" src="http://i.imgur.com/w5p76Lr.png"></p>
+
+<p>It&rsquo;s common in survival analysis to fit parametric distributions to survival data.  If you&rsquo;re able to find a model that fits well, it can be used for inference or prediction.</p>
+
+<p><img class="center" src="http://i.imgur.com/I38qSLR.png"></p>
+
+<p>This data is best fit by a <a href="http://en.wikipedia.org/wiki/Log-normal_distribution">Log-normal</a> distribution.  Behind the Weibull distribution, the log-normal is probably second most-popular.</p>
+
+<p>If we look at the log-normal by itself, the fit looks pretty good!  Notice again the small crosses that represent fugitives currently on the run?</p>
+
+<p><img class="center" src="http://i.imgur.com/nhZpLdf.png"></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>print(fit2 &lt;- fitdistcens(censdata = df[df$left > 0, c("left", "right")], 
+</span><span class='line'>      "lnorm"))
+</span><span class='line'>
+</span><span class='line'>Fitting of the distribution ' lnorm ' on censored data by maximum likelihood 
+</span><span class='line'>Parameters:
+</span><span class='line'>        estimate
+</span><span class='line'>  meanlog 4.430638  # exponentiate to get ~84 days
+</span><span class='line'>  sdlog   2.149077</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now that we have our model, let&rsquo;s figure out the probability that you evade capture for a set of days:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>quantile(fit2)
+</span><span class='line'>Estimated quantiles for each specified probability (censored data)
+</span><span class='line'>                     p=0.1    p=0.2    p=0.3   p=0.4  p=0.5    p=0.6   p=0.7    p=0.8    p=0.9
+</span><span class='line'>      estimate 5.346729 13.76225 27.21208 48.7242 83.985 144.7634 259.204 512.5239 1319.214</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Each of the estimates above is in days and corresponds to the probability you&rsquo;re caught.  It may seems strange, but I&rsquo;m stating the probabilities upfront: 10% to 90% by increments of 10%.</p>
+
+<p>So the probability that you&rsquo;re caught within 5.34 days is about 10 percent.  Using another probability, there&rsquo;s a 90 percent chance that you&rsquo;re caught within 1,319 days (about 3.6 years).</p>
+
+<p>What strikes me about this is that there is a 1 in 5 shot you&rsquo;re caught within two weeks. After another two weeks it rises to a 1-in-3 shot you&rsquo;re caught.  The first two weeks are very much so the most crucial to the fugitive.  The first two weeks is equivalent to the 16 weeks after in terms of risk.</p>
+
+<p>So there you have it!  The FBI&rsquo;s Ten Most Wanted list as analyzed with survival analysis.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>The FBI removes fugitives, but I don&rsquo;t think that&rsquo;s really a fair measure.  I&rsquo;m after a measure of my likelihood to get locked up once I&rsquo;m put on the list.  It&rsquo;s hard to believe that the pressure the List creates simply disappears after a fugitive is removed. Apparently Leo is in Canada, where I live, yikes!  He&rsquo;s been free for 15,892 days or over 43 years!<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Managing diabetes with data science]]></title>
