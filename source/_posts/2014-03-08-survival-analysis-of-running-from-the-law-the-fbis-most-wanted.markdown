@@ -41,7 +41,7 @@ What about the fact that we left 12 fugitives our of our analysis?  If we say th
 
 I start by marking each fugitive as caught or not caught. In SA-speak this is censoring.  You're 'censored' if you haven't been caught and you've 'died' if you've been caught. Survival analysis uses simplifying language so that all the statisticians can communicate such that problem-specific language is abstracted. Another label for 'died' is 'failure.' This can lead to funny situations like me calling a fugitive being caught a 'death.'  Why death?  Well much of survival analysis was developed with medical trials in mind.
 
-Once I've coded the fugitives, I measure the time from being put on the list to time caught OR today.  At that point I can use the Kaplan-Meier estimator (KM estimator) to get a non-parametric estimate of the mean that includes all of our data.[^2]
+Once I've coded the fugitives, I measure the time from being put on the list to time caught OR today.  At that point I can use the Kaplan-Meier estimator (KM estimator) to get a non-parametric estimate of the mean that includes all of our data.
 
 The KM estimator calculates the share that were captured for each duration in our dataset, of those that could have been captured. 
 
