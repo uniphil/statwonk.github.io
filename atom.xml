@@ -4,7 +4,7 @@
   <title><![CDATA[@statwonk]]></title>
   <link href="http://statwonk.github.io/atom.xml" rel="self"/>
   <link href="http://statwonk.github.io/"/>
-  <updated>2014-03-14T18:08:52-04:00</updated>
+  <updated>2014-03-14T18:20:43-04:00</updated>
   <id>http://statwonk.github.io/</id>
   <author>
     <name><![CDATA[Christopher P. Peters]]></name>
@@ -18,12 +18,12 @@
     <link href="http://statwonk.github.io/blog/2014/03/08/survival-analysis-of-running-from-the-law-the-fbis-most-wanted/"/>
     <updated>2014-03-08T19:28:00-05:00</updated>
     <id>http://statwonk.github.io/blog/2014/03/08/survival-analysis-of-running-from-the-law-the-fbis-most-wanted</id>
-    <content type="html"><![CDATA[<p>My current best-guess is,</p>
+    <content type="html"><![CDATA[<p>My best guess is,</p>
 
-<blockquote><p>613 days</p></blockquote>
+<blockquote><p>613 days, but there&#8217;s a 50-50 shot you&#8217;ll be caught within 2.7 months.</p></blockquote>
 
 
-<p>That&rsquo;s my best guess.</p>
+<p>Now I&rsquo;ll give some background and show you how I arrived at that number.</p>
 
 <p>The FBI&rsquo;s Ten Most Wanted Fugitives List has publicized America&rsquo;s deadliest criminals for nearly 65 years, since March 14th, 1950.  The list is available nearly <a href="http://www.fbi.gov/wanted">everywhere</a>, from America&rsquo;s post offices to the streets of Venezuela, criminals have been noticed and captured.  The list makes life difficult for fugitives and some end up collaborating with the FBI as criminal informants.  In other cases, the FBI has removed fugitives when charges were dismissed or the critera for being on the list was not met (in their eyes).</p>
 
