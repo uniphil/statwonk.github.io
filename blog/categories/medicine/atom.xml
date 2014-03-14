@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: medicine, | @statwonk]]></title>
+  <link href="http://statwonk.github.io/blog/categories/medicine/atom.xml" rel="self"/>
+  <link href="http://statwonk.github.io/"/>
+  <updated>2014-02-16T21:00:29-05:00</updated>
+  <id>http://statwonk.github.io/</id>
+  <author>
+    <name><![CDATA[Christopher P. Peters]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Taking a quick peek at FDA adverse drug reactions]]></title>
+    <link href="http://statwonk.github.io/blog/2013/10/26/taking-a-quick-peek-at-fda-drug-reactions/"/>
+    <updated>2013-10-26T00:07:00-04:00</updated>
+    <id>http://statwonk.github.io/blog/2013/10/26/taking-a-quick-peek-at-fda-drug-reactions</id>
+    <content type="html"><![CDATA[<p>About a week ago my doctor put me on a new medication.  The drug is one that is known to have some unpleasant effects as you get used to it.  I was curious to see what the reported adverse reactions (to the U.S. FDA) were, so I decided to take a look at the data.</p>
+
+<p>The data actually wasn&rsquo;t very easy to find, but here&rsquo;s the current location: <a href="http://www.fda.gov/Drugs/GuidanceComplianceRegulatoryInformation/Surveillance/AdverseDrugEffects/ucm082193.htm">http://www.fda.gov/Drugs/GuidanceComplianceRegulatoryInformation/Surveillance/AdverseDrugEffects/ucm082193.htm</a>.</p>
+
+<p>Wow, look at the SEO value of that URL!</p>
+
+<p>It&rsquo;s pretty unbelievable to me that the latest data is now more than 10 months old. We&rsquo;ll have to see what the FDA says,</p>
+
+<blockquote class="twitter-tweet tw-center-align"><p><a
+href="https://twitter.com/FDA_Drug_Info">@FDA_Drug_Info</a> This info seems
+stale, what&#39;s going on? <a
+href="http://t.co/fVAkiJzS9i">http://t.co/fVAkiJzS9i</a></p>&mdash; Christopher
+Peters (@statwonk) <a
+href="https://twitter.com/statwonk/statuses/393945145030094848">October 26,
+2013</a></blockquote>
+
+
+<script async src="http://statwonk.github.io//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+<p>So I took a look at the drug reaction info and the top twenty reactions seemed relatively benign, so I feel a bit better.  It&rsquo;s a pretty simple way to go about things, but I&rsquo;d encourage you to take a look at some <a href="http://www.accessdata.fda.gov/scripts/cder/drugsatfda/index.cfm">FDA studies of drugs you take</a>.  The few I&rsquo;ve looked at are appallingly deficient.  Where are the power studies, yo?  If a study has a 5% likelihood of detecting a 20% increase in heart attacks, you&rsquo;d never know &mdash; that&rsquo;s why you should NOT blindly trust p-values > 0.05.  It doesn&rsquo;t mean that there isn&rsquo;t an effect and the study may not have had a good chance of detecting the increased risk from the get-go.</p>
+
+<p>You can find my little script on <a href="https://github.com/statwonk/FDA-adverse-drug-reactions">Github here</a>.</p>
+
+<p>I would love to collaborate with someone on this, let&rsquo;s dig into this data!</p>
+
+<p>Perhaps data mine to find not well known drug interactions?</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>h1<span class="o">&gt;</span>Author<span class="o">:</span> Christopher Peters<span class="o">&lt;/</span>h1<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>h1<span class="o">&gt;</span>Twitter<span class="o">:</span> <span class="o">@</span>statwonk<span class="o">&lt;/</span>h1<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>h1<span class="o">&gt;</span>Analysis of adverse reported drug events from FDA database<span class="o">&lt;/</span>h1<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>h1<span class="o">&gt;</span>Data found here<span class="o">:</span> <span class="o">&lt;</span>a href<span class="o">=</span><span class="s">&quot;http://www.fda.gov/Drugs/GuidanceComplianceRegulatoryInformation/Surveillance/AdverseDrugEffects/ucm082193.htm&quot;</span><span class="o">&gt;</span>http<span class="o">://</span>www.fda.gov<span class="o">/</span>Drugs<span class="o">/</span>GuidanceComplianceRegulatoryInformation<span class="o">/</span>Surveillance<span class="o">/</span>AdverseDrugEffects<span class="o">/</span>ucm082193.htm<span class="o">&lt;/</span>a<span class="o">&gt;&lt;/</span>h1<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>patient <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> read.table<span class="p">(</span><span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">~/</span>Downloads<span class="o">/</span>faers_ascii_2012q4<span class="o">/</span>ascii<span class="o">/</span>demo12q4.txt<span class="o">&amp;</span>rdquo<span class="p">;,</span> sep <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">$&amp;</span>rdquo<span class="p">;,</span> header <span class="o">=</span> <span class="k-Variable">T</span><span class="p">,</span> fill <span class="o">=</span> <span class="k-Variable">T</span><span class="p">,</span> quote <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">&amp;</span>rdquo<span class="p">;)</span>
+</span><span class='line'>drug <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> read.table<span class="p">(</span><span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">~/</span>Downloads<span class="o">/</span>faers_ascii_2012q4<span class="o">/</span>ascii<span class="o">/</span>drug12q4.txt<span class="o">&amp;</span>rdquo<span class="p">;,</span> sep <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">$&amp;</span>rdquo<span class="p">;,</span> header <span class="o">=</span> <span class="k-Variable">T</span><span class="p">,</span> fill <span class="o">=</span> <span class="k-Variable">T</span><span class="p">,</span> quote <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">&amp;</span>rdquo<span class="p">;)</span>
+</span><span class='line'>reaction <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> read.table<span class="p">(</span><span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">~/</span>Downloads<span class="o">/</span>faers_ascii_2012q4<span class="o">/</span>ascii<span class="o">/</span>reac12q4.txt<span class="o">&amp;</span>rdquo<span class="p">;,</span> sep <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">$&amp;</span>rdquo<span class="p">;,</span> header <span class="o">=</span> <span class="k-Variable">T</span><span class="p">,</span> fill <span class="o">=</span> <span class="k-Variable">T</span><span class="p">,</span> quote <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">&amp;</span>rdquo<span class="p">;)</span>
+</span><span class='line'>outcomes <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> read.table<span class="p">(</span><span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">~/</span>Downloads<span class="o">/</span>faers_ascii_2012q4<span class="o">/</span>ascii<span class="o">/</span>outc12q4.txt<span class="o">&amp;</span>rdquo<span class="p">;,</span> sep <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">$&amp;</span>rdquo<span class="p">;,</span> header <span class="o">=</span> <span class="k-Variable">T</span><span class="p">,</span> fill <span class="o">=</span> <span class="k-Variable">T</span><span class="p">,</span> quote <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span><span class="o">&amp;</span>rdquo<span class="p">;)</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>h1<span class="o">&gt;</span>You can find individual drugs and their reported adverse by specifying there names below<span class="o">&lt;/</span>h1<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>h1<span class="o">&gt;</span>There are commonly many names <span class="kr">for</span> a drug<span class="p">,</span> see below where I put three grepl statements<span class="o">&lt;/</span>h1<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>h1<span class="o">&gt;</span>with text like<span class="p">,</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>put drug brand name here<span class="o">&amp;</span>rdquo<span class="p">;,</span> you can replace this with drug brand names<span class="o">&lt;/</span>h1<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>h1<span class="o">&gt;</span>you can add or remote grepl statements depending on the number of brand names you want to look over.<span class="o">&lt;/</span>h1<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>df <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> drug<span class="p">[(</span>grepl<span class="p">(</span><span class="o">&amp;</span>ldquo<span class="p">;</span>put drug brand name <span class="m">1</span> here<span class="o">&amp;</span>rdquo<span class="p">;,</span> drug<span class="o">$</span>drugname<span class="p">,</span> ignore.case <span class="o">=</span> <span class="k-Variable">T</span><span class="p">)</span> <span class="o">|</span> <span class="c1"># drug is likely to be entered as many different brand names, use this to capture them individually&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>pre<span class="o">&gt;&lt;</span>code<span class="o">&gt;</span>          grepl<span class="p">(</span><span class="s">&quot;put drug brand name 2 here&quot;</span><span class="p">,</span> drug<span class="o">$</span>drugname<span class="p">,</span> ignore.case <span class="o">=</span> <span class="k-Variable">T</span><span class="p">)</span> <span class="o">|</span> <span class="c1"># enter drug names here, add or remove grepl() as needed with &quot;or&quot; statements \</span>
+</span><span class='line'>          grepl<span class="p">(</span><span class="s">&quot;put drug brand name 3 here ... add more grepl statements as necessary&quot;</span><span class="p">,</span> drug<span class="o">$</span>drugname<span class="p">,</span> ignore.case <span class="o">=</span> <span class="k-Variable">T</span><span class="p">))</span> <span class="o">&amp;</span>amp<span class="p">;</span> drug<span class="o">$</span>drug_seq <span class="o">==</span> <span class="m">1</span><span class="p">,</span> <span class="p">]</span> <span class="c1"># drug seq 1 == suspect drug of many possible that patient is taking</span>
+</span><span class='line'><span class="o">&lt;/</span>code<span class="o">&gt;&lt;/</span>pre<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>df <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> merge<span class="p">(</span>df<span class="p">,</span> reaction<span class="p">,</span> by <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>primaryid<span class="o">&amp;</span>rdquo<span class="p">;)</span> <span class="c1"># let&amp;rsquo;s merge the drug file with reactions</span>
+</span><span class='line'>df <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> merge<span class="p">(</span>df<span class="p">,</span> outcomes<span class="p">,</span> by <span class="o">=</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>primaryid<span class="o">&amp;</span>rdquo<span class="p">;)</span> <span class="c1"># we&amp;rsquo;ll bring in outcomes, too</span>
+</span><span class='line'>df2 <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> as.data.frame<span class="p">(</span>table<span class="p">(</span>df<span class="o">$</span>pt<span class="p">,</span> df<span class="o">$</span>outc_code<span class="p">))</span> <span class="c1"># count the instances of reactions and their outcomes</span>
+</span><span class='line'>names<span class="p">(</span>df2<span class="p">)</span> <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> c<span class="p">(</span><span class="o">&amp;</span>ldquo<span class="p">;</span>reaction<span class="o">&amp;</span>rdquo<span class="p">;,</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>outcome<span class="o">&amp;</span>rdquo<span class="p">;,</span> <span class="o">&amp;</span>ldquo<span class="p">;</span>count<span class="o">&amp;</span>rdquo<span class="p">;)</span>
+</span><span class='line'>df2 <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> df2<span class="p">[</span>order<span class="p">(</span>df2<span class="o">$</span>count<span class="p">,</span> decreasing <span class="o">=</span> <span class="k-Variable">T</span><span class="p">),</span> <span class="p">]</span>
+</span><span class='line'>head<span class="p">(</span>df2<span class="p">,</span> <span class="m">20</span><span class="p">)</span> <span class="c1"># top 20 reactions</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+]]></content>
+  </entry>
+  
+</feed>

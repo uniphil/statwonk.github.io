@@ -1,0 +1,803 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Visualizing my bionic partner's data - @statwonk</title>
+  <meta name="author" content="Christopher P. Peters">
+
+  
+  <meta name="description" content="This is an analysis and data visualization of diabetes blood glucose data.">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://statwonk.github.io/blog/2014/01/05/visualizing-diabetes-data">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="@statwonk" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script src="/javascripts/topojson.js"></script>
+  <script src="/javascripts/datamaps.world.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-1432163-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">@statwonk</a></h1>
+  
+    <h2>mostly data science, statistics and applications.</h2>
+  
+</hgroup>
+<script>
+var basic = new Datamap({
+  element: document.getElementById("basic")
+  });
+</script>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:statwonk.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/about/">About</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li style="padding-left:1em;"><a href="https://twitter.com/statwonk" class="twitter-follow-button"
+  data-show-count="false" data-size="large">Follow @statwonk</a>
+<script>!function(d,s,id){var
+js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document,
+'script', 'twitter-wjs');</script>
+</li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <link rel="stylesheet" type="text/css" href="stylesheets/diabetes.css">
+<link rel="stylesheet" type="text/css" href="stylesheets/braces.css">
+<div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Visualizing My Bionic Partner's Data</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-05T16:44:00-05:00" pubdate data-updated="true">Jan 5<span>th</span>, 2014</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><link rel="stylesheet" type="text/css" href="../../../../../stylesheets/diabetes.css">
+<link rel="stylesheet" type="text/css" href="../../../../../stylesheets/braces.css"></p>
+
+<script type="text/javascript" src="../../../../../javascripts/crossfilter.v1.min.js"></script>
+
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+
+<p>My partner is a loving and willing lab-rat. She&rsquo;s bionic and carries an insulin
+pump that automatically doses insulin for her diabetes. The pump has a few
+&ldquo;levers&rdquo; one can pull and &ldquo;knobs&rdquo; that can be set.</p>
+
+<p>This is her exact model:</p>
+
+<p><img class="center" src="http://www.medtronicdiabetes.com/res/img/misc/revel-pump-introducing.png" width="400" height="400"></p>
+
+<p>The beauty for a data scientist, like me, is that the pump records every blood
+glucose measurement.  Blood glucose is basically what keeps your body fueled
+with energy. The non-diabetic&rsquo;s pancreas regulates these levels, like an
+automatic transmission in a car. The diabetic&rsquo;s pancreas is like a manual
+transmission.  My partner takes a blood glucose reading (tachometer RPM level)
+and decides to &ldquo;shift&rdquo; or not by giving herself insulin.</p>
+
+<p>Ideally, a diabetic would like to stay in a range of 70 &ndash; 180 mg/dL of blood
+glucose.  If you&rsquo;re not diabetic, you probably never stray from 70 &ndash; 140 mg/dL.</p>
+
+<p>The interesting thing is that patterns become apparent in the diabetic.</p>
+
+<p>For example, select levels greater than 250 in the Glucose graph below.  You can
+see that many happen after 4pm, likely after lunch and/or dinner.  It makes
+sense, right?</p>
+
+<p><img class="center" src="http://i.imgur.com/S7HOtYb.png"></p>
+
+<p>If you select values less than 70, you&rsquo;ll see three spikes.</p>
+
+<p><img class="center" src="http://i.imgur.com/4mUfiCg.png"></p>
+
+<p>These are likely do to insulin mis-calculations before eating breakfast, lunch
+and a late snack. At these times, the diabetic gives themself a large quantity
+of insulin to counter-act the rise in blood glucose that the food will provide.
+Again, it&rsquo;s like shifting a manual transmission in traffic on hills, sometimes
+you grind the gears.</p>
+
+<p><strong>Play with the data yourself.</strong>  It&rsquo;s a kindly donated year&rsquo;s worth of a real
+diabetic&rsquo;s readings.</p>
+
+<div id="charts">
+  <div id="hour-chart" class="chart">
+    <div class="title">Readings by time of day (hour, 0 = midnight)</div>
+  </div>
+  <br>
+  <div id="delay-chart" class="chart">
+    <div class="title">Glucose (mg / dL)</div>
+  </div>
+<div id="curly-brace">
+  <div id="left" class="brace"></div>
+  <div id="right" class="brace"></div>
+  <span style="margin-left:30px;">Ideal range</span>
+</div>
+</div>
+
+
+<p><aside id="totals"><span id="active">&ndash;</span> of <span id="total">&ndash;</span> readings selected.</aside></p>
+
+<div id="lists">
+  <div id="flight-list" class="list"></div>
+</div>
+
+
+
+
+<script>
+// (It's CSV, but GitHub Pages only gzip's JSON at the moment.)
+d3.csv("/assets/diabetes.json", function(error, flights) {
+
+  // Various formatters.
+  var formatNumber = d3.format(",d"),
+      formatChange = d3.format("+,d"),
+      formatDate = d3.time.format("%B %d, %Y"),
+      formatTime = d3.time.format("%I:%M %p");
+
+  // A nest operator, for grouping the flight list.
+  var nestByDate = d3.nest()
+      .key(function(d) { return d3.time.day(d.time); });
+
+  // A little coercion, since the CSV is untyped.
+  flights.forEach(function(d, i) {
+    d.index = i;
+    d.time = parseDate(d.time);
+    d.bg = +d.bg;
+    d.hour = d.time.getHours();
+  });
+
+  // Create the crossfilter for the relevant dimensions and groups.
+  var flight = crossfilter(flights),
+      all = flight.groupAll(),
+      date = flight.dimension(function(d) { return d.time; }),
+      dates = date.group(d3.time.day),
+      hour = flight.dimension(function(d) { return d.time.getHours() + d.time.getMinutes() / 60; }),
+      hours = hour.group(Math.floor),
+      delay = flight.dimension(function(d) { return d.bg; }),
+      delays = delay.group(function(d) { return Math.floor(d / 10) * 10; })
+
+  var charts = [
+
+    barChart()
+        .dimension(hour)
+        .group(hours)
+      .x(d3.scale.linear()
+        .domain([0, 24])
+        .rangeRound([0, 500])),
+
+    barChart()
+        .dimension(delay)
+        .group(delays)
+      .x(d3.scale.linear()
+        .domain([0, 600])
+        .rangeRound([0, 800]))
+  ];
+
+  // Given our array of charts, which we assume are in the same order as the
+  // .chart elements in the DOM, bind the charts to the DOM and render them.
+  // We also listen to the chart's brush events to update the display.
+  var chart = d3.selectAll(".chart")
+      .data(charts)
+      .each(function(chart) { chart.on("brush", renderAll).on("brushend", renderAll); });
+
+  // Render the initial lists.
+  var list = d3.selectAll(".list")
+      .data([flightList]);
+
+  // Render the total.
+  d3.selectAll("#total")
+      .text(formatNumber(flight.size()));
+
+  renderAll();
+
+  // Renders the specified chart or list.
+  function render(method) {
+    d3.select(this).call(method);
+  }
+
+  // Whenever the brush moves, re-rendering everything.
+  function renderAll() {
+    chart.each(render);
+    list.each(render);
+    d3.select("#active").text(formatNumber(all.value()));
+  }
+
+  // Like d3.time.format, but faster.
+  function parseDate(d) {
+    return new Date(2013,
+        d.substring(0, 2) - 1,
+        d.substring(2, 4),
+        d.substring(4, 6),
+        d.substring(6, 8));
+  }
+
+  window.filter = function(filters) {
+    filters.forEach(function(d, i) { charts[i].filter(d); });
+    renderAll();
+  };
+
+  window.reset = function(i) {
+    charts[i].filter(null);
+    renderAll();
+  };
+
+  function flightList(div) {
+    var flightsByDate = nestByDate.entries(date.top(1200));
+
+    div.each(function() {
+      var date = d3.select(this).selectAll(".date")
+          .data(flightsByDate, function(d) { return d.key; });
+
+      date.enter().append("div")
+          .attr("class", "date")
+        .append("div")
+          .attr("class", "day")
+          .text(function(d) { return formatDate(d.values[0].time); });
+
+      date.exit().remove();
+
+      var flight = date.order().selectAll(".flight")
+          .data(function(d) { return d.values; }, function(d) { return d.index; });
+
+      var flightEnter = flight.enter().append("div")
+          .attr("class", "flight");
+      
+      flightEnter.append("div")
+          .attr("class", "time")
+          .text(function(d) { return formatTime(d.time); });
+
+      flightEnter.append("div")
+          .attr("class", "delay")
+          .classed("inrange", function(d) { return d.bg > 69 && d.bg < 181})
+          .classed("highoutofrange", function(d) { return d.bg >= 181 })
+          .classed("lowoutofrange", function(d) { return d.bg < 69 })
+          .text(function(d) { return d.bg + " mg/dl"; });
+
+      flight.exit().remove();
+
+      flight.sort(function(a, b) { return b - a; });
+    });
+  }
+
+  function barChart() {
+    if (!barChart.id) barChart.id = 0;
+
+    var margin = {top: 10, right: 10, bottom: 20, left: 10},
+        width = 600 - margin.left - margin.right,
+        x = d3.scale.linear().range([0, width]),
+        y = d3.scale.linear().range([100, 0]),
+        id = barChart.id++,
+        axis = d3.svg.axis().orient("bottom"),
+        brush = d3.svg.brush(),
+        brushDirty,
+        dimension,
+        group,
+        round;
+
+    function chart(div) {
+      var height = y.range()[0];
+
+      y.domain([0, group.top(1)[0].value]);
+
+      div.each(function() {
+        var div = d3.select(this),
+            g = div.select("g");
+
+        // Create the skeletal chart.
+        if (g.empty()) {
+
+          div.select(".title").append("a")
+              .attr("href", "javascript:reset(" + id + ")")
+              .attr("class", "reset")
+              .text("reset")
+              .style("display", "none");
+
+          g = div.append("svg")
+              .attr("width", width + margin.left + margin.right)
+              .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+              .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+          g.append("clipPath")
+              .attr("id", "clip-" + id)
+            .append("rect")
+              .attr("width", width)
+              .attr("height", height);
+
+          g.selectAll(".bar")
+              .data(["background", "foreground"])
+            .enter().append("path")
+              .attr("class", function(d) { return d + " bar"; })
+              .datum(group.all());
+
+          g.selectAll(".foreground.bar")
+              .attr("clip-path", "url(#clip-" + id + ")");
+
+          g.append("g")
+              .attr("class", "axis")
+              .attr("transform", "translate(0," + height + ")")
+              .call(axis);
+
+          // Initialize the brush component with pretty resize handles.
+          var gBrush = g.append("g").attr("class", "brush").call(brush);
+          gBrush.selectAll("rect").attr("height", height);
+          gBrush.selectAll(".resize").append("path").attr("d", resizePath);
+        }
+
+        // Only redraw the brush if set externally.
+        if (brushDirty) {
+          brushDirty = false;
+          g.selectAll(".brush").call(brush);
+          div.select(".title a").style("display", brush.empty() ? "none" : null);
+          if (brush.empty()) {
+            g.selectAll("#clip-" + id + " rect")
+                .attr("x", 0)
+                .attr("width", width);
+          } else {
+            var extent = brush.extent();
+            g.selectAll("#clip-" + id + " rect")
+                .attr("x", x(extent[0]))
+                .attr("width", x(extent[1]) - x(extent[0]));
+          }
+        }
+
+        g.selectAll(".bar").attr("d", barPath);
+      });
+
+      function barPath(groups) {
+        var path = [],
+            i = -1,
+            n = groups.length,
+            d;
+        while (++i < n) {
+          d = groups[i];
+          path.push("M", x(d.key), ",", height, "V", y(d.value), "h9V", height);
+        }
+        return path.join("");
+      }
+
+      function resizePath(d) {
+        var e = +(d == "e"),
+            x = e ? 1 : -1,
+            y = height / 3;
+        return "M" + (.5 * x) + "," + y
+            + "A6,6 0 0 " + e + " " + (6.5 * x) + "," + (y + 6)
+            + "V" + (2 * y - 6)
+            + "A6,6 0 0 " + e + " " + (.5 * x) + "," + (2 * y)
+            + "Z"
+            + "M" + (2.5 * x) + "," + (y + 8)
+            + "V" + (2 * y - 8)
+            + "M" + (4.5 * x) + "," + (y + 8)
+            + "V" + (2 * y - 8);
+      }
+    }
+
+    brush.on("brushstart.chart", function() {
+      var div = d3.select(this.parentNode.parentNode.parentNode);
+      div.select(".title a").style("display", null);
+    });
+
+    brush.on("brush.chart", function() {
+      var g = d3.select(this.parentNode),
+          extent = brush.extent();
+      if (round) g.select(".brush")
+          .call(brush.extent(extent = extent.map(round)))
+        .selectAll(".resize")
+          .style("display", null);
+      g.select("#clip-" + id + " rect")
+          .attr("x", x(extent[0]))
+          .attr("width", x(extent[1]) - x(extent[0]));
+      dimension.filterRange(extent);
+    });
+
+    brush.on("brushend.chart", function() {
+      if (brush.empty()) {
+        var div = d3.select(this.parentNode.parentNode.parentNode);
+        div.select(".title a").style("display", "none");
+        div.select("#clip-" + id + " rect").attr("x", null).attr("width", "100%");
+        dimension.filterAll();
+      }
+    });
+
+    chart.margin = function(_) {
+      if (!arguments.length) return margin;
+      margin = _;
+      return chart;
+    };
+
+    chart.x = function(_) {
+      if (!arguments.length) return x;
+      x = _;
+      axis.scale(x);
+      brush.x(x);
+      return chart;
+    };
+
+    chart.y = function(_) {
+      if (!arguments.length) return y;
+      y = _;
+      return chart;
+    };
+
+    chart.dimension = function(_) {
+      if (!arguments.length) return dimension;
+      dimension = _;
+      return chart;
+    };
+
+    chart.filter = function(_) {
+      if (_) {
+        brush.extent(_);
+        dimension.filterRange(_);
+      } else {
+        brush.clear();
+        dimension.filterAll();
+      }
+      brushDirty = true;
+      return chart;
+    };
+
+    chart.group = function(_) {
+      if (!arguments.length) return group;
+      group = _;
+      return chart;
+    };
+
+    chart.round = function(_) {
+      if (!arguments.length) return round;
+      round = _;
+      return chart;
+    };
+
+    return d3.rebind(chart, brush, "on");
+  }
+});
+</script>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Christopher P. Peters</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-05T16:44:00-05:00" pubdate data-updated="true">Jan 5<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/d3/'>d3,</a>, <a class='category' href='/blog/categories/diabetes/'>diabetes,</a>, <a class='category' href='/blog/categories/javascript/'>javascript,</a>, <a class='category' href='/blog/categories/visualization/'>visualization</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://statwonk.github.io/blog/2014/01/05/visualizing-diabetes-data/" data-via="statwonk" data-counturl="http://statwonk.github.io/blog/2014/01/05/visualizing-diabetes-data/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/12/15/are-academics-adopting-github/" title="Previous Post: Are academics adopting Github?">&laquo; Are academics adopting Github?</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/01/18/resizing-tmux-panes-with-the-bind-key/" title="Next Post: Resizing tmux panes with the bind-key">Resizing tmux panes with the bind-key &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <br>
+  <h2>Recieve my analyses in your inbox</h2>
+  <link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
+  <style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
+			   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+  </style>
+  <div id="mc_embed_signup">
+    <form action="http://github.us3.list-manage.com/subscribe/post?u=8e91a13e08e4144e866bce9b3&amp;id=ddede14721" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+      <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+      <div style="position: absolute; left: -5000px;"><input type="text" name="b_8e91a13e08e4144e866bce9b3_ddede14721" value=""></div>
+      <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </form>
+  </div>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/02/16/managing-diabetes-with-data-science/">Managing Diabetes With Data Science</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/14/mawk-or-awk/">Mawk or Awk? Munging Large Log Files</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/07/passing-a-rails-array-to-javascript/">Passing a Rails Array to JavaScript in Well-formed JSON</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/02/dipping-my-toe-in-the-node-dot-js-waters/">Dipping My Toes in the JavaScript and Node.js Waters</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/01/18/resizing-tmux-panes-with-the-bind-key/">Resizing Tmux Panes With the Bind-key</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/01/05/visualizing-diabetes-data/">Visualizing My Bionic Partner's Data</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/12/15/are-academics-adopting-github/">Are Academics Adopting Github?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/11/24/washing-dishes-with-bayes/">Washing Dishes With Bayes</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/11/03/goodbye-scripts/">Goodbye Scripts, Hello R Packages!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/11/03/5-cool-unix-hacks-for-fun-and-productivity/">5 Cool Unix Hacks for Fun and Productivity</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/26/taking-a-quick-peek-at-fda-drug-reactions/">Taking a Quick Peek at FDA Adverse Drug Reactions</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/11/how-statisticians-lost-their-business-mojo/">How Statisticians Lost Their Business Mojo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/06/the-p-in-p-value-does-not-stand-for-profit-dot/">P-value Does Not Stand for Profit.</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/09/27/reading-csv-data-into-r/">'Reading CSV Data Into R'</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/09/22/placing-knitr-chunks-in-a-table/">'Placing Knitr Chunks in a Table'</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/09/17/activemodel-dirty/">'ActiveModel::Dirty'</a>
+      </li>
+    
+  </ul>
+</section>
+<a href="http://stackoverflow.com/users/1408640/statwonk">
+<img src="http://stackoverflow.com/users/flair/1408640.png" width="208" height="58" alt="profile for Statwonk at Stack Overflow, Q&amp;A for professional and enthusiast programmers" title="profile for Statwonk at Stack Overflow, Q&amp;A for professional and enthusiast programmers">
+</a>
+<a href="https://twitter.com/statwonk" class="twitter-follow-button"
+  data-show-count="false" data-size="large">Follow @statwonk</a>
+<script>!function(d,s,id){var
+js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document,
+'script', 'twitter-wjs');</script>
+<br><br>
+<script src="//platform.linkedin.com/in.js"
+type="text/javascript"></script>
+<script type="IN/MemberProfile" data-id="http://www.linkedin.com/in/statwonk"
+data-format="hover" data-text="Christopher Peters"></script>
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/u/1/111908970327115332394/posts?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/statwonk">@statwonk</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'statwonk',
+            count: 8,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Christopher P. Peters -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'statwonk';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://statwonk.github.io/blog/2014/01/05/visualizing-diabetes-data/';
+        var disqus_url = 'http://statwonk.github.io/blog/2014/01/05/visualizing-diabetes-data/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

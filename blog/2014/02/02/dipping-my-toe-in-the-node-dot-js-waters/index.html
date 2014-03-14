@@ -1,0 +1,631 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Dipping my toes in the JavaScript and Node.js waters - @statwonk</title>
+  <meta name="author" content="Christopher P. Peters">
+
+  
+  <meta name="description" content="A look at using JavaScript and Node.js to work with anonymous functions (lambdas) and closures. I also talk about first-class functions in JavaScript &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://statwonk.github.io/blog/2014/02/02/dipping-my-toe-in-the-node-dot-js-waters">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="@statwonk" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script src="/javascripts/topojson.js"></script>
+  <script src="/javascripts/datamaps.world.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-1432163-2']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">@statwonk</a></h1>
+  
+    <h2>mostly data science, statistics and applications.</h2>
+  
+</hgroup>
+<script>
+var basic = new Datamap({
+  element: document.getElementById("basic")
+  });
+</script>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:statwonk.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/about/">About</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li style="padding-left:1em;"><a href="https://twitter.com/statwonk" class="twitter-follow-button"
+  data-show-count="false" data-size="large">Follow @statwonk</a>
+<script>!function(d,s,id){var
+js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document,
+'script', 'twitter-wjs');</script>
+</li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <link rel="stylesheet" type="text/css" href="stylesheets/diabetes.css">
+<link rel="stylesheet" type="text/css" href="stylesheets/braces.css">
+<div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Dipping My Toes in the JavaScript and Node.js Waters</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-02T11:03:00-05:00" pubdate data-updated="true">Feb 2<span>nd</span>, 2014</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I&rsquo;ve recently been attracted to learning JavaScript by way of D3.js.  We all know from the Hacker News posts that ole JS has seen a huge revitalization and if you want to push data around with D3, you might as well take advantage of the powerful language its build on. So I started with <a href="http://crockford.com">Crockford&rsquo;s</a> <em>JavaScript: The Good Parts.</em></p>
+
+<p>Before reading the book, JavaScript was a means to take care of incidental calculations that may need to be done when creating graphs.  Dates are always a pain in the ass, so hey, &ldquo;I might want some JS ability to work with them.&rdquo;</p>
+
+<p>Instead, I&rsquo;m now looking at JavaScript as a potential alternative to R in certain spaces. Having the ability to jump from language to language (maybe even tie them together with a shell script) is a huge boon for data science work.  Each language has its pros and cons and usually some mix of them is the best most efficient path from raw data to inights.</p>
+
+<p>Only recently did I even realize that the browser is a compiler while reading up on Google&rsquo;s <a href="https://code.google.com/p/v8/">V8 engine</a> and Mozilla&rsquo;s <a href="http://en.wikipedia.org/wiki/Gecko_(layout_engine)">Gecko engine</a>. An aquantance at a recent party put it, &ldquo; &hellip; Google put tons of work into V8, it&rsquo;s a very efficient and speedy.&rdquo; This is pretty exciting in that it turns the browser from a space simply to display data to a computing engine.</p>
+
+<p>For example, suppose you want to implement a marketing attribution model. In order to do this, you want to use a Cox Proportional Hazard model to calculate conversion rate liklihoods. Are you going to download the data, apply the model in R, create weights, upload to the database, and then analyze?  You could, or you could fit that Cox PH model with JavaScript on-the-fly and be done with it.  <a href="http://statpages.org/prophaz.html">This person did just that and you can checkout the implementation for yourself</a>:</p>
+
+<p><img class="center" src="http://i.imgur.com/BjZYck0.png"></p>
+
+<p>My usual development goto is a Sinatra / rack-app or maybe even full-fledge rails app.  Whether it&rsquo;s D3, a simulation, or something else, a rails app is usually overkill.  <a href="http://nodejs.org">Node.js</a> makes even Sinatra look like overkill for JS development.  Node allows you to easily spin up a server to host JavaScript (and other things):</p>
+
+<br>
+
+
+<p>Here&rsquo;s a hello world example, with Node installed, just run it with <code>node your-filename.js</code></p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">res</span><span class="p">.</span><span class="nx">writeHead</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span> <span class="s1">&#39;text/plain&#39;</span><span class="p">});</span>
+</span><span class='line'>    <span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">&#39;Hello World\n&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}).</span><span class="nx">listen</span><span class="p">(</span><span class="mi">1337</span><span class="p">,</span> <span class="s1">&#39;127.0.0.1&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Server running at http://127.0.0.1:1337/&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Working with just JavaScript? Use vim and the console with <code>node some-script.js</code>.</p>
+
+<p>As I mentioned, I&rsquo;ve been working through <a href="http://crockford.com">Douglas Crockford&rsquo;s</a> <a href="http://www.amazon.com/exec/obidos/ASIN/0596517742/wrrrldwideweb">JavaScript: The Good Parts</a>.  The design patterns just seem to fit my brain.  I&rsquo;ve been using closures (ineffectively) for years now.  It turns out that they can be very powerful in conjunction with R or JavaScript&rsquo;s first-class functions.</p>
+
+<p><a href="http://stackoverflow.com/questions/705173/what-is-meant-by-first-class-object">First-class functions</a> and <a href="http://javascript.crockford.com/private.html">closures</a> are also features of R, my native language.</p>
+
+<p>Bootstrapping is something that data scientists do commonly.  Basically instead of having a statistic like a mean, it gives us the distribution of that statistic. Bootstrapping isn&rsquo;t hard, it could be as simple as sub-sampling data 100 times and calculating the mean each time. That collection of means will give you a good idea how the true mean of the population is distributed. The hard thing about bootstrapping is keeping track of all of the parts.  You might want to bootstrap means, median, upper and lower confidence intervals, etc.  There&rsquo;s a lot to keep track of at times!</p>
+
+<p>I&rsquo;ll usually do something like this in R:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'>nboot <span class="o">&lt;-</span> <span class="m">100</span> <span class="c1"># 100 bootstrap means</span>
+</span><span class='line'>boot_means <span class="o">&lt;-</span> rep<span class="p">(</span><span class="kc">NA</span><span class="p">,</span> nboot<span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>data <span class="o">&lt;-</span> runif<span class="p">(</span><span class="m">1000</span><span class="p">)</span>
+</span><span class='line'><span class="kr">for</span><span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span>nboot<span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  boot_means<span class="p">[</span>i<span class="p">]</span> <span class="o">&lt;-</span> data<span class="p">[</span>sample<span class="p">(</span>data<span class="p">,</span> <span class="m">10</span><span class="p">,</span> replace <span class="o">=</span> <span class="k-Variable">T</span><span class="p">),</span> <span class="p">]</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And that looks pretty simple, but it&rsquo;s just one statistic.</p>
+
+<p>Below is a bootstrapping example showing the use of closures and first-class functions in R from the <a href="http://leftcensored.skepsi.net/2012/12/02/closures-in-r-a-useful-abstraction/">Left Censored</a> blog</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'>make_container <span class="o">&lt;-</span> <span class="kr">function</span><span class="p">(</span>n<span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  x <span class="o">&lt;-</span> numeric<span class="p">(</span>n<span class="p">)</span>
+</span><span class='line'>  i <span class="o">&lt;-</span> <span class="m">1</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kr">function</span><span class="p">(</span>value<span class="o">=</span><span class="kc">NULL</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kr">if</span> <span class="p">(</span>is.null<span class="p">(</span>value<span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>      <span class="kr">return</span><span class="p">(</span>x<span class="p">)</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="kr">else</span> <span class="p">{</span>
+</span><span class='line'>      x<span class="p">[</span>i<span class="p">]</span> <span class="o">&lt;&lt;-</span> value
+</span><span class='line'>      i <span class="o">&lt;&lt;-</span> i <span class="o">+</span> <span class="m">1</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>nboot <span class="o">&lt;-</span> <span class="m">10</span>
+</span><span class='line'>sample_size <span class="o">&lt;-</span> <span class="m">10</span>
+</span><span class='line'>bootmeans <span class="o">&lt;-</span> make_container<span class="p">(</span>nboot<span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span>nboot<span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  bootmeans<span class="p">(</span>mean<span class="p">(</span>runif<span class="p">(</span>sample_size<span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">100</span><span class="p">)))</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>round<span class="p">(</span>bootmeans<span class="p">(),</span> <span class="m">0</span><span class="p">)</span>
+</span><span class='line'> <span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="m">37</span> <span class="m">66</span> <span class="m">54</span> <span class="m">44</span> <span class="m">57</span> <span class="m">50</span> <span class="m">55</span> <span class="m">64</span> <span class="m">65</span> <span class="m">55</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is cool because the bootstrappng pattern is factored out into the <code>make_container</code> function.  The <code>function(value=NULL)</code> is a first-class lambda in R, but it looks like a classic first-class JS lambda.</p>
+
+<p>Now lets look at a similar implementation in JavaScript:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">make_container</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">that</span> <span class="o">=</span> <span class="k">this</span><span class="p">,</span> <span class="c1">// for namespacing, thanks Crockford!   </span>
+</span><span class='line'>      <span class="nx">x</span> <span class="o">=</span> <span class="p">[],</span>
+</span><span class='line'>      <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">return</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// example of first-class functions! </span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">value</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="nx">x</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">that</span><span class="p">.</span><span class="nx">x</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+</span><span class='line'>  <span class="nx">that</span><span class="p">.</span><span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">};</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">x</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">x</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">getMean</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">x</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> <span class="nx">sum</span> <span class="o">+=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">x</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span> <span class="p">};</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">avg</span> <span class="o">=</span> <span class="nx">sum</span><span class="o">/</span><span class="nx">x</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">avg</span><span class="p">);</span>
+</span><span class='line'><span class="p">},</span> <span class="c1">// amazingly, I couldn&#39;t find a JS mean() function</span>
+</span><span class='line'>  <span class="nx">nboot</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="c1">// x bootstrapped means</span>
+</span><span class='line'>  <span class="nx">data</span> <span class="o">=</span> <span class="p">[],</span>
+</span><span class='line'>  <span class="nx">sample_size</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span> <span class="c1">// how many obs in each sample?</span>
+</span><span class='line'>  <span class="nx">get_data</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="c1">// function to pull data</span>
+</span><span class='line'>    <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&lt;</span> <span class="nx">sample_size</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">data</span><span class="p">[</span><span class="nx">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">};</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">data</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Let&#39;s just look at one sample mean</span>
+</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;arithmetic mean: &quot;</span> <span class="o">+</span> <span class="nx">getMean</span><span class="p">(</span><span class="nx">get_data</span><span class="p">()));</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">bootmeans</span> <span class="o">=</span> <span class="nx">make_container</span><span class="p">(</span><span class="nx">nboot</span><span class="p">);</span>
+</span><span class='line'><span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">nboot</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">bootmeans</span><span class="p">(</span><span class="nx">getMean</span><span class="p">(</span><span class="nx">get_data</span><span class="p">()));</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Now x bootstrapped means</span>
+</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">bootmeans</span><span class="p">())</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It&rsquo;s much longer and really dirty, but hey, it&rsquo;s in JavaScript! I also have a nice interpreter / host with Node.js. [It&rsquo;s not an exact copy, <strong>JS doesn&rsquo;t have nice statistical functions like R, such as mean!!!!</strong>]</p>
+
+<p>I&rsquo;m also interested in how I can leverage learning JavaScript <a href="http://www.yaksis.com/posts/coffeescript-for-r.html"><strong>given how similar it is to R</strong></a>. As that author shows, the following code block is 100% valid JavaScript and R:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">fib</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">n</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">n</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="p">(</span><span class="nx">fib</span><span class="p">(</span><span class="nx">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="nx">fib</span><span class="p">(</span><span class="nx">n</span><span class="o">-</span><span class="mi">2</span><span class="p">))</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For now I&rsquo;m just excited that I have a space beyond the web worker to throw data around!</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Christopher P. Peters</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-02T11:03:00-05:00" pubdate data-updated="true">Feb 2<span>nd</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/coffeescript/'>CoffeeScript</a>, <a class='category' href='/blog/categories/javascript/'>JavaScript</a>, <a class='category' href='/blog/categories/r/'>R</a>, <a class='category' href='/blog/categories/closure/'>closure</a>, <a class='category' href='/blog/categories/first-class/'>first-class</a>, <a class='category' href='/blog/categories/functions/'>functions</a>, <a class='category' href='/blog/categories/node/'>node</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://statwonk.github.io/blog/2014/02/02/dipping-my-toe-in-the-node-dot-js-waters/" data-via="statwonk" data-counturl="http://statwonk.github.io/blog/2014/02/02/dipping-my-toe-in-the-node-dot-js-waters/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/01/18/resizing-tmux-panes-with-the-bind-key/" title="Previous Post: Resizing tmux panes with the bind-key">&laquo; Resizing tmux panes with the bind-key</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/02/07/passing-a-rails-array-to-javascript/" title="Next Post: Passing a Rails array to JavaScript in well-formed JSON">Passing a Rails array to JavaScript in well-formed JSON &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <br>
+  <h2>Recieve my analyses in your inbox</h2>
+  <link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
+  <style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
+			   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+  </style>
+  <div id="mc_embed_signup">
+    <form action="http://github.us3.list-manage.com/subscribe/post?u=8e91a13e08e4144e866bce9b3&amp;id=ddede14721" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+      <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+      <div style="position: absolute; left: -5000px;"><input type="text" name="b_8e91a13e08e4144e866bce9b3_ddede14721" value=""></div>
+      <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </form>
+  </div>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/02/16/managing-diabetes-with-data-science/">Managing Diabetes With Data Science</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/14/mawk-or-awk/">Mawk or Awk? Munging Large Log Files</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/07/passing-a-rails-array-to-javascript/">Passing a Rails Array to JavaScript in Well-formed JSON</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/02/dipping-my-toe-in-the-node-dot-js-waters/">Dipping My Toes in the JavaScript and Node.js Waters</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/01/18/resizing-tmux-panes-with-the-bind-key/">Resizing Tmux Panes With the Bind-key</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/01/05/visualizing-diabetes-data/">Visualizing My Bionic Partner's Data</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/12/15/are-academics-adopting-github/">Are Academics Adopting Github?</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/11/24/washing-dishes-with-bayes/">Washing Dishes With Bayes</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/11/03/goodbye-scripts/">Goodbye Scripts, Hello R Packages!</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/11/03/5-cool-unix-hacks-for-fun-and-productivity/">5 Cool Unix Hacks for Fun and Productivity</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/26/taking-a-quick-peek-at-fda-drug-reactions/">Taking a Quick Peek at FDA Adverse Drug Reactions</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/11/how-statisticians-lost-their-business-mojo/">How Statisticians Lost Their Business Mojo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/10/06/the-p-in-p-value-does-not-stand-for-profit-dot/">P-value Does Not Stand for Profit.</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/09/27/reading-csv-data-into-r/">'Reading CSV Data Into R'</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/09/22/placing-knitr-chunks-in-a-table/">'Placing Knitr Chunks in a Table'</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/09/17/activemodel-dirty/">'ActiveModel::Dirty'</a>
+      </li>
+    
+  </ul>
+</section>
+<a href="http://stackoverflow.com/users/1408640/statwonk">
+<img src="http://stackoverflow.com/users/flair/1408640.png" width="208" height="58" alt="profile for Statwonk at Stack Overflow, Q&amp;A for professional and enthusiast programmers" title="profile for Statwonk at Stack Overflow, Q&amp;A for professional and enthusiast programmers">
+</a>
+<a href="https://twitter.com/statwonk" class="twitter-follow-button"
+  data-show-count="false" data-size="large">Follow @statwonk</a>
+<script>!function(d,s,id){var
+js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document,
+'script', 'twitter-wjs');</script>
+<br><br>
+<script src="//platform.linkedin.com/in.js"
+type="text/javascript"></script>
+<script type="IN/MemberProfile" data-id="http://www.linkedin.com/in/statwonk"
+data-format="hover" data-text="Christopher Peters"></script>
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/u/1/111908970327115332394/posts?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/statwonk">@statwonk</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'statwonk',
+            count: 8,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Christopher P. Peters -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'statwonk';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://statwonk.github.io/blog/2014/02/02/dipping-my-toe-in-the-node-dot-js-waters/';
+        var disqus_url = 'http://statwonk.github.io/blog/2014/02/02/dipping-my-toe-in-the-node-dot-js-waters/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

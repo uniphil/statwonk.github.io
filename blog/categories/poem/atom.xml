@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: poem, | @statwonk]]></title>
+  <link href="http://statwonk.github.io/blog/categories/poem/atom.xml" rel="self"/>
+  <link href="http://statwonk.github.io/"/>
+  <updated>2014-02-16T21:00:29-05:00</updated>
+  <id>http://statwonk.github.io/</id>
+  <author>
+    <name><![CDATA[Christopher P. Peters]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Washing dishes with Bayes]]></title>
+    <link href="http://statwonk.github.io/blog/2013/11/24/washing-dishes-with-bayes/"/>
+    <updated>2013-11-24T16:08:00-05:00</updated>
+    <id>http://statwonk.github.io/blog/2013/11/24/washing-dishes-with-bayes</id>
+    <content type="html"><![CDATA[<p>Cutting board to wash.</p>
+
+<p>Where do I focus my effort?</p>
+
+<p>The dirtiest part.</p>
+]]></content>
+  </entry>
+  
+</feed>

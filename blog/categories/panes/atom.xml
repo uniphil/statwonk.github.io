@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: panes | @statwonk]]></title>
+  <link href="http://statwonk.github.io/blog/categories/panes/atom.xml" rel="self"/>
+  <link href="http://statwonk.github.io/"/>
+  <updated>2014-02-16T21:00:29-05:00</updated>
+  <id>http://statwonk.github.io/</id>
+  <author>
+    <name><![CDATA[Christopher P. Peters]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Resizing tmux panes with the bind-key]]></title>
+    <link href="http://statwonk.github.io/blog/2014/01/18/resizing-tmux-panes-with-the-bind-key/"/>
+    <updated>2014-01-18T14:06:00-05:00</updated>
+    <id>http://statwonk.github.io/blog/2014/01/18/resizing-tmux-panes-with-the-bind-key</id>
+    <content type="html"><![CDATA[<iframe align="center" width="600" height="450" src="http://statwonk.github.io//www.youtube.com/embed/oGs7h9ECL0Y" frameborder="0" allowfullscreen></iframe>
+
+
+<p>With small screens, resizing tmux panes efficiently is important.  Using the <code>resize-pane -U [number]</code> command each time you want to resize a pane, isn&rsquo;t going to cut it.</p>
+
+<p>Add the following lines to your <code>~/.tmux.conf</code> file:</p>
+
+<p><code>
+bind-key -r j resize-pane -D 5
+bind-key -r k resize-pane -U 5
+bind-key -r h resize-pane -L 5
+bind-key -r l resize-pane -R 5
+</code></p>
+
+<p>Instead of typing <code>resize-pane -U 10</code> into <code>tmux</code>, just hit <code>bind-key</code> and tap <code>k</code> a few times. If working with vertically split panes, type <code>bind-key</code> and <code>h</code> or <code>l</code> a few times.</p>
+]]></content>
+  </entry>
+  
+</feed>

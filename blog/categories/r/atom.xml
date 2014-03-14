@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: R | @statwonk]]></title>
+  <link href="http://statwonk.github.io/blog/categories/r/atom.xml" rel="self"/>
+  <link href="http://statwonk.github.io/"/>
+  <updated>2014-02-16T21:00:29-05:00</updated>
+  <id>http://statwonk.github.io/</id>
+  <author>
+    <name><![CDATA[Christopher P. Peters]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Dipping my toes in the JavaScript and Node.js waters]]></title>
+    <link href="http://statwonk.github.io/blog/2014/02/02/dipping-my-toe-in-the-node-dot-js-waters/"/>
+    <updated>2014-02-02T11:03:00-05:00</updated>
+    <id>http://statwonk.github.io/blog/2014/02/02/dipping-my-toe-in-the-node-dot-js-waters</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve recently been attracted to learning JavaScript by way of D3.js.  We all know from the Hacker News posts that ole JS has seen a huge revitalization and if you want to push data around with D3, you might as well take advantage of the powerful language its build on. So I started with <a href="http://crockford.com">Crockford&rsquo;s</a> <em>JavaScript: The Good Parts.</em></p>
+
+<p>Before reading the book, JavaScript was a means to take care of incidental calculations that may need to be done when creating graphs.  Dates are always a pain in the ass, so hey, &ldquo;I might want some JS ability to work with them.&rdquo;</p>
+
+<p>Instead, I&rsquo;m now looking at JavaScript as a potential alternative to R in certain spaces. Having the ability to jump from language to language (maybe even tie them together with a shell script) is a huge boon for data science work.  Each language has its pros and cons and usually some mix of them is the best most efficient path from raw data to inights.</p>
+
+<p>Only recently did I even realize that the browser is a compiler while reading up on Google&rsquo;s <a href="https://code.google.com/p/v8/">V8 engine</a> and Mozilla&rsquo;s <a href="http://en.wikipedia.org/wiki/Gecko_(layout_engine)">Gecko engine</a>. An aquantance at a recent party put it, &ldquo; &hellip; Google put tons of work into V8, it&rsquo;s a very efficient and speedy.&rdquo; This is pretty exciting in that it turns the browser from a space simply to display data to a computing engine.</p>
+
+<p>For example, suppose you want to implement a marketing attribution model. In order to do this, you want to use a Cox Proportional Hazard model to calculate conversion rate liklihoods. Are you going to download the data, apply the model in R, create weights, upload to the database, and then analyze?  You could, or you could fit that Cox PH model with JavaScript on-the-fly and be done with it.  <a href="http://statpages.org/prophaz.html">This person did just that and you can checkout the implementation for yourself</a>:</p>
+
+<p><img class="center <a" src="href="http://i.imgur.com/BjZYck0.png">http://i.imgur.com/BjZYck0.png</a>"></p>
+
+<p>My usual development goto is a Sinatra / rack-app or maybe even full-fledge rails app.  Whether it&rsquo;s D3, a simulation, or something else, a rails app is usually overkill.  <a href="http://nodejs.org">Node.js</a> makes even Sinatra look like overkill for JS development.  Node allows you to easily spin up a server to host JavaScript (and other things):</p>
+
+<br>
+
+
+<p>Here&rsquo;s a hello world example, with Node installed, just run it with <code>node your-filename.js</code>
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">lsquo</span><span class="p">;</span><span class="nx">http</span><span class="o">&amp;</span><span class="nx">rsquo</span><span class="p">;);</span>
+</span><span class='line'><span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">res</span><span class="p">.</span><span class="nx">writeHead</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span><span class="o">&amp;</span><span class="nx">lsquo</span><span class="p">;</span><span class="nx">Content</span><span class="o">-</span><span class="nx">Type</span><span class="o">&amp;</span><span class="nx">rsquo</span><span class="p">;</span><span class="o">:</span> <span class="o">&amp;</span><span class="nx">lsquo</span><span class="p">;</span><span class="nx">text</span><span class="o">/</span><span class="nx">plain</span><span class="o">&amp;</span><span class="nx">rsquo</span><span class="p">;});</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">(</span><span class="s1">&#39;Hello World\n&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}).</span><span class="nx">listen</span><span class="p">(</span><span class="mi">1337</span><span class="p">,</span> <span class="s1">&#39;127.0.0.1&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Server running at http://127.0.0.1:1337/&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Working with just JavaScript? Use vim and the console with <code>node some-script.js</code>.</p>
+
+<p>As I mentioned, I&rsquo;ve been working through <a href="http://crockford.com">Douglas Crockford&rsquo;s</a> <a href="http://www.amazon.com/exec/obidos/ASIN/0596517742/wrrrldwideweb">JavaScript: The Good Parts</a>.  The design patterns just seem to fit my brain.  I&rsquo;ve been using closures (ineffectively) for years now.  It turns out that they can be very powerful in conjunction with R or JavaScript&rsquo;s first-class functions.</p>
+
+<p><a href="http://stackoverflow.com/questions/705173/what-is-meant-by-first-class-object">First-class functions</a> and <a href="http://javascript.crockford.com/private.html">closures</a> are also features of R, my native language.</p>
+
+<p>Bootstrapping is something that data scientists do commonly.  Basically instead of having a statistic like a mean, it gives us the distribution of that statistic. Bootstrapping isn&rsquo;t hard, it could be as simple as sub-sampling data 100 times and calculating the mean each time. That collection of means will give you a good idea how the true mean of the population is distributed. The hard thing about bootstrapping is keeping track of all of the parts.  You might want to bootstrap means, median, upper and lower confidence intervals, etc.  There&rsquo;s a lot to keep track of at times!</p>
+
+<p>I&rsquo;ll usually do something like this in R:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'>nboot <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> <span class="m">100</span> <span class="c1"># 100 bootstrap means</span>
+</span><span class='line'>boot_means <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> rep<span class="p">(</span><span class="kc">NA</span><span class="p">,</span> nboot<span class="p">)</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>data <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> runif<span class="p">(</span><span class="m">1000</span><span class="p">)</span>
+</span><span class='line'><span class="kr">for</span><span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span>nboot<span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  boot_means<span class="p">[</span>i<span class="p">]</span> <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> data<span class="p">[</span>sample<span class="p">(</span>data<span class="p">,</span> <span class="m">10</span><span class="p">,</span> replace <span class="o">=</span> <span class="k-Variable">T</span><span class="p">),</span> <span class="p">]</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>And that looks pretty simple, but it&rsquo;s just one statistic.</p>
+
+<p>Below is a bootstrapping example showing the use of closures and first-class functions in R from the <a href="http://leftcensored.skepsi.net/2012/12/02/closures-in-r-a-useful-abstraction/">Left Censored</a> blog</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class='r'><span class='line'>make_container <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> <span class="kr">function</span><span class="p">(</span>n<span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  x <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> numeric<span class="p">(</span>n<span class="p">)</span>
+</span><span class='line'>  i <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> <span class="m">1</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>  <span class="kr">function</span><span class="p">(</span>value<span class="o">=</span><span class="kc">NULL</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>pre<span class="o">&gt;&lt;</span>code<span class="o">&gt;</span><span class="kr">if</span> <span class="p">(</span>is.null<span class="p">(</span>value<span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kr">return</span><span class="p">(</span>x<span class="p">)</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="kr">else</span> <span class="p">{</span>
+</span><span class='line'>  x<span class="p">[</span>i<span class="p">]</span> <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>lt<span class="p">;</span><span class="o">-</span> value
+</span><span class='line'>  i <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>lt<span class="p">;</span><span class="o">-</span> i <span class="o">+</span> <span class="m">1</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">&lt;/</span>code<span class="o">&gt;&lt;/</span>pre<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span>nboot <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> <span class="m">10</span>
+</span><span class='line'>sample_size <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> <span class="m">10</span>
+</span><span class='line'>bootmeans <span class="o">&amp;</span>lt<span class="p">;</span><span class="o">&amp;</span>ndash<span class="p">;</span> make_container<span class="p">(</span>nboot<span class="p">)</span><span class="o">&lt;/</span>p<span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span>p<span class="o">&gt;</span><span class="kr">for</span> <span class="p">(</span>i <span class="kr">in</span> <span class="m">1</span><span class="o">:</span>nboot<span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  bootmeans<span class="p">(</span>mean<span class="p">(</span>runif<span class="p">(</span>sample_size<span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">100</span><span class="p">)))</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>round<span class="p">(</span>bootmeans<span class="p">(),</span> <span class="m">0</span><span class="p">)</span>
+</span><span class='line'> <span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="m">37</span> <span class="m">66</span> <span class="m">54</span> <span class="m">44</span> <span class="m">57</span> <span class="m">50</span> <span class="m">55</span> <span class="m">64</span> <span class="m">65</span> <span class="m">55</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>This is cool because the bootstrappng pattern is factored out into the <code>make_container</code> function.  The <code>function(value=NULL)</code> is a first-class lambda in R, but it looks like a classic first-class JS lambda.</p>
+
+<p>Now lets look at a similar implementation in JavaScript:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">make_container</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">that</span> <span class="o">=</span> <span class="k">this</span><span class="p">,</span> <span class="c1">// for namespacing, thanks Crockford!&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span>  <span class="nx">x</span> <span class="o">=</span> <span class="p">[],</span>
+</span><span class='line'>  <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="k">return</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// example of first-class functions!&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="k">if</span> <span class="p">(</span><span class="nx">value</span> <span class="o">===</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">x</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">that</span><span class="p">.</span><span class="nx">x</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+</span><span class='line'><span class="nx">that</span><span class="p">.</span><span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="k">return</span> <span class="nx">x</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">x</span><span class="p">.</span><span class="nx">length</span> <span class="o">&amp;</span><span class="nx">ndash</span><span class="p">;</span> <span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'><span class="p">};</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="kd">var</span> <span class="nx">getMean</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span> <span class="nx">x</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> <span class="nx">sum</span> <span class="o">+=</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">x</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span> <span class="p">};</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">avg</span> <span class="o">=</span> <span class="nx">sum</span><span class="o">/</span><span class="nx">x</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">avg</span><span class="p">);</span>
+</span><span class='line'><span class="p">},</span> <span class="c1">// amazingly, I couldn&amp;rsquo;t find a JS mean() function</span>
+</span><span class='line'>  <span class="nx">nboot</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="c1">// x bootstrapped means</span>
+</span><span class='line'>  <span class="nx">data</span> <span class="o">=</span> <span class="p">[],</span>
+</span><span class='line'>  <span class="nx">sample_size</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span> <span class="c1">// how many obs in each sample?</span>
+</span><span class='line'>  <span class="nx">get_data</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="c1">// function to pull data&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span> <span class="nx">sample_size</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">data</span><span class="p">[</span><span class="nx">j</span><span class="p">]</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span><span class="p">);</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'><span class="k">return</span> <span class="nx">data</span><span class="p">;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="p">}</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="c1">// Let&amp;rsquo;s just look at one sample mean</span>
+</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">ldquo</span><span class="p">;</span><span class="nx">arithmetic</span> <span class="nx">mean</span><span class="o">:</span> <span class="o">&amp;</span><span class="nx">rdquo</span><span class="p">;</span> <span class="o">+</span> <span class="nx">getMean</span><span class="p">(</span><span class="nx">get_data</span><span class="p">()));</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="kd">var</span> <span class="nx">bootmeans</span> <span class="o">=</span> <span class="nx">make_container</span><span class="p">(</span><span class="nx">nboot</span><span class="p">);</span>
+</span><span class='line'><span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&amp;</span><span class="nx">lt</span><span class="p">;</span> <span class="nx">nboot</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">bootmeans</span><span class="p">(</span><span class="nx">getMean</span><span class="p">(</span><span class="nx">get_data</span><span class="p">()));</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="c1">// Now x bootstrapped means</span>
+</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">bootmeans</span><span class="p">())</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>It&rsquo;s much longer and really dirty, but hey, it&rsquo;s in JavaScript! I also have a nice interpreter / host with Node.js. [It&rsquo;s not an exact copy, <strong>JS doesn&rsquo;t have nice statistical functions like R, such as mean!!!!</strong>]</p>
+
+<p>I&rsquo;m also interested in how I can leverage learning JavaScript <a href="http://www.yaksis.com/posts/coffeescript-for-r.html"><strong>given how similar it is to R</strong></a>. As that author shows, the following code block is 100% valid JavaScript and R:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">fib</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="nx">n</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="k">return</span> <span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">n</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="k">return</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span><span class="k">return</span> <span class="p">(</span><span class="nx">fib</span><span class="p">(</span><span class="nx">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="nx">fib</span><span class="p">(</span><span class="nx">n</span><span class="o">-</span><span class="mi">2</span><span class="p">))</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>For now I&rsquo;m just excited that I have a space beyond the web worker to throw data around!</p>
+]]></content>
+  </entry>
+  
+</feed>
