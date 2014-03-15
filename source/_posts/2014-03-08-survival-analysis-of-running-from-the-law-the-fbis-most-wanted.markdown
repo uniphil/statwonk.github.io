@@ -89,7 +89,7 @@ It's common in survival analysis to fit parametric distributions to survival dat
 
 {% img center http://i.imgur.com/I38qSLR.png %}
 
-This data is best fit by a [Log-normal](http://en.wikipedia.org/wiki/Log-normal_distribution) distribution.  Behind the Weibull distribution, the log-normal is probably second most-popular.
+This data is best fit by a [Log-normal](http://en.wikipedia.org/wiki/Log-normal_distribution) distribution.  Behind the Weibull distribution, the log-normal is probably second most-popular in parametric survival analysis.
 
 If we look at the log-normal by itself, the fit looks pretty good!  Notice again the small crosses that represent fugitives currently on the run?
 
