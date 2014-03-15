@@ -29,6 +29,8 @@ Analysis of durations falls squarely on the survival analysis statistical toolse
 
 Let's take the average lenth of time-to-capture simply by averaging the duration from being added to the list to capture.
 
+You can view or download the dataset in the [Github repository](https://github.com/statwonk/fbi_topten/blob/master/data.csv).
+
 {% gist 9448932 %}
 
 Currently that average function says 402 days free. Let's get a distribution of this statistic by boostrapping.  For those unfamiliar, bootstrapping means to take a sample of the 491 fugutives <a href="http://en.wikipedia.org/wiki/Sampling_(statistics)#Replacement_of_selected_units)">with replacement</a>, say 30% of the 491, calculate the mean, save it, and repeat say 1,000 times. You end up with a distribution for your mean statistic. 
