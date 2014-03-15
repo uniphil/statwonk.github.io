@@ -4,7 +4,7 @@
   <title><![CDATA[Category: survival analysis | @statwonk]]></title>
   <link href="http://statwonk.github.io/blog/categories/survival-analysis/atom.xml" rel="self"/>
   <link href="http://statwonk.github.io/"/>
-  <updated>2014-03-14T18:44:15-04:00</updated>
+  <updated>2014-03-14T21:31:38-04:00</updated>
   <id>http://statwonk.github.io/</id>
   <author>
     <name><![CDATA[Christopher P. Peters]]></name>
@@ -34,6 +34,8 @@
 <p>Analysis of durations falls squarely on the survival analysis statistical toolset.  The survival framework was designed ground-up to deal with these types of problems.  You might be thinking, &lsquo;Woah, this guy just took a simple set of questions probably solvable with Excel&rsquo;s Average function and made it sound complicated.&rsquo; But if that&rsquo;s your tool as a fugitive, you&rsquo;ll underestimate the length free and perhaps act reckless in your escape.</p>
 
 <p>Let&rsquo;s take the average lenth of time-to-capture simply by averaging the duration from being added to the list to capture.</p>
+
+<p>You can view or download the dataset in the <a href="https://github.com/statwonk/fbi_topten/blob/master/data.csv">Github repository</a>.</p>
 
 <p><div><script src='https://gist.github.com/9448932.js'></script>
 <noscript><pre><code>df &lt;- read.csv(&quot;data.csv&quot;,
